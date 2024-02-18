@@ -2,6 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import RequireAuth from "./RequireAuth";
 import HomePage from "../pages/HomePage";
+import ProductDetails from "../pages/ProductDetails";
+import BasketPage from "../pages/BasketPage";
+import Profile from "../pages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -16,13 +19,9 @@ export const router = createBrowserRouter([
         ],
       },
       { path: "", element: <HomePage /> },
-//       { path: "catalog", element: <Catalog /> },
-//       { path: "catalog/:id", element: <ProductDetail /> },
-//       { path: "about", element: <AboutPage /> },
-//       { path: "contact", element: <ContactPage /> },
-//       { path: "server-error", element: <ServerError /> },
-//       { path: "not-found", element: <NotFound /> },
-//       { path: "basket", element: <BasketPage /> },
+      { path: "products/:id", element: <ProductDetails /> },
+      { path: "profile", element: <Profile /> },
+      { path: "basket", element: <BasketPage /> },
 //       { path: "login", element: <Login /> },
 //       { path: "register", element: <Register /> },
 //       { path: "*", element: <Navigate replace to="not-found" /> },

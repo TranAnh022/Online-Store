@@ -13,7 +13,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Grid, Switch } from "@mui/material";
-import { drawerWidth, navList, navStyles } from "../../customizedCSS";
+import { drawerWidth, listItemStyle, navList, navStyles } from "../../customizedCSS";
 
 interface Props {
   darkMode: boolean;
@@ -44,7 +44,7 @@ export default function Header(props: Props) {
       <List sx={navList}>
         {["Catalog", "About", "Contact"].map((text) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton sx={listItemStyle}>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
@@ -54,7 +54,7 @@ export default function Header(props: Props) {
       <List sx={navList}>
         {["Login", "Register"].map((text) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton sx={listItemStyle}>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>

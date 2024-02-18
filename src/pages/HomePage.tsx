@@ -1,19 +1,19 @@
 import { Box, Grid } from "@mui/material";
-import React from "react";
 
-
+import HeroBanner from "../components/banner/HeroBanner";
+import Products from "../components/products/Products";
 
 function HomePage() {
-  return <Box >
-    <Grid>
-      <Grid item>
-        {/* search nav */}
+  return (
+    <Box>
+      <HeroBanner />
+      <Products/>
+      <Grid>
+        <Grid item>{/* search nav */}</Grid>
+        <Grid item>{/* list of items */}</Grid>
       </Grid>
-      <Grid item>
-        {/* list of items */}
-      </Grid>
-    </Grid>
-  </Box>;
+    </Box>
+  );
 }
 
 export default HomePage;
