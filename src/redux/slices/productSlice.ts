@@ -5,7 +5,7 @@ import agent from "../../api/agent";
 type InitialState = {
   products: ProductType[];
   favList: ProductType[];
-  userInput: string;
+  productDetail: ProductType | null;
   loading: boolean;
   error?: string;
   productParams: FilterType;
@@ -15,7 +15,7 @@ const initialState: InitialState = {
   products: [],
   loading: false,
   favList: [],
-  userInput: "",
+  productDetail: null,
   productParams: {
     price: 0,
   },
@@ -26,6 +26,21 @@ export const fetchAllProductsAsync = createAsyncThunk<ProductType[]>(
   async () => {
     try {
       const data = await agent.Product.list();
+      return data;
+    } catch (e) {
+      const error = e as Error;
+      return error;
+    }
+  }
+);
+
+export const fetchProductAsync = createAsyncThunk<ProductType, string>(
+  "fetchProductAsync",
+  async (productId) => {
+    try {
+      
+      const data = await agent.Product.details(productId);
+      console.log(data)
       return data;
     } catch (e) {
       const error = e as Error;
@@ -122,6 +137,35 @@ const productSlice = createSlice({
     });
     // error
     builder.addCase(fetchFilterProduct.rejected, (state, action) => {
+      if (action.payload instanceof Error) {
+        //logic
+        return {
+          ...state,
+          loading: false,
+          error: action.payload.message,
+        };
+      }
+    });
+    builder.addCase(fetchProductAsync.fulfilled, (state, action) => {
+      // save data in redux
+      if (!(action.payload instanceof Error)) {
+
+        return {
+          ...state,
+          productDetail: action.payload,
+          loading: false,
+        };
+      }
+    });
+    // loading
+    builder.addCase(fetchProductAsync.pending, (state, action) => {
+      return {
+        ...state,
+        loading: true,
+      };
+    });
+    // error
+    builder.addCase(fetchProductAsync.rejected, (state, action) => {
       if (action.payload instanceof Error) {
         //logic
         return {

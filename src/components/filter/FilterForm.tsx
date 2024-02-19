@@ -82,7 +82,7 @@ function FilterForm() {
             }
             label="Categories"
           >
-            <MenuItem value="">None</MenuItem>
+            <MenuItem >None</MenuItem>
             <MenuItem value="1">Clothes</MenuItem>
             <MenuItem value="2">Electronics</MenuItem>
             <MenuItem value="3">Furniture</MenuItem>

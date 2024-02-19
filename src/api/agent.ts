@@ -23,8 +23,9 @@ const Product = {
       );
     if (filterParams.search?.length)
       return requests.get(`products/?title=${filterParams.search}`);
-    return requests.get("products")
+    return requests.get("products");
   },
+  details: (id: string) => requests.get(`products/${id}`),
 };
 
 const agent = {

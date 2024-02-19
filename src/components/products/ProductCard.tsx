@@ -2,12 +2,14 @@ import React from "react";
 import { ProductType } from "../../types/type";
 import styled from "@emotion/styled";
 import LoadingComponent from "../loading/LoadingComponent";
+import { Box } from "@mui/material";
+import { Link } from "react-router-dom";
 
 type Props = {
   product: ProductType;
 };
 
-const ProductCard1 = styled("div")({
+const ProductCard1 = {
   backgroundColor: "#dcdcdc",
   borderRadius: "20px",
   width: "300px",
@@ -17,11 +19,13 @@ const ProductCard1 = styled("div")({
   alignItems: "center",
   transform: "scale(1, 1)",
   transition: "transform 0.5s ease",
+  cursor: "pointer",
   "&:hover": {
     transform: "scale(1.1, 1.1)",
   },
-  cursor: "pointer",
-});
+  textDecoration: "none",
+  color:'black'
+};
 
 const ProductFigure = styled("figure")({
   padding: "0",
@@ -40,7 +44,12 @@ const ProductCaption = styled("figcaption")({
 function ProductCard({ product }: Props) {
   if (!product) return <LoadingComponent message="Product not found..." />;
   return (
-    <ProductCard1 className="product__card">
+    <Box
+      className="product__card"
+      sx={ProductCard1}
+      component={Link}
+      to={`/products/${product.id}`}
+    >
       <ProductFigure>
         <ProductImg
           src={
@@ -53,7 +62,7 @@ function ProductCard({ product }: Props) {
         <ProductCaption>{product?.title}</ProductCaption>
         <ProductCaption>${product?.price}</ProductCaption>
       </ProductFigure>
-    </ProductCard1>
+    </Box>
   );
 }
 
