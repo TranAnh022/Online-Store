@@ -1,15 +1,13 @@
-import { Box, Grid } from "@mui/material";
-
+import {  Container } from "@mui/material";
 import HeroBanner from "../components/banner/HeroBanner";
 import Products from "../components/products/Products";
 
 function HomePage() {
   return (
-    <Box>
+    <Container sx={{ marginTop: "5rem", marginBottom: "3rem" }}>
       <HeroBanner />
-      <Products/>
-      
-    </Box>
+      <Products />
+    </Container>
   );
 }
 

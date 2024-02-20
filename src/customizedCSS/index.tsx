@@ -39,7 +39,6 @@ export const buttonStyle = {
   fontSize: "18px",
   fontWeight: "500",
   cursor: "pointer",
-  zIndex: "10000",
   transition: "transform 0.5s ease",
   "&:hover": {
     transform: "scale(1.1, 1.1)",
@@ -56,9 +55,19 @@ export const ProductContainer = {
   gap: "100px",
 };
 
-
 export const TitleStyle = {
   fontWeight: "700",
   textAlign: "center",
   fontSize: "2rem",
+};
+
+
+export const LoginContainerStyle = {
+  backgroundImage:
+    "linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+  height: "100vh",
+  alignItems: "center",
+  display: "flex",
+  justifyContent: "center",
+  color: "white",
 };

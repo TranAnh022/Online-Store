@@ -64,7 +64,11 @@ export default function Header(props: Props) {
       <List sx={navList}>
         {["Login", "Register"].map((text) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton sx={listItemStyle}>
+            <ListItemButton
+              sx={listItemStyle}
+              component={Link}
+              to={`${text.toLowerCase()}`}
+            >
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>

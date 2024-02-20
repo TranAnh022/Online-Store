@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import "./App.css";
+import { useState } from "react";
 import {
   Container,
   CssBaseline,
@@ -35,9 +34,7 @@ function App() {
       <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
       <CssBaseline />
       <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-      <Container sx={{ marginTop: "5rem", marginBottom: "3rem" }}>
         <Outlet />
-      </Container>
     </ThemeProvider>
   );
 }

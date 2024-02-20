@@ -8,12 +8,12 @@ import {
 import { useFormik } from "formik";
 import { TitleStyle } from "../customizedCSS";
 import { ProductDto } from "../types/type";
-import { createProduct } from "../redux/action";
+import { createProduct } from "../redux/actions/productActions";
 import { useAppDispatch } from "../redux/configureStore";
-import { validationSchema } from "../validation";
+import { validationProductSchema } from "../validation";
 import { ImageList } from "../components/imagesList/ImageList";
 
-function FormComponent() {
+function ProductCreate() {
   const dispatch = useAppDispatch();
 
   const initialValues = {
@@ -26,8 +26,8 @@ function FormComponent() {
 
   const handleSubmit = (values: ProductDto) => {
     console.log("form sub", values);
-    dispatch(createProduct(values))
-    formik.resetForm()
+    dispatch(createProduct(values));
+    formik.resetForm();
   };
 
   const handleImageDelete = (index: number) => {
@@ -36,11 +36,11 @@ function FormComponent() {
     formik.setFieldValue("images", newImages);
   };
 
-   const formik = useFormik({
-     initialValues,
-     validationSchema,
-     onSubmit: handleSubmit,
-   });
+  const formik = useFormik({
+    initialValues,
+    validationSchema: validationProductSchema,
+    onSubmit: handleSubmit,
+  });
 
   return (
     <Container maxWidth="sm" style={{ marginTop: "5rem" }}>
@@ -137,4 +137,4 @@ function FormComponent() {
   );
 }
 
-export default FormComponent;
+export default ProductCreate;

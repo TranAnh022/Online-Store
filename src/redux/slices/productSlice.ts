@@ -1,11 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { FilterType, ProductType } from "../../types/type";
-import {
-  createProduct,
-  fetchAllProductsAsync,
-  fetchFilterProduct,
-  fetchProductAsync,
-} from "../action";
+import { createProduct, fetchAllProductsAsync, fetchFilterProduct, fetchProductAsync } from "../actions/productActions";
+
 
 type InitialState = {
   products: ProductType[];

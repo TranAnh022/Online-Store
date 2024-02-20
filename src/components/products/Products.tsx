@@ -1,14 +1,18 @@
 import { useSelector } from "react-redux";
-import { AppState, useAppDispatch, useAppSelector } from "../../redux/configureStore";
+import {
+  AppState,
+  useAppDispatch,
+  useAppSelector,
+} from "../../redux/configureStore";
 import { useEffect, useState } from "react";
-
 import { Box, Pagination, Typography } from "@mui/material";
 import { ProductType } from "../../types/type";
 import ProductCard from "./ProductCard";
 import { ProductContainer } from "../../customizedCSS";
 import LoadingComponent from "../loading/LoadingComponent";
 import FilterForm from "../filter/FilterForm";
-import { fetchFilterProduct } from "../../redux/action";
+import { fetchFilterProduct } from "../../redux/actions/productActions";
+
 
 function Products() {
   const dispatch = useAppDispatch();
@@ -35,6 +39,8 @@ function Products() {
     event.preventDefault();
     setPage(value);
   };
+
+  console.log(productParams)
   if (!productsShow) return <LoadingComponent message="Loading Products..." />;
 
   return (

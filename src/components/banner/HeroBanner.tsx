@@ -1,5 +1,4 @@
-import { Avatar, Box, Button, Grid, Typography } from "@mui/material";
-
+import {  Button, Grid, Typography } from "@mui/material";
 import { bannerContainer, buttonStyle } from "../../customizedCSS";
 
 const HeroBanner = () => {

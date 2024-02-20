@@ -30,3 +30,22 @@ export interface ProductDto {
   images: string[];
   categoryId: number;
 }
+
+enum Role {
+  customer,
+  admin,
+}
+
+export interface UserType {
+  id: number;
+  email: string;
+  password: string;
+  name: string;
+  role: Role;
+  avatar: string;
+}
+
+export interface UserLogin {
+  email: string;
+  password: string;
+}

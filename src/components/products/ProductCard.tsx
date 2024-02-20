@@ -1,4 +1,3 @@
-import React from "react";
 import { ProductType } from "../../types/type";
 import styled from "@emotion/styled";
 import LoadingComponent from "../loading/LoadingComponent";

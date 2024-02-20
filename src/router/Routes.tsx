@@ -6,7 +6,9 @@ import HomePage from "../pages/HomePage";
 import BasketPage from "../pages/BasketPage";
 import Profile from "../pages/Profile";
 import ProductDetails from "../pages/ProductDetails";
-import FormComponent from "../pages/ProductCreate";
+import Login from "../pages/LoginPage";
+import Register from "../pages/Register";
+import ProductCreate from "../pages/ProductCreate";
 
 export const router = createBrowserRouter([
   {
@@ -24,9 +26,9 @@ export const router = createBrowserRouter([
       { path: "products/:id", element: <ProductDetails /> },
       { path: "profile", element: <Profile /> },
       { path: "basket", element: <BasketPage /> },
-      { path: "create", element: <FormComponent /> },
-      //       { path: "login", element: <Login /> },
-      //       { path: "register", element: <Register /> },
+      { path: "create", element: <ProductCreate /> },
+      { path: "login", element: <Login /> },
+      { path: "register", element: <Register /> },
       //       { path: "*", element: <Navigate replace to="not-found" /> },
     ],
   },

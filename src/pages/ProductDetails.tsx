@@ -1,8 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/configureStore";
-
-
 import {
   Divider,
   Grid,
@@ -14,9 +12,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { fetchProductAsync } from "../redux/action";
-
-
+import { fetchProductAsync } from "../redux/actions/productActions";
 
 function ProductDetails() {
   const { id } = useParams<{ id: string }>();
