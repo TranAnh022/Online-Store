@@ -23,6 +23,9 @@ function App() {
         default: paletteType === "light" ? "#eaeaea" : "#121212",
       },
     },
+    typography: {
+      fontFamily: '"Roboto", sans-serif',
+    },
   });
 
   if (loading) return <LoadingComponent message="Initializing app..." />;

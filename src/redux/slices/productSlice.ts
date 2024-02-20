@@ -1,6 +1,11 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { FilterType, ProductType } from "../../types/type";
-import agent from "../../api/agent";
+import {
+  createProduct,
+  fetchAllProductsAsync,
+  fetchFilterProduct,
+  fetchProductAsync,
+} from "../action";
 
 type InitialState = {
   products: ProductType[];
@@ -20,47 +25,6 @@ const initialState: InitialState = {
     price: 0,
   },
 };
-
-export const fetchAllProductsAsync = createAsyncThunk<ProductType[]>(
-  "fetchAllProductsAsync",
-  async () => {
-    try {
-      const data = await agent.Product.list();
-      return data;
-    } catch (e) {
-      const error = e as Error;
-      return error;
-    }
-  }
-);
-
-export const fetchProductAsync = createAsyncThunk<ProductType, string>(
-  "fetchProductAsync",
-  async (productId) => {
-    try {
-      
-      const data = await agent.Product.details(productId);
-      console.log(data)
-      return data;
-    } catch (e) {
-      const error = e as Error;
-      return error;
-    }
-  }
-);
-
-export const fetchFilterProduct = createAsyncThunk(
-  "fetchFilterProductsAsync",
-  async (filterMethod: FilterType) => {
-    try {
-      const data = await agent.Product.filter(filterMethod);
-      return data;
-    } catch (e) {
-      const error = e as Error;
-      return error;
-    }
-  }
-);
 
 const productSlice = createSlice({
   name: "products",
@@ -88,10 +52,7 @@ const productSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    // async
-    // 3 states:
     builder.addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
-      // save data in redux
       if (!(action.payload instanceof Error)) {
         return {
           ...state,
@@ -100,17 +61,16 @@ const productSlice = createSlice({
         };
       }
     });
-    // loading
+
     builder.addCase(fetchAllProductsAsync.pending, (state, action) => {
       return {
         ...state,
         loading: true,
       };
     });
-    // error
+
     builder.addCase(fetchAllProductsAsync.rejected, (state, action) => {
       if (action.payload instanceof Error) {
-        //logic
         return {
           ...state,
           loading: false,
@@ -119,7 +79,6 @@ const productSlice = createSlice({
       }
     });
     builder.addCase(fetchFilterProduct.fulfilled, (state, action) => {
-      // save data in redux
       if (!(action.payload instanceof Error)) {
         return {
           ...state,
@@ -128,17 +87,15 @@ const productSlice = createSlice({
         };
       }
     });
-    // loading
     builder.addCase(fetchFilterProduct.pending, (state, action) => {
       return {
         ...state,
         loading: true,
       };
     });
-    // error
+
     builder.addCase(fetchFilterProduct.rejected, (state, action) => {
       if (action.payload instanceof Error) {
-        //logic
         return {
           ...state,
           loading: false,
@@ -147,9 +104,7 @@ const productSlice = createSlice({
       }
     });
     builder.addCase(fetchProductAsync.fulfilled, (state, action) => {
-      // save data in redux
       if (!(action.payload instanceof Error)) {
-
         return {
           ...state,
           productDetail: action.payload,
@@ -157,17 +112,43 @@ const productSlice = createSlice({
         };
       }
     });
-    // loading
+
     builder.addCase(fetchProductAsync.pending, (state, action) => {
       return {
         ...state,
         loading: true,
       };
     });
-    // error
+
     builder.addCase(fetchProductAsync.rejected, (state, action) => {
       if (action.payload instanceof Error) {
-        //logic
+        return {
+          ...state,
+          loading: false,
+          error: action.payload.message,
+        };
+      }
+    });
+    builder.addCase(createProduct.fulfilled, (state, action) => {
+      if (!(action.payload instanceof Error)) {
+        const newProducts = [...state.products, action.payload];
+        return {
+          ...state,
+          products: newProducts,
+          loading: false,
+        };
+      }
+    });
+
+    builder.addCase(createProduct.pending, (state, action) => {
+      return {
+        ...state,
+        loading: true,
+      };
+    });
+
+    builder.addCase(createProduct.rejected, (state, action) => {
+      if (action.payload instanceof Error) {
         return {
           ...state,
           loading: false,
@@ -182,5 +163,5 @@ const productReducer = productSlice.reducer;
 
 export const { addToFav, setProductParams, resetProductParams } =
   productSlice.actions;
-// actions: use in component:
+
 export default productReducer;

@@ -22,3 +22,11 @@ export interface FilterType {
   price: number;
   category?: string;
 }
+
+export interface ProductDto {
+  title: string;
+  price: number;
+  description: string;
+  images: string[];
+  categoryId: number;
+}

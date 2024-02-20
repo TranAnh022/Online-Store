@@ -13,7 +13,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Grid, Switch } from "@mui/material";
-import { drawerWidth, listItemStyle, navList, navStyles } from "../../customizedCSS";
+import {
+  drawerWidth,
+  listItemStyle,
+  navList,
+  navStyles,
+} from "../../customizedCSS";
+import { Link } from "react-router-dom";
 
 interface Props {
   darkMode: boolean;
@@ -42,9 +48,13 @@ export default function Header(props: Props) {
   const drawer = (
     <Box sx={navStyles}>
       <List sx={navList}>
-        {["Catalog", "About", "Contact"].map((text) => (
+        {["Home", "Create", "Contact"].map((text) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton sx={listItemStyle}>
+            <ListItemButton
+              sx={listItemStyle}
+              component={Link}
+              to={`${text.toLowerCase()}`}
+            >
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
@@ -79,7 +89,7 @@ export default function Header(props: Props) {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" noWrap component="div">
+              <Typography variant="h6" noWrap component={Link} to="/">
                 Online Store
               </Typography>
               <Switch onChange={() => props.setDarkMode(!props.darkMode)} />

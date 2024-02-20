@@ -12,9 +12,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/configureStore";
 import { debounce } from "lodash";
 import { setProductParams } from "../../redux/slices/productSlice";
 
-type Props = {};
-
-const MAX = 100;
+const MAX = 1000;
 const MIN = 0;
 const marks = [
   {
@@ -32,7 +30,7 @@ function FilterForm() {
   const { productParams } = useAppSelector((state) => state.products);
   const [searchTerm, setSearchTerm] = useState(productParams.search);
 
-  const handleSearchChange = debounce((event: any) => {
+  const handleSearchChange = debounce((event) => {
     dispatch(
       setProductParams({
         ...productParams,
@@ -42,19 +40,20 @@ function FilterForm() {
   }, 1000);
 
   return (
-    <Grid container alignItems="center">
-      <Grid item md={4}>
+    <Grid container>
+      <Grid item xs={12} sx={{ textAlign: "center" }} md={4}>
         <TextField
           placeholder="Search..."
-          onChange={(event: any) => {
+          onChange={(event) => {
             setSearchTerm(event.target.value);
             handleSearchChange(event);
           }}
           value={searchTerm || ""}
+          fullWidth
         />
       </Grid>
-      <Grid item md={6}>
-        <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
+      <Grid item md={6} xs={12} flexDirection={"column"}>
+        <Stack spacing={6} direction="row" sx={{ mb: 1 }} alignItems="center">
           <Typography>Price:</Typography>
           <Slider
             marks={marks}
@@ -81,8 +80,9 @@ function FilterForm() {
               )
             }
             label="Categories"
+            fullWidth
           >
-            <MenuItem >None</MenuItem>
+            <MenuItem>None</MenuItem>
             <MenuItem value="1">Clothes</MenuItem>
             <MenuItem value="2">Electronics</MenuItem>
             <MenuItem value="3">Furniture</MenuItem>

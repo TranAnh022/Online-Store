@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { FilterType } from "../types/type";
+import { FilterType, ProductDto } from "../types/type";
 
 axios.defaults.baseURL = "https://api.escuelajs.co/api/v1/";
 
@@ -15,17 +15,32 @@ const requests = {
 const Product = {
   list: () => requests.get("products"),
   filter: (filterParams: FilterType) => {
-    if (filterParams.category?.length)
-      return requests.get(`products/?categoryId=${filterParams.category}`);
-    if (filterParams.price > 0)
-      return requests.get(
-        `products/?price_min=${filterParams.price.toString()}&price_max=1000`
-      );
-    if (filterParams.search?.length)
-      return requests.get(`products/?title=${filterParams.search}`);
-    return requests.get("products");
+     let url = "products";
+
+     const queryParams: string[] = [];
+
+     if (filterParams.category?.length) {
+       queryParams.push(`categoryId=${filterParams.category}`);
+     }
+
+     if (filterParams.price > 0) {
+       queryParams.push(
+         `price_min=${filterParams.price.toString()}&price_max=1000`
+       );
+     }
+
+     if (filterParams.search?.length) {
+       queryParams.push(`title=${filterParams.search}`);
+     }
+
+     if (queryParams.length > 0) {
+       url += `?${queryParams.join("&")}`;
+     }
+
+     return requests.get(url);
   },
   details: (id: string) => requests.get(`products/${id}`),
+  create: (values:ProductDto)=>requests.post(`products`,values)
 };
 
 const agent = {

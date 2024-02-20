@@ -8,10 +8,7 @@ function HomePage() {
     <Box>
       <HeroBanner />
       <Products/>
-      <Grid>
-        <Grid item>{/* search nav */}</Grid>
-        <Grid item>{/* list of items */}</Grid>
-      </Grid>
+      
     </Box>
   );
 }

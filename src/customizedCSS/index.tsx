@@ -55,3 +55,10 @@ export const ProductContainer = {
   width: " 100%",
   gap: "100px",
 };
+
+
+export const TitleStyle = {
+  fontWeight: "700",
+  textAlign: "center",
+  fontSize: "2rem",
+};

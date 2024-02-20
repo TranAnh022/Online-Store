@@ -1,8 +1,8 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 
-import { fetchProductAsync } from "../redux/slices/productSlice";
+
 import {
   Divider,
   Grid,
@@ -14,10 +14,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { fetchProductAsync } from "../redux/action";
 
-type Props = {};
 
-function ProductDetails({}: Props) {
+
+function ProductDetails() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const { productDetail } = useAppSelector((state) => state.products);
@@ -65,7 +66,7 @@ function ProductDetails({}: Props) {
         <Typography variant="h3">{productDetail.title}</Typography>
         <Divider sx={{ mb: 2 }} />
         <Typography variant="h4" color="secondary">
-          ${(productDetail.price / 100).toFixed(2)}
+          ${productDetail.price}
         </Typography>
         <TableContainer>
           <Table>

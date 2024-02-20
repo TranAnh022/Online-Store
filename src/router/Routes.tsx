@@ -6,6 +6,7 @@ import HomePage from "../pages/HomePage";
 import BasketPage from "../pages/BasketPage";
 import Profile from "../pages/Profile";
 import ProductDetails from "../pages/ProductDetails";
+import FormComponent from "../pages/ProductCreate";
 
 export const router = createBrowserRouter([
   {
@@ -15,17 +16,18 @@ export const router = createBrowserRouter([
       {
         element: <RequireAuth />,
         children: [
-        //   { path: "checkout", element: <CheckoutPage /> },
-        //   { path: "orders", element: <Orders /> },
+          //   { path: "checkout", element: <CheckoutPage /> },
+          //   { path: "orders", element: <Orders /> },
         ],
       },
-      { path: "", element: <HomePage /> },
+      { path: "home", element: <HomePage /> },
       { path: "products/:id", element: <ProductDetails /> },
       { path: "profile", element: <Profile /> },
       { path: "basket", element: <BasketPage /> },
-//       { path: "login", element: <Login /> },
-//       { path: "register", element: <Register /> },
-//       { path: "*", element: <Navigate replace to="not-found" /> },
+      { path: "create", element: <FormComponent /> },
+      //       { path: "login", element: <Login /> },
+      //       { path: "register", element: <Register /> },
+      //       { path: "*", element: <Navigate replace to="not-found" /> },
     ],
   },
 ]);
