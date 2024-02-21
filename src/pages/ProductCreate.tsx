@@ -25,7 +25,6 @@ function ProductCreate() {
   };
 
   const handleSubmit = (values: ProductDto) => {
-    console.log("form sub", values);
     dispatch(createProduct(values));
     formik.resetForm();
   };

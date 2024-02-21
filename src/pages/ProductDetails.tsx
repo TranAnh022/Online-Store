@@ -2,6 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 import {
+  Container,
   Divider,
   Grid,
   Table,
@@ -50,51 +51,52 @@ function ProductDetails() {
   //   }
   if (!id || !productDetail) return <div></div>;
   return (
-    <Grid container spacing={6}>
-      <Grid item md={6}>
-        <img
-          src={productDetail.images[1]}
-          alt={productDetail.title}
-          style={{ width: "100%" }}
-        />
-      </Grid>
-      <Grid item md={6}>
-        <Typography variant="h3">{productDetail.title}</Typography>
-        <Divider sx={{ mb: 2 }} />
-        <Typography variant="h4" color="secondary">
-          ${productDetail.price}
-        </Typography>
-        <TableContainer>
-          <Table>
-            <TableBody>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>{productDetail.title}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Description</TableCell>
-                <TableCell>{productDetail.description}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Category</TableCell>
-                <TableCell>{productDetail.category.name}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <Grid container spacing={2} sx={{ marginTop: "5px" }}>
-          <Grid item md={6}>
-            <TextField
-              variant="outlined"
-              type="number"
-              label="Quantity in Cart"
-              fullWidth
-              value={quantity}
-              onChange={handleInputChange}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            {/* <LoadingButton
+    <Container sx={{ marginTop: "5rem", marginBottom: "3rem" }}>
+      <Grid container spacing={6}>
+        <Grid item md={6}>
+          <img
+            src={productDetail.images[1]}
+            alt={productDetail.title}
+            style={{ width: "100%" }}
+          />
+        </Grid>
+        <Grid item md={6}>
+          <Typography variant="h3">{productDetail.title}</Typography>
+          <Divider sx={{ mb: 2 }} />
+          <Typography variant="h4" color="secondary">
+            ${productDetail.price}
+          </Typography>
+          <TableContainer>
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell>{productDetail.title}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Description</TableCell>
+                  <TableCell>{productDetail.description}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Category</TableCell>
+                  <TableCell>{productDetail.category.name}</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Grid container spacing={2} sx={{ marginTop: "5px" }}>
+            <Grid item md={6}>
+              <TextField
+                variant="outlined"
+                type="number"
+                label="Quantity in Cart"
+                fullWidth
+                value={quantity}
+                onChange={handleInputChange}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              {/* <LoadingButton
               disabled={
                 item?.quantity === quantity || (!item && quantity === 0)
               }
@@ -110,10 +112,11 @@ function ProductDetails() {
             >
               {item ? "Update Quantity" : "Add to Cart"}
             </LoadingButton> */}
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </Container>
   );
 }
 

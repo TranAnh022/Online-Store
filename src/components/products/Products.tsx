@@ -40,7 +40,6 @@ function Products() {
     setPage(value);
   };
 
-  console.log(productParams)
   if (!productsShow) return <LoadingComponent message="Loading Products..." />;
 
   return (

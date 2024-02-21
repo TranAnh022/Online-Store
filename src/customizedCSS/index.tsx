@@ -1,4 +1,20 @@
+import { PaletteMode, createTheme } from "@mui/material";
+
 export const drawerWidth = 240;
+
+export const createCustomTheme = (paletteType: PaletteMode | undefined) => {
+  return createTheme({
+    palette: {
+      mode: paletteType,
+      background: {
+        default: paletteType === "light" ? "#eaeaea" : "#121212",
+      },
+    },
+    typography: {
+      fontFamily: '"Roboto", sans-serif',
+    },
+  });
+};
 
 export const navStyles = {
   color: "inherit",
@@ -10,14 +26,17 @@ export const navStyles = {
 };
 
 export const listItemStyle = {
-  typography: "h6",
   borderRadius: "15px",
   "&.active": { color: "text.secondary" },
 };
 
 export const navList = {
   display: "flex",
-  flexDirection: { xs: "column", md: "row" },
+  flexDirection: {
+    xs: "column",
+    md: "row",
+  },
+  gap:"5px"
 };
 
 export const bannerContainer = {
@@ -60,7 +79,6 @@ export const TitleStyle = {
   textAlign: "center",
   fontSize: "2rem",
 };
-
 
 export const LoginContainerStyle = {
   backgroundImage:

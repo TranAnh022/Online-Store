@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 
-type Props = {}
+type Props = {};
 
 function Profile({}: Props) {
-  return (
-    <div>Profile</div>
-  )
+  const user = useAppSelector((state) => state.user.user);
+
+
+  return <div>{user?.name}</div>;
 }
 
-export default Profile
+export default Profile;

@@ -18,8 +18,8 @@ export const router = createBrowserRouter([
       {
         element: <RequireAuth />,
         children: [
-          //   { path: "checkout", element: <CheckoutPage /> },
-          //   { path: "orders", element: <Orders /> },
+            // { path: "checkout", element: <Profile /> },
+            // { path: "orders", element: <BasketPage /> },
         ],
       },
       { path: "home", element: <HomePage /> },

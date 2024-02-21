@@ -1,17 +1,40 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { UserLogin } from "../../types/type";
+import { UserLogin, UserType } from "../../types/type";
 import agent from "../../api/agent";
+import { setUser } from "../slices/userSlice";
 
 export const userLoginAsync = createAsyncThunk(
   "userLoginAsync",
-  async (values: UserLogin,thunkAPI) => {
+  async (values: UserLogin, thunkAPI) => {
     try {
-      console.log(values);
       const data = await agent.User.login(values);
-      localStorage.setItem("user", JSON.stringify(data));
+       localStorage.setItem("accessToken", data.access_token);
+       localStorage.setItem("refreshToken", data.refresh_token);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
     }
+  }
+);
+
+export const fetchCurrentUser = createAsyncThunk<UserType>(
+  "fetchCurrentUser",
+  async (_, thunkAPI) => {
+    try {
+      const userInfo = await agent.User.currentUser();
+      localStorage.setItem("user", JSON.stringify(userInfo));
+      thunkAPI.dispatch(setUser(userInfo));
+      return userInfo;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({ error: error.data });
+    }
+  },
+  //this condition below will determine the async thunk should be executed or not
+  {
+    condition: () => {
+      if (!localStorage.getItem("accessToken")) {
+        return false;
+      } // if the condition returns false it will be skipped,otherwise, the async thunk will be executed
+    },
   }
 );

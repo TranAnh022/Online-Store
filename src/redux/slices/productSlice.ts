@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { FilterType, ProductType } from "../../types/type";
-import { createProduct, fetchAllProductsAsync, fetchFilterProduct, fetchProductAsync } from "../actions/productActions";
+import { createProduct, fetchFilterProduct, fetchProductAsync } from "../actions/productActions";
 
 
 type InitialState = {
@@ -48,32 +48,6 @@ const productSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
-      if (!(action.payload instanceof Error)) {
-        return {
-          ...state,
-          products: action.payload,
-          loading: false,
-        };
-      }
-    });
-
-    builder.addCase(fetchAllProductsAsync.pending, (state, action) => {
-      return {
-        ...state,
-        loading: true,
-      };
-    });
-
-    builder.addCase(fetchAllProductsAsync.rejected, (state, action) => {
-      if (action.payload instanceof Error) {
-        return {
-          ...state,
-          loading: false,
-          error: action.payload.message,
-        };
-      }
-    });
     builder.addCase(fetchFilterProduct.fulfilled, (state, action) => {
       if (!(action.payload instanceof Error)) {
         return {

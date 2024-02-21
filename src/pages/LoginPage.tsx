@@ -4,12 +4,17 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { LoginContainerStyle, TitleStyle } from "../customizedCSS";
 import { validationUserSchema } from "../validation";
 import { useAppDispatch } from "../redux/configureStore";
-import { userLoginAsync } from "../redux/actions/userActions";
+import { fetchCurrentUser, userLoginAsync } from "../redux/actions/userActions";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const dispatch = useAppDispatch();
-  const handleSubmit = (values: any) => {
-    dispatch(userLoginAsync(values));
+  const navigate = useNavigate()
+  
+  const handleSubmit = async(values: any) => {
+    await dispatch(userLoginAsync(values));
+    await dispatch(fetchCurrentUser());
+    navigate("/home")
     formik.resetForm()
   };
 

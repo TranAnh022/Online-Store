@@ -1,9 +1,24 @@
 import axios, { AxiosResponse } from "axios";
 import { FilterType, ProductDto, UserLogin, UserType } from "../types/type";
+import { store } from "../redux/configureStore";
 
 axios.defaults.baseURL = "https://api.escuelajs.co/api/v1/";
 
+
 const responseBody = (response: AxiosResponse) => response.data;
+
+axios.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("accessToken"); // Assuming your token is stored in the user slice of your Redux store
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 const requests = {
   get: (url: string) => axios.get(url).then(responseBody),
@@ -46,6 +61,7 @@ const Product = {
 const User = {
   login: (values: UserLogin) => requests.post("auth/login", values),
   register: (values: UserType) => requests.post(`users/${values.id}`, values),
+  currentUser: () => requests.get("auth/profile"),
 };
 
 const agent = {
