@@ -49,10 +49,11 @@ function FilterForm() {
             handleSearchChange(event);
           }}
           value={searchTerm || ""}
-          fullWidth
+          
         />
       </Grid>
-      <Grid item md={6} xs={12} flexDirection={"column"}>
+      <Grid item md={4}></Grid>
+      <Grid item md={4} xs={12} flexDirection={"column"}>
         <Stack spacing={6} direction="row" sx={{ mb: 1 }} alignItems="center">
           <Typography>Price:</Typography>
           <Slider

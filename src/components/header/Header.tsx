@@ -8,9 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Grid, Switch } from "@mui/material";
-import {
-  drawerWidth,
-} from "../../customizedCSS";
+import { drawerWidth } from "../../customizedCSS";
 import { Link } from "react-router-dom";
 import { UserType } from "../../types/type";
 import HeaderDrawer from "./HeaderDrawer";
@@ -42,7 +40,7 @@ export default function Header(props: Props) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed">
+      <AppBar>
         <Toolbar>
           <Grid container>
             <Grid item md={5} sx={{ display: "flex", alignItems: "center" }}>

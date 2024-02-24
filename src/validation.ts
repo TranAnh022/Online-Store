@@ -15,3 +15,10 @@ export const validationUserSchema = yup.object().shape({
   email: yup.string().email().required("Email is required"),
   password: yup.string().required("Password is required"),
 });
+
+export const validationRegisterSchema = yup.object().shape({
+  name: yup.string().required("Name is required"),
+  email: yup.string().email().required("Email is required"),
+  password: yup.string().required("Password is required"),
+  avatar: yup.string().required("Password is required"),
+});

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { UserLogin, UserType } from "../../types/type";
+import { UserLogin, UserRegister, UserType } from "../../types/type";
 import agent from "../../api/agent";
 import { setUser } from "../slices/userSlice";
 
@@ -23,7 +23,6 @@ export const fetchCurrentUser = createAsyncThunk<UserType>(
     try {
       const userInfo = await agent.User.currentUser();
       localStorage.setItem("user", JSON.stringify(userInfo));
-      thunkAPI.dispatch(setUser(userInfo));
       return userInfo;
     } catch (error: any) {
       return thunkAPI.rejectWithValue({ error: error.data });
@@ -36,5 +35,17 @@ export const fetchCurrentUser = createAsyncThunk<UserType>(
         return false;
       } // if the condition returns false it will be skipped,otherwise, the async thunk will be executed
     },
+  }
+);
+
+export const userRegisterAsync= createAsyncThunk(
+  "userRegisterAsync",
+  async (values: UserRegister, thunkAPI) => {
+    try {
+      const data = await agent.User.register(values);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
   }
 );

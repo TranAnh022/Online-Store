@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import { FilterType, ProductDto, UserLogin, UserType } from "../types/type";
-import { store } from "../redux/configureStore";
+import { FilterType, ProductDto, UserLogin, UserRegister, UserType } from "../types/type";
+
 
 axios.defaults.baseURL = "https://api.escuelajs.co/api/v1/";
 
@@ -9,7 +9,7 @@ const responseBody = (response: AxiosResponse) => response.data;
 
 axios.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("accessToken"); // Assuming your token is stored in the user slice of your Redux store
+    const token = localStorage.getItem("accessToken");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -28,7 +28,6 @@ const requests = {
 };
 
 const Product = {
-  list: () => requests.get("products"),
   filter: (filterParams: FilterType) => {
     let url = "products";
 
@@ -54,14 +53,14 @@ const Product = {
 
     return requests.get(url);
   },
-  details: (id: string) => requests.get(`products/${id}`),
+  details: (id: number) => requests.get(`products/${id}`),
   create: (values: ProductDto) => requests.post(`products`, values),
 };
 
 const User = {
   login: (values: UserLogin) => requests.post("auth/login", values),
-  register: (values: UserType) => requests.post(`users/${values.id}`, values),
   currentUser: () => requests.get("auth/profile"),
+  register: (values: UserRegister) => requests.post(`users`, values),
 };
 
 const agent = {

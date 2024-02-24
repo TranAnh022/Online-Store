@@ -1,34 +1,35 @@
 import { Box, Button, Link, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { LoginContainerStyle, TitleStyle, customTheme } from "../customizedCSS";
-import { validationUserSchema } from "../validation";
+import { validationRegisterSchema } from "../validation";
 import { useAppDispatch } from "../redux/configureStore";
-import { fetchCurrentUser, userLoginAsync } from "../redux/actions/userActions";
+import { userRegisterAsync } from "../redux/actions/userActions";
 import { useNavigate } from "react-router-dom";
 
-function LoginPage() {
+function RegisterPage() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleSubmit = async(values: any) => {
-    await dispatch(userLoginAsync(values));
-    await dispatch(fetchCurrentUser());
-    formik.resetForm()
+  const handleSubmit = async (values: any) => {
+    await dispatch(userRegisterAsync(values));
+    formik.resetForm();
   };
 
   const formik = useFormik({
     initialValues: {
+      name: "",
       email: "",
       password: "",
+      avatar: "",
     },
-    validationSchema: validationUserSchema,
+    validationSchema: validationRegisterSchema,
     onSubmit: handleSubmit,
   });
 
   return (
     <ThemeProvider theme={customTheme("dark")}>
-      <Box sx={LoginContainerStyle}>
+      <Box sx={LoginContainerStyle} marginTop={"2rem"}>
         <Box
           sx={{
             textAlign: "center",
@@ -36,12 +37,13 @@ function LoginPage() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
+
           }}
         >
           <Typography sx={TitleStyle}>Online Store</Typography>
           <Typography variant="body1" sx={{ mb: 4 }}>
-            Unlock a world of endless shopping possibilities. Sign in and start
-            exploring today!"
+            Join now for exclusive offers! Save big with up to 50% off as an
+            online store member.
           </Typography>
           <Box>
             <Box
@@ -53,9 +55,21 @@ function LoginPage() {
               }}
             >
               <Typography variant="h4" sx={{ mb: 2 }}>
-                Login
+                Register
               </Typography>
               <form onSubmit={formik.handleSubmit}>
+                <TextField
+                  fullWidth
+                  id="name"
+                  name="name"
+                  label="Name"
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.name && Boolean(formik.errors.name)}
+                  helperText={formik.touched.name && formik.errors.name}
+                  disabled={formik.isSubmitting}
+                />
                 <TextField
                   fullWidth
                   id="email"
@@ -84,6 +98,18 @@ function LoginPage() {
                   helperText={formik.touched.password && formik.errors.password}
                   disabled={formik.isSubmitting}
                 />
+                <TextField
+                  fullWidth
+                  id="avatar"
+                  name="avatar"
+                  label="Avatar"
+                  value={formik.values.avatar}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.avatar && Boolean(formik.errors.avatar)}
+                  helperText={formik.touched.avatar && formik.errors.avatar}
+                  disabled={formik.isSubmitting}
+                />
                 <Button
                   variant="contained"
                   color="primary"
@@ -91,12 +117,11 @@ function LoginPage() {
                   disabled={formik.isSubmitting}
                   sx={{ mt: 2, width: "100%" }}
                 >
-                  {formik.isSubmitting ? "Logging in..." : "Login"}
+                  {formik.isSubmitting ? "Registering..." : "Register"}
                 </Button>
               </form>
               <Typography variant="body2" sx={{ color: "white", mt: 2 }}>
-                New to the Online Store?{" "}
-                <Link href="/register">Create an account</Link>
+                Already have an account? <Link href="/login">Login here</Link>
               </Typography>
             </Box>
           </Box>
@@ -106,4 +131,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegisterPage;

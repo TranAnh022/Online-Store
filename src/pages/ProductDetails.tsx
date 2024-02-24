@@ -14,42 +14,42 @@ import {
   Typography,
 } from "@mui/material";
 import { fetchProductAsync } from "../redux/actions/productActions";
+import LoadingComponent from "../components/loading/LoadingComponent";
+import { addToCart, updateToCart } from "../redux/slices/cartSlice";
+import { LoadingButton } from "@mui/lab";
+import { CartItem } from "../types/type";
 
 function ProductDetails() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const { productDetail } = useAppSelector((state) => state.products);
+  const { cart } = useAppSelector((state) => state.cart);
   const [quantity, setQuantity] = useState(0);
+  const product = cart?.products.find((p) => p.id === productDetail?.id);
 
   useEffect(() => {
-    dispatch(fetchProductAsync(id as string));
-  }, [dispatch, id]);
+    if (product && id && parseInt(id)=== productDetail?.id ) setQuantity(product.quantity);
+    if (id && parseInt(id) !== productDetail?.id)
+      dispatch(fetchProductAsync(parseInt(id)));
+    console.log(id);
+  }, [id, product, productDetail, dispatch]);
 
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     if (parseInt(event.currentTarget.value) >= 0) {
       setQuantity(parseInt(event.currentTarget.value));
     }
   }
-  //          function handleUpdateCart() {
-  //     if (!item || quantity > item.quantity) {
-  //       const updatedQuantity = item ? quantity - item.quantity : quantity;
-  //       dispatch(
-  //         addBasketItemAsync({
-  //           productId: product!.id,
-  //           quantity: updatedQuantity,
-  //         })
-  //       );
-  //     } else {
-  //       const updatedQuantity = item.quantity - quantity;
-  //       dispatch(
-  //         removeBasketItemAsync({
-  //           productId: product!.id,
-  //           quantity: updatedQuantity,
-  //         })
-  //       );
-  //     }
-  //   }
-  if (!id || !productDetail) return <div></div>;
+
+  function handleUpdateCart() {
+    if (!product || product.quantity === undefined) {
+      dispatch(addToCart({ ...productDetail, quantity } as CartItem));
+    }
+    if (product && product.quantity !== quantity) {
+      dispatch(updateToCart({ id: product.id, quantity: quantity }));
+    }
+    
+  }
+  if (!productDetail) return <LoadingComponent message="Loading Product ..." />;
   return (
     <Container sx={{ marginTop: "5rem", marginBottom: "3rem" }}>
       <Grid container spacing={6}>
@@ -96,22 +96,21 @@ function ProductDetails() {
               />
             </Grid>
             <Grid item xs={6}>
-              {/* <LoadingButton
-              disabled={
-                item?.quantity === quantity || (!item && quantity === 0)
-              }
-              sx={{
-                height: "55px",
-              }}
-              loading={status.includes("pending")}
-              color="primary"
-              size="large"
-              variant="contained"
-              fullWidth
-              onClick={handleUpdateCart}
-            >
-              {item ? "Update Quantity" : "Add to Cart"}
-            </LoadingButton> */}
+              <LoadingButton
+                disabled={
+                  product?.quantity === quantity || (!product && quantity === 0)
+                }
+                sx={{
+                  height: "55px",
+                }}
+                color="primary"
+                size="large"
+                variant="contained"
+                fullWidth
+                onClick={handleUpdateCart}
+              >
+                {product ? "Update Quantity" : "Add to Cart"}
+              </LoadingButton>
             </Grid>
           </Grid>
         </Grid>

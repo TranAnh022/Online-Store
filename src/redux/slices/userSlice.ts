@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TokenState, UserLogin, UserType } from "../../types/type";
-import { fetchCurrentUser, userLoginAsync } from "../actions/userActions";
+import { fetchCurrentUser, userLoginAsync, userRegisterAsync } from "../actions/userActions";
 import { router } from "../../router/Routes";
+import { toast } from "react-toastify";
 
 type InitialState = {
   user: UserType | null;
@@ -33,6 +34,7 @@ const UserSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(userLoginAsync.fulfilled, (state, action) => {
+      router.navigate("/home")
       if (!(action.payload instanceof Error)) {
         return {
           ...state,
@@ -48,11 +50,7 @@ const UserSlice = createSlice({
     });
 
     builder.addCase(userLoginAsync.rejected, (state, action) => {
-      if (action.payload instanceof Error) {
-        return {
-          ...state,
-        };
-      }
+     toast.error("Invalid email or password")
     });
     builder.addCase(fetchCurrentUser.fulfilled, (state, action) => {
       if (!(action.payload instanceof Error)) {
@@ -70,11 +68,30 @@ const UserSlice = createSlice({
     });
 
     builder.addCase(fetchCurrentUser.rejected, (state, action) => {
-      if (action.payload instanceof Error) {
+      state.user = null;
+      localStorage.removeItem("user");
+      toast.error("Session expired - please login again");
+      router.navigate("/home");
+    });
+    builder.addCase(userRegisterAsync.fulfilled, (state, action) => {
+      if (!(action.payload instanceof Error)) {
+        router.navigate("/login");
         return {
           ...state,
+          user: action.payload,
         };
       }
+    });
+
+    builder.addCase(userRegisterAsync.pending, (state) => {
+      return {
+        ...state,
+      };
+    });
+
+    builder.addCase(userRegisterAsync.rejected, (state, action:any) => {
+      toast.error(action.payload.response.data.message[0])
+
     });
   },
 });

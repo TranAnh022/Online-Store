@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import LoadingComponent from "./components/loading/LoadingComponent";
 import Header from "./components/header/Header";
-import { useAppDispatch, useAppSelector } from "./redux/configureStore";
+import { useAppDispatch} from "./redux/configureStore";
 import { fetchCurrentUser } from "./redux/actions/userActions";
-import { createCustomTheme } from "./customizedCSS";
+import {  customTheme } from "./customizedCSS";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -29,7 +30,7 @@ function App() {
   if (loading) return <LoadingComponent message="Initializing app..." />;
 
   return (
-    <ThemeProvider theme={createCustomTheme(paletteType)}>
+    <ThemeProvider theme={customTheme(paletteType)}>
       <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
       <CssBaseline />
       <Header darkMode={darkMode} setDarkMode={setDarkMode} />

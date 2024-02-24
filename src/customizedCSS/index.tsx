@@ -2,7 +2,7 @@ import { PaletteMode, createTheme } from "@mui/material";
 
 export const drawerWidth = 240;
 
-export const createCustomTheme = (paletteType: PaletteMode | undefined) => {
+export const customTheme = (paletteType: PaletteMode | undefined) => {
   return createTheme({
     palette: {
       mode: paletteType,
@@ -40,7 +40,7 @@ export const navList = {
 };
 
 export const bannerContainer = {
-  padding: "100px 40px",
+  padding: {md:"100px 40px",xs:"50px 20px"},
   backgroundColor: "#dcdcdc",
   borderRadius: "15px",
   position: "relative",
@@ -54,9 +54,9 @@ export const buttonStyle = {
   backgroundColor: "#f02d34",
   color: "white",
   border: "none",
-  marginTop: "40px",
-  fontSize: "18px",
-  fontWeight: "500",
+  marginTop: "20px",
+  fontSize: {md:"18px",xs:"12px"},
+  fontWeight: "700",
   cursor: "pointer",
   transition: "transform 0.5s ease",
   "&:hover": {

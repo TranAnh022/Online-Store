@@ -7,7 +7,7 @@ import {
 import agent from "../../api/agent";
 
 
-export const fetchProductAsync = createAsyncThunk<ProductType, string>(
+export const fetchProductAsync = createAsyncThunk<ProductType, number>(
   "fetchProductAsync",
   async (productId,thunkAPI) => {
     try {

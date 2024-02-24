@@ -50,7 +50,22 @@ export interface UserLogin {
   password: string;
 }
 
+export interface UserRegister {
+  name: string;
+  email: string;
+  password: string;
+  avatar: string;
+}
+
 export interface TokenState {
   access_token: string;
   refresh_token: string;
 };
+
+export interface CartItem extends ProductType{
+  quantity: number
+}
+
+export interface CartType {
+  products: CartItem[];
+}
