@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 import {
@@ -13,58 +13,65 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { fetchProductAsync } from "../redux/actions/productActions";
-import LoadingComponent from "../components/loading/LoadingComponent";
-import { addToCart, updateToCart } from "../redux/slices/cartSlice";
 import { LoadingButton } from "@mui/lab";
 import { CartItem } from "../types/type";
+import {
+  deleteProduct,
+  fetchProductAsync,
+} from "../redux/actions/productActions";
+import { addToCart, updateToCart } from "../redux/slices/cartSlice";
+import LoadingComponent from "../components/loading/LoadingComponent";
+import NotFound from "../components/notFound/NotFound";
 
 function ProductDetails() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
   const { productDetail } = useAppSelector((state) => state.products);
   const { cart } = useAppSelector((state) => state.cart);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState<number>(0);
   const product = cart?.products.find((p) => p.id === productDetail?.id);
+  console.log(productDetail);
 
   useEffect(() => {
-    if (product && id && parseInt(id)=== productDetail?.id ) setQuantity(product.quantity);
-    if (id && parseInt(id) !== productDetail?.id)
+    if (product && parseInt(id!) === productDetail?.id) {
+      setQuantity(product.quantity);
+    } else if (id && parseInt(id) !== productDetail?.id) {
       dispatch(fetchProductAsync(parseInt(id)));
-    console.log(id);
+    }
   }, [id, product, productDetail, dispatch]);
 
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    if (parseInt(event.currentTarget.value) >= 0) {
-      setQuantity(parseInt(event.currentTarget.value));
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const newQuantity = parseInt(event.currentTarget.value);
+    if (!isNaN(newQuantity)) {
+      setQuantity(newQuantity);
     }
-  }
+  };
 
-  function handleUpdateCart() {
+  const handleUpdateCart = () => {
     if (!product || product.quantity === undefined) {
       dispatch(addToCart({ ...productDetail, quantity } as CartItem));
     }
     if (product && product.quantity !== quantity) {
       dispatch(updateToCart({ id: product.id, quantity: quantity }));
     }
-    
-  }
-  if (!productDetail) return <LoadingComponent message="Loading Product ..." />;
+  };
+
+  if (!productDetail) return <NotFound />;
   return (
     <Container sx={{ marginTop: "5rem", marginBottom: "3rem" }}>
       <Grid container spacing={6}>
         <Grid item md={6}>
           <img
-            src={productDetail.images[1]}
+            src={productDetail?.images![0]?.replace(/"/g,'').replace(/\[|\]/g, '')}
             alt={productDetail.title}
             style={{ width: "100%" }}
           />
         </Grid>
         <Grid item md={6}>
-          <Typography variant="h3">{productDetail.title}</Typography>
+          <Typography variant="h3">{productDetail?.title}</Typography>
           <Divider sx={{ mb: 2 }} />
           <Typography variant="h4" color="secondary">
-            ${productDetail.price}
+            ${productDetail?.price}
           </Typography>
           <TableContainer>
             <Table>
@@ -79,7 +86,7 @@ function ProductDetails() {
                 </TableRow>
                 <TableRow>
                   <TableCell>Category</TableCell>
-                  <TableCell>{productDetail.category.name}</TableCell>
+                  <TableCell>{productDetail?.category?.name}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -100,9 +107,7 @@ function ProductDetails() {
                 disabled={
                   product?.quantity === quantity || (!product && quantity === 0)
                 }
-                sx={{
-                  height: "55px",
-                }}
+                sx={{ height: "55px" }}
                 color="primary"
                 size="large"
                 variant="contained"
@@ -110,6 +115,32 @@ function ProductDetails() {
                 onClick={handleUpdateCart}
               >
                 {product ? "Update Quantity" : "Add to Cart"}
+              </LoadingButton>
+            </Grid>
+          </Grid>
+          <Grid container spacing={2} sx={{ marginTop: "5px" }}>
+            <Grid item md={6}>
+              <LoadingButton
+                sx={{ height: "55px" }}
+                color="error"
+                size="large"
+                variant="contained"
+                fullWidth
+                onClick={() => dispatch(deleteProduct(productDetail.id))}
+              >
+                Delete
+              </LoadingButton>
+            </Grid>
+            <Grid item xs={6}>
+              <LoadingButton
+                sx={{ height: "55px" }}
+                color="secondary"
+                size="large"
+                variant="contained"
+                fullWidth
+                href={`/products/${productDetail.id}/update`}
+              >
+                Update
               </LoadingButton>
             </Grid>
           </Grid>

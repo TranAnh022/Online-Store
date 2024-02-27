@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { UserLogin, UserRegister, UserType } from "../../types/type";
 import agent from "../../api/agent";
-import { setUser } from "../slices/userSlice";
+
 
 export const userLoginAsync = createAsyncThunk(
   "userLoginAsync",
@@ -49,3 +49,5 @@ export const userRegisterAsync= createAsyncThunk(
     }
   }
 );
+
+

@@ -8,6 +8,8 @@ import Header from "./components/header/Header";
 import { useAppDispatch} from "./redux/configureStore";
 import { fetchCurrentUser } from "./redux/actions/userActions";
 import {  customTheme } from "./customizedCSS";
+import NewLetter from "./components/newLetter";
+import Footer from "./components/footer";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -35,6 +37,7 @@ function App() {
       <CssBaseline />
       <Header darkMode={darkMode} setDarkMode={setDarkMode} />
       <Outlet />
+     
     </ThemeProvider>
   );
 }

@@ -6,7 +6,7 @@ export interface ProductType {
   images: string[];
   creationAt: string;
   updatedAt: string;
-  category: CategoryType;
+  category: CategoryType | null;
 }
 
 export interface CategoryType {
@@ -31,17 +31,12 @@ export interface ProductDto {
   categoryId: number;
 }
 
-enum Role {
-  customer,
-  admin,
-}
-
 export interface UserType {
   id: number;
   email: string;
   password: string;
   name: string;
-  role: Role;
+  role: "admin" | "customer";
   avatar: string;
 }
 

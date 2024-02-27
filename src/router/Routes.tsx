@@ -8,6 +8,7 @@ import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage";
 import ProductCreate from "../pages/ProductCreate";
 import CartPage from "../pages/CartPage";
+import ProductUpdate from "../pages/ProductUpdate";
 
 export const router = createBrowserRouter([
   {
@@ -18,7 +19,6 @@ export const router = createBrowserRouter([
         element: <RequireAuth />,
         children: [
           { path: "profile", element: <Profile /> },
-          // { path: "orders", element: <BasketPage /> },
         ],
       },
       { path: "", element: <HomePage /> },
@@ -27,6 +27,10 @@ export const router = createBrowserRouter([
       { path: "create", element: <ProductCreate /> },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
+      {
+        path: "products/:id/update",
+        element: <ProductUpdate />,
+      },
     ],
   },
 ]);

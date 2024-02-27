@@ -1,20 +1,16 @@
 import { Box } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
+import { FormattingURL } from "../../utils";
 
-export const ImageList = ({
-  images,
-  onDelete,
-}: {
-  images: string[];
-  onDelete: (index: number) => void;
-}) => {
+export const ImageList = ({images,onDelete,}: {images: string[];onDelete: (index: number) => void;}) => {
+
   return (
     <Box flexWrap={"wrap"} display={"flex"}>
       {images.map((image, index) => (
         <div key={index} style={{ marginBottom: "10px" }}>
           <Box sx={{ position: "relative" }}>
             <img
-              src={image}
+              src={FormattingURL(image)}
               alt={`Img ${index + 1}`}
               style={{ maxWidth: "100px", marginRight: "10px" }}
             />

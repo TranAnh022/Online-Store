@@ -10,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import { Grid, Switch } from "@mui/material";
 import { drawerWidth } from "../../customizedCSS";
 import { Link } from "react-router-dom";
-import { UserType } from "../../types/type";
 import HeaderDrawer from "./HeaderDrawer";
 
 interface Props {

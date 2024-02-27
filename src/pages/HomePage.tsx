@@ -1,13 +1,19 @@
-import {  Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import HeroBanner from "../components/banner/HeroBanner";
 import Products from "../components/products/Products";
+import NewLetter from "../components/newLetter";
+import Footer from "../components/footer";
 
 function HomePage() {
   return (
-    <Container sx={{ marginTop: "5rem", marginBottom: "3rem" }}>
-      <HeroBanner />
-      <Products />
-    </Container>
+    <Box>
+      <Container sx={{ marginTop: "5rem", marginBottom: "3rem" }}>
+        <HeroBanner />
+        <Products />
+      </Container>
+      <NewLetter />
+      <Footer />
+    </Box>
   );
 }
 

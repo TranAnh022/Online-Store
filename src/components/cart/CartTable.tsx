@@ -17,12 +17,11 @@ import {
   removeToCart,
   updateToCart,
 } from "../../redux/slices/cartSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/configureStore";
-import { navList } from "../../customizedCSS";
+import { useAppDispatch } from "../../redux/configureStore";
 
 type Props = { cart: CartType };
 
-function CartTable({cart}: Props) {
+function CartTable({ cart }: Props) {
   const dispatch = useAppDispatch();
 
   return (
@@ -48,11 +47,13 @@ function CartTable({cart}: Props) {
                   to={`/products/${item.id}`}
                   style={{ textDecoration: "none", cursor: "pointer" }}
                 >
-                  <img
-                    src={item.images[0]}
-                    alt={item.title}
-                    style={{ height: 50, marginRight: 20 }}
-                  />
+                  {item.images && (
+                    <img
+                      src={item.images[0]}
+                      alt={item.title}
+                      style={{ height: 50, marginRight: 20 }}
+                    />
+                  )}
                   <span>{item.title}</span>
                 </Box>
               </TableCell>

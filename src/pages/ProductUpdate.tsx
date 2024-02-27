@@ -7,27 +7,50 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { TitleStyle } from "../customizedCSS";
-import { ProductDto } from "../types/type";
-import { createProduct } from "../redux/actions/productActions";
-import { useAppDispatch } from "../redux/configureStore";
+import { ProductDto, ProductType } from "../types/type";
+import {
+  createProduct,
+  fetchProductAsync,
+  updateProduct,
+} from "../redux/actions/productActions";
+import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 import { validationProductSchema } from "../validation";
 import { ImageList } from "../components/imagesList/ImageList";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import LoadingComponent from "../components/loading/LoadingComponent";
+import { FormattingURL } from "../utils";
 
-function ProductCreate() {
+function ProductUpdate() {
   const dispatch = useAppDispatch();
+  const { id } = useParams();
+  const productDetail = useAppSelector((state) => state.products.productDetail);
 
-  const initialValues = {
-    title: "",
-    categoryId: 0,
-    price: 0,
-    description: "",
-    images: [],
-  };
+  useEffect(() => {
+    if (productDetail?.title) {
+      const { title, category, price, description, images } = productDetail;
+      formik.setValues({
+        title: title || "",
+        categoryId: category?.id || 0,
+        price: price || 0,
+        description: description || "",
+        images: images || [],
+      });
+    } else if (id) {
+      dispatch(fetchProductAsync(parseInt(id)));
+    }
+  }, [id, dispatch, productDetail]);
 
-  const handleSubmit = (values: ProductDto) => {
-    console.log(values);
-    dispatch(createProduct(values));
-    //formik.resetForm();
+  const handleSubmit = async (values: ProductDto) => {
+    const updatedImages: string[] = values.images.map((img) =>
+      FormattingURL(img)
+    );
+    await dispatch(
+      updateProduct({
+        id: parseInt(id!),
+        value: { ...values, images: updatedImages },
+      })
+    );
   };
 
   const handleImageDelete = (index: number) => {
@@ -37,14 +60,21 @@ function ProductCreate() {
   };
 
   const formik = useFormik({
-    initialValues,
+    initialValues: {
+      title: productDetail?.title || "",
+      categoryId: productDetail?.category?.id || 0,
+      price: productDetail?.price || 0,
+      description: productDetail?.description || "",
+      images: productDetail?.images || [],
+    },
     validationSchema: validationProductSchema,
     onSubmit: handleSubmit,
   });
 
+  if (!productDetail) return <LoadingComponent message="Loading Form" />;
   return (
     <Container maxWidth="sm" style={{ marginTop: "5rem" }}>
-      <Typography sx={TitleStyle}>Create New Product</Typography>
+      <Typography sx={TitleStyle}>Update the Product</Typography>
       <form onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth
@@ -109,7 +139,7 @@ function ProductCreate() {
           label="Images (comma-separated)"
           multiline
           rows={4}
-          value={formik.values.images.join(",")}
+          value={FormattingURL(formik.values.images)}
           onChange={(event) => {
             const imageArray = event.target.value.split(",");
             formik.setFieldValue("images", imageArray);
@@ -130,11 +160,11 @@ function ProductCreate() {
           color="primary"
           style={{ marginTop: "16px" }}
         >
-          Submit
+          Update
         </Button>
       </form>
     </Container>
   );
 }
 
-export default ProductCreate;
+export default ProductUpdate;

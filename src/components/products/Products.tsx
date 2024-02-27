@@ -12,6 +12,7 @@ import { ProductContainer } from "../../customizedCSS";
 import LoadingComponent from "../loading/LoadingComponent";
 import FilterForm from "../filter/FilterForm";
 import { fetchFilterProduct } from "../../redux/actions/productActions";
+import NotFound from "../notFound/NotFound";
 
 
 function Products() {
@@ -19,17 +20,18 @@ function Products() {
   const [page, setPage] = useState(1);
   const [productsShow, setProductsShow] = useState<ProductType[]>([]);
   const { productParams } = useAppSelector((state) => state.products);
+
   useEffect(() => {
     dispatch(fetchFilterProduct(productParams));
   }, [dispatch,productParams]);
 
   const productList = useSelector((state: AppState) => state.products.products);
-  const totalPage = Math.ceil(productList.length / 8);
+  const totalPage = Math.ceil(productList.length / 6);
 
   useEffect(() => {
     const paginationProducts = async () => {
-      const startIndex = (page - 1) * 8;
-      const endIndex = startIndex + 8;
+      const startIndex = (page - 1) * 6;
+      const endIndex = startIndex + 6;
       setProductsShow(productList.slice(startIndex, endIndex));
     };
     paginationProducts();
@@ -40,7 +42,7 @@ function Products() {
     setPage(value);
   };
 
-  if (!productsShow) return <LoadingComponent message="Loading Products..." />;
+  if (!productsShow) return <NotFound />;
 
   return (
     <Box sx={{ mt: 2 }}>

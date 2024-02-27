@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import LoadingComponent from "../loading/LoadingComponent";
 import { Box } from "@mui/material";
 import { Link } from "react-router-dom";
+import { FormattingURL } from "../../utils";
 
 type Props = {
   product: ProductType;
@@ -23,7 +24,7 @@ const ProductCard1 = {
     transform: "scale(1.1, 1.1)",
   },
   textDecoration: "none",
-  color:'black'
+  color: "black",
 };
 
 const ProductFigure = styled("figure")({
@@ -52,9 +53,9 @@ function ProductCard({ product }: Props) {
       <ProductFigure>
         <ProductImg
           src={
-            product?.images[1]?.replace(/"/g, "") === undefined
+            !FormattingURL(product.images![0])
               ? "https://source.unsplash.com/random/?clothing"
-              : product?.images[1]?.replace(/"/g, "")
+              : FormattingURL(product.images![0])
           }
           alt="product-img"
         />

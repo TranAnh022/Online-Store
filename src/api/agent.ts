@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { FilterType, ProductDto, UserLogin, UserRegister, UserType } from "../types/type";
+import { FilterType, ProductDto, UserLogin, UserRegister} from "../types/type";
 
 
 axios.defaults.baseURL = "https://api.escuelajs.co/api/v1/";
@@ -55,6 +55,8 @@ const Product = {
   },
   details: (id: number) => requests.get(`products/${id}`),
   create: (values: ProductDto) => requests.post(`products`, values),
+  update: (id: number, values: ProductDto) => requests.put(`products/${id}`, values),
+  delete: (id: number) => requests.delete(`products/${id}`),
 };
 
 const User = {

@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CartItem, CartType } from "../../types/type";
-import { store } from "../configureStore";
 
 type InitialState = {
   cart: CartType;

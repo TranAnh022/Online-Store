@@ -26,7 +26,7 @@ const UserSlice = createSlice({
       localStorage.removeItem("user");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
-      router.navigate("/home");
+      router.navigate("/");
     },
     setUser: (state, action) => {
       state.user = action.payload;
@@ -34,7 +34,7 @@ const UserSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(userLoginAsync.fulfilled, (state, action) => {
-      router.navigate("/home")
+      router.navigate("/")
       if (!(action.payload instanceof Error)) {
         return {
           ...state,

@@ -6,8 +6,10 @@ import Fade from "@mui/material/Fade";
 import { useAppDispatch } from "../../redux/configureStore";
 import { signOut } from "../../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
+import { Avatar, Box } from "@mui/material";
+import { UserType } from "../../types/type";
 
-export default function FadeMenu(props: { user: string; role: number }) {
+export default function FadeMenu(props: { user: UserType }) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -21,16 +23,19 @@ export default function FadeMenu(props: { user: string; role: number }) {
 
   return (
     <div>
-      <Button
-        id="fade-button"
-        aria-controls={open ? "fade-menu" : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        sx={{ color: "white" }}
-      >
-        {props.user}
-      </Button>
+      <Box display={"flex"} flexDirection={{ xs: "row" }} gap="1rem">
+        <Avatar alt="avatar" src={`${props.user.avatar}`} />
+        <Button
+          id="fade-button"
+          aria-controls={open ? "fade-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+          onClick={handleClick}
+          sx={{ color: "white",display:{xs:"none",md:"block"}}}
+        >
+          {props.user.name}
+        </Button>
+      </Box>
       <Menu
         id="fade-menu"
         MenuListProps={{
@@ -42,8 +47,10 @@ export default function FadeMenu(props: { user: string; role: number }) {
         TransitionComponent={Fade}
       >
         <MenuItem onClick={() => navigate("/profile")}>Profile</MenuItem>
-        {props.role === 1 && (
-          <MenuItem onClick={() => navigate("/create")}>My account</MenuItem>
+        {props.user.role === "admin" && (
+          <MenuItem onClick={() => navigate("/create")}>
+            Create new Product
+          </MenuItem>
         )}
         <MenuItem onClick={() => dispatch(signOut())}>Logout</MenuItem>
       </Menu>

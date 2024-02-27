@@ -8,7 +8,6 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  Typography,
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/configureStore";
@@ -26,7 +25,6 @@ const HeaderDrawer = () => {
     (sum, product) => sum + product.quantity,
     0
   );
-  console.log(cart);
   return (
     <Box sx={navStyles}>
       <Divider sx={{ md: "none" }} />
@@ -45,7 +43,7 @@ const HeaderDrawer = () => {
             </Badge>
           </IconButton>
           <ListItem disablePadding>
-            <HeaderDropDown user={user.name} role={user.role} />
+            <HeaderDropDown user={user} />
           </ListItem>
           <List
             sx={{
@@ -65,7 +63,7 @@ const HeaderDrawer = () => {
                 Profile
               </ListItemButton>
             </ListItem>
-            {user.role === 1 && (
+            {user.role === "admin" && (
               <ListItem disablePadding>
                 <ListItemButton
                   sx={listItemStyle}
@@ -90,11 +88,11 @@ const HeaderDrawer = () => {
           <IconButton
             component={Link}
             to="/cart"
-            size="small"
+            size="large"
             color="inherit"
             sx={{ mr: 2 }}
           >
-            <Badge badgeContent={3} color="secondary">
+            <Badge badgeContent={itemCount} color="secondary">
               <ShoppingCart />
             </Badge>
           </IconButton>

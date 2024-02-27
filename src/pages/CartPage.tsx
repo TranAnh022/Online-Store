@@ -1,30 +1,26 @@
 import {
-  Box,
-  Button,
   Container,
   Grid,
   Typography,
 } from "@mui/material";
 import CartTable from "../components/cart/CartTable";
-import { TitleStyle, buttonStyle } from "../customizedCSS";
+import { TitleStyle } from "../customizedCSS";
 import CartSum from "../components/cart/CartSum";
-import { useAppDispatch, useAppSelector } from "../redux/configureStore";
-import { SimCard } from "@mui/icons-material";
+import {  useAppSelector } from "../redux/configureStore";
 
-type Props = {};
 
-function CartPage({}: Props) {
+
+function CartPage() {
   const { cart } = useAppSelector((state) => state.cart);
   const sum = cart?.products.reduce((sum, item) => sum + item.quantity * item.price,0) ?? 0;
   return (
-    <Container sx={{ marginTop: "5rem" }}>
+    <Container sx={{ marginY: "10px" }}>
       <Grid container gap={"1rem"}>
         <Grid item xs={12}>
           <Typography textAlign={"center"} sx={TitleStyle}>
             Shopping Cart
           </Typography>
         </Grid>
-
         <Grid item md={8} xs={12}>
           <CartTable cart={cart} />
         </Grid>

@@ -49,7 +49,7 @@ function FilterForm() {
             handleSearchChange(event);
           }}
           value={searchTerm || ""}
-          
+
         />
       </Grid>
       <Grid item md={4}></Grid>
@@ -71,7 +71,7 @@ function FilterForm() {
         <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
           <Typography>Category:</Typography>
           <Select
-            value={productParams.category}
+            value={productParams.category || ""}
             onChange={(event) =>
               dispatch(
                 setProductParams({
@@ -83,7 +83,7 @@ function FilterForm() {
             label="Categories"
             fullWidth
           >
-            <MenuItem>None</MenuItem>
+            <MenuItem value="">None</MenuItem>
             <MenuItem value="1">Clothes</MenuItem>
             <MenuItem value="2">Electronics</MenuItem>
             <MenuItem value="3">Furniture</MenuItem>
