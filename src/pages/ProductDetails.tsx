@@ -20,7 +20,6 @@ import {
   fetchProductAsync,
 } from "../redux/actions/productActions";
 import { addToCart, updateToCart } from "../redux/slices/cartSlice";
-import LoadingComponent from "../components/loading/LoadingComponent";
 import NotFound from "../components/notFound/NotFound";
 
 function ProductDetails() {
@@ -30,7 +29,7 @@ function ProductDetails() {
   const { cart } = useAppSelector((state) => state.cart);
   const [quantity, setQuantity] = useState<number>(0);
   const product = cart?.products.find((p) => p.id === productDetail?.id);
-  console.log(productDetail);
+
 
   useEffect(() => {
     if (product && parseInt(id!) === productDetail?.id) {

@@ -19,7 +19,7 @@ export interface CategoryType {
 
 export interface FilterType {
   search?: string;
-  price: number;
+  price?: number;
   category?: string;
 }
 

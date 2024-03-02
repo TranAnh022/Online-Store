@@ -25,9 +25,8 @@ function ProductCreate() {
   };
 
   const handleSubmit = (values: ProductDto) => {
-    console.log(values);
     dispatch(createProduct(values));
-    //formik.resetForm();
+    formik.resetForm();
   };
 
   const handleImageDelete = (index: number) => {

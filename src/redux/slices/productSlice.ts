@@ -22,14 +22,14 @@ const initialState: InitialState = {
   products: [],
   loading: false,
   productDetail: {
-  id:0,
-  title: "",
-  price: 0,
-  description: "",
-  images: [],
-  creationAt: "",
-  updatedAt: "",
-  category:null,
+    id: 0,
+    title: "",
+    price: 0,
+    description: "",
+    images: [],
+    creationAt: "",
+    updatedAt: "",
+    category: null,
   },
   productParams: {
     price: 0,
@@ -57,13 +57,11 @@ const productSlice = createSlice({
   extraReducers(builder) {
     //--- FETCH PRODUCTS----
     builder.addCase(fetchFilterProduct.fulfilled, (state, action) => {
-      if (!(action.payload instanceof Error)) {
-        return {
-          ...state,
-          products: action.payload,
-          loading: false,
-        };
-      }
+      return {
+        ...state,
+        products: action.payload,
+        loading: false,
+      };
     });
     builder.addCase(fetchFilterProduct.pending, (state, action) => {
       return {
@@ -73,13 +71,11 @@ const productSlice = createSlice({
     });
 
     builder.addCase(fetchFilterProduct.rejected, (state, action) => {
-      if (action.payload instanceof Error) {
-        return {
-          ...state,
-          loading: false,
-          error: action.payload.message,
-        };
-      }
+      return {
+        ...state,
+        loading: false,
+        error: action.error.message ?? "error",
+      };
     });
 
     //--- FETCH  SINGLE PRODUCT----
@@ -113,10 +109,9 @@ const productSlice = createSlice({
     //--- CREATE PRODUCT----
     builder.addCase(createProduct.fulfilled, (state, action) => {
       if (!(action.payload instanceof Error)) {
-        const newProducts = [...state.products, action.payload];
         return {
           ...state,
-          products: newProducts,
+          products: [...state.products, action.payload],
           loading: false,
         };
       }
@@ -165,23 +160,31 @@ const productSlice = createSlice({
       };
     });
 
-    builder.addCase(updateProduct.rejected, (state, action:any) => {
-       toast.error(action.payload.response.data.message[0]);
-        return {
-          ...state,
-          loading: false,
-          error: action.payload.message,
-        };
-
+    builder.addCase(updateProduct.rejected, (state, action: any) => {
+      toast.error(action.payload.message);
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.message,
+      };
     });
 
     // --- DELETE PRODUCT ----
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
-      state.products = state.products.filter(
-        (product) => product.id !== action.meta.arg
-      );
       toast.success("Delete product successfully");
       router.navigate("/");
+
+      // Filter out the deleted product from the products array
+      const newProducts = state.products.filter(
+        (product) => product.id !== action.meta.arg
+      );
+
+      // Return the updated state with the new products array
+      return {
+        ...state,
+        products: newProducts,
+        loading: false,
+      };
     });
 
     builder.addCase(deleteProduct.pending, (state, action) => {
