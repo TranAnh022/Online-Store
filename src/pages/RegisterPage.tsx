@@ -5,12 +5,11 @@ import { LoginContainerStyle, TitleStyle, customTheme } from "../customizedCSS";
 import { validationRegisterSchema } from "../validation";
 import { useAppDispatch } from "../redux/configureStore";
 import { userRegisterAsync } from "../redux/actions/userActions";
-import { useNavigate } from "react-router-dom";
+
 
 function RegisterPage() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
+  
   const handleSubmit = async (values: any) => {
     await dispatch(userRegisterAsync(values));
     formik.resetForm();

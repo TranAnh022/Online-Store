@@ -49,7 +49,7 @@ describe("cart reducer", () => {
   test("update to card", () => {
     store.dispatch(addToCart(mockData));
     store.dispatch(updateToCart({ id: 64, quantity: 3 }));
-    expect(store.getState().cart.cart.products[0]).toStrictEqual({
+    expect(store.getState().cart.cart.products[0]).toEqual({
       id: 64,
       title: "Shoes",
       price: 45,

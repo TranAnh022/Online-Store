@@ -1,20 +1,18 @@
 import { Box, Button, Link, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import { LoginContainerStyle, TitleStyle, customTheme } from "../customizedCSS";
 import { validationUserSchema } from "../validation";
 import { useAppDispatch } from "../redux/configureStore";
 import { fetchCurrentUser, userLoginAsync } from "../redux/actions/userActions";
-import { useNavigate } from "react-router-dom";
+import GoogleLogin from "../components/googleLogin/GoogleLogin";
 
 function LoginPage() {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate()
-
-  const handleSubmit = async(values: any) => {
+  const handleSubmit = async (values: any) => {
     await dispatch(userLoginAsync(values));
     await dispatch(fetchCurrentUser());
-    formik.resetForm()
+    formik.resetForm();
   };
 
   const formik = useFormik({
@@ -97,6 +95,9 @@ function LoginPage() {
               <Typography variant="body2" sx={{ color: "white", mt: 2 }}>
                 New to the Online Store?{" "}
                 <Link href="/register">Create an account</Link>
+              </Typography>
+              <Typography variant="body2" sx={{ color: "white", mt: 2 }}>
+                <GoogleLogin />
               </Typography>
             </Box>
           </Box>

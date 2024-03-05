@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { TokenState, UserLogin, UserType } from "../../types/type";
-import { fetchCurrentUser, userLoginAsync, userRegisterAsync } from "../actions/userActions";
+import {
+  fetchCurrentUser,
+  userLoginAsync,
+  userRegisterAsync,
+} from "../actions/userActions";
 import { router } from "../../router/Routes";
 import { toast } from "react-toastify";
 
@@ -26,15 +30,17 @@ const UserSlice = createSlice({
       localStorage.removeItem("user");
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
+      toast.success("Logout successfully");
       router.navigate("/");
     },
     setUser: (state, action) => {
       state.user = action.payload;
+      router.navigate('/')
     },
   },
   extraReducers(builder) {
     builder.addCase(userLoginAsync.fulfilled, (state, action) => {
-      router.navigate("/")
+      router.navigate("/");
       if (!(action.payload instanceof Error)) {
         return {
           ...state,
@@ -50,7 +56,7 @@ const UserSlice = createSlice({
     });
 
     builder.addCase(userLoginAsync.rejected, (state, action) => {
-     toast.error("Invalid email or password")
+      toast.error("Invalid email or password");
     });
     builder.addCase(fetchCurrentUser.fulfilled, (state, action) => {
       if (!(action.payload instanceof Error)) {
@@ -71,7 +77,7 @@ const UserSlice = createSlice({
       state.user = null;
       localStorage.removeItem("user");
       toast.error("Session expired - please login again");
-      router.navigate("/home");
+      router.navigate("/");
     });
     builder.addCase(userRegisterAsync.fulfilled, (state, action) => {
       if (!(action.payload instanceof Error)) {
@@ -89,9 +95,8 @@ const UserSlice = createSlice({
       };
     });
 
-    builder.addCase(userRegisterAsync.rejected, (state, action:any) => {
-      toast.error(action.payload.response.data.message[0])
-
+    builder.addCase(userRegisterAsync.rejected, (state, action: any) => {
+      toast.error(action.payload.response.data.message[0]);
     });
   },
 });

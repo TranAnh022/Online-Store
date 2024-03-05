@@ -109,6 +109,8 @@ const productSlice = createSlice({
     //--- CREATE PRODUCT----
     builder.addCase(createProduct.fulfilled, (state, action) => {
       if (!(action.payload instanceof Error)) {
+        toast.success("create new product successfully !!!")
+        router.navigate(`/products/${action.payload.id}`)
         return {
           ...state,
           products: [...state.products, action.payload],
@@ -173,13 +175,9 @@ const productSlice = createSlice({
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
       toast.success("Delete product successfully");
       router.navigate("/");
-
-      // Filter out the deleted product from the products array
       const newProducts = state.products.filter(
         (product) => product.id !== action.meta.arg
       );
-
-      // Return the updated state with the new products array
       return {
         ...state,
         products: newProducts,

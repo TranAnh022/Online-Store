@@ -7,15 +7,25 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { TitleStyle } from "../customizedCSS";
-import { ProductDto } from "../types/type";
+import { ProductDto, UserType } from "../types/type";
 import { createProduct } from "../redux/actions/productActions";
 import { useAppDispatch } from "../redux/configureStore";
 import { validationProductSchema } from "../validation";
 import { ImageList } from "../components/imagesList/ImageList";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { router } from "../router/Routes";
 
 function ProductCreate() {
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    const user = localStorage.getItem("user") as unknown as UserType;
+    if (user?.role !== "admin") {
+      toast.error("Only admin can access delete page !!!");
+      router.navigate("/");
+    }
+  })
   const initialValues = {
     title: "",
     categoryId: 0,

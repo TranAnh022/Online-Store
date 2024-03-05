@@ -34,7 +34,7 @@ export interface ProductDto {
 export interface UserType {
   id: number;
   email: string;
-  password: string;
+  password?: string;
   name: string;
   role: "admin" | "customer";
   avatar: string;

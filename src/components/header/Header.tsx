@@ -11,16 +11,12 @@ import { Grid, Switch } from "@mui/material";
 import { drawerWidth } from "../../customizedCSS";
 import { Link } from "react-router-dom";
 import HeaderDrawer from "./HeaderDrawer";
+import { ColorModeContext } from "../contextAPI/ThemeColorProvider.tsx";
 
-interface Props {
-  darkMode: boolean;
-  setDarkMode: (a: boolean) => void;
-}
-
-export default function Header(props: Props) {
+export default function Header() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
-
+  const colorMode = React.useContext(ColorModeContext);
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
@@ -55,7 +51,7 @@ export default function Header(props: Props) {
               <Typography variant="h6" noWrap component={Link} to="/">
                 Online Store
               </Typography>
-              <Switch onChange={() => props.setDarkMode(!props.darkMode)} />
+              <Switch onClick={colorMode.toggleColorMode} />
             </Grid>
             <Grid item md={7} display={{ xs: "none", md: "block" }}>
               <HeaderDrawer />

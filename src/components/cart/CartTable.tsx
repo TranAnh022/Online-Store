@@ -18,6 +18,7 @@ import {
   updateToCart,
 } from "../../redux/slices/cartSlice";
 import { useAppDispatch } from "../../redux/configureStore";
+import { formattingURL } from "../../utils";
 
 type Props = { cart: CartType };
 
@@ -49,7 +50,7 @@ function CartTable({ cart }: Props) {
                 >
                   {item.images && (
                     <img
-                      src={item.images[0]}
+                      src={formattingURL(item.images[0])}
                       alt={item.title}
                       style={{ height: 50, marginRight: 20 }}
                     />

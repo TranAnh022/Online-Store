@@ -21,6 +21,8 @@ import {
 } from "../redux/actions/productActions";
 import { addToCart, updateToCart } from "../redux/slices/cartSlice";
 import NotFound from "../components/notFound/NotFound";
+import ImageCarousel from "../components/imagesList/ImageCarousel";
+
 
 function ProductDetails() {
   const { id } = useParams<{ id: string }>();
@@ -29,7 +31,7 @@ function ProductDetails() {
   const { cart } = useAppSelector((state) => state.cart);
   const [quantity, setQuantity] = useState<number>(0);
   const product = cart?.products.find((p) => p.id === productDetail?.id);
-
+  const user= useAppSelector(state=>state.user.user)
 
   useEffect(() => {
     if (product && parseInt(id!) === productDetail?.id) {
@@ -60,11 +62,8 @@ function ProductDetails() {
     <Container sx={{ marginTop: "5rem", marginBottom: "3rem" }}>
       <Grid container spacing={6}>
         <Grid item md={6}>
-          <img
-            src={productDetail?.images![0]?.replace(/"/g,'').replace(/\[|\]/g, '')}
-            alt={productDetail.title}
-            style={{ width: "100%" }}
-          />
+          <ImageCarousel images={productDetail?.images}/>
+          
         </Grid>
         <Grid item md={6}>
           <Typography variant="h3">{productDetail?.title}</Typography>
@@ -117,32 +116,34 @@ function ProductDetails() {
               </LoadingButton>
             </Grid>
           </Grid>
-          <Grid container spacing={2} sx={{ marginTop: "5px" }}>
-            <Grid item md={6}>
-              <LoadingButton
-                sx={{ height: "55px" }}
-                color="error"
-                size="large"
-                variant="contained"
-                fullWidth
-                onClick={() => dispatch(deleteProduct(productDetail.id))}
-              >
-                Delete
-              </LoadingButton>
+          {user?.role === "admin" && (
+            <Grid container spacing={2} sx={{ marginTop: "5px" }}>
+              <Grid item md={6}>
+                <LoadingButton
+                  sx={{ height: "55px" }}
+                  color="error"
+                  size="large"
+                  variant="contained"
+                  fullWidth
+                  onClick={() => dispatch(deleteProduct(productDetail.id))}
+                >
+                  Delete
+                </LoadingButton>
+              </Grid>
+              <Grid item xs={6}>
+                <LoadingButton
+                  sx={{ height: "55px" }}
+                  color="secondary"
+                  size="large"
+                  variant="contained"
+                  fullWidth
+                  href={`/products/${productDetail.id}/update`}
+                >
+                  Update
+                </LoadingButton>
+              </Grid>
             </Grid>
-            <Grid item xs={6}>
-              <LoadingButton
-                sx={{ height: "55px" }}
-                color="secondary"
-                size="large"
-                variant="contained"
-                fullWidth
-                href={`/products/${productDetail.id}/update`}
-              >
-                Update
-              </LoadingButton>
-            </Grid>
-          </Grid>
+          )}
         </Grid>
       </Grid>
     </Container>

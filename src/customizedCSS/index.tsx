@@ -2,13 +2,26 @@ import { PaletteMode, createTheme } from "@mui/material";
 
 export const drawerWidth = 240;
 
-export const customTheme = (paletteType: PaletteMode | undefined) => {
+export const customTheme = (paletteType: PaletteMode) => {
   return createTheme({
     palette: {
       mode: paletteType,
-      background: {
-        default: paletteType === "light" ? "#eaeaea" : "#121212",
-      },
+      ...(paletteType === "light"
+        ? {
+            // palette values for light mode
+            background: { default: "#eaeaea" },
+          }
+        : {
+            // palette values for dark mode
+            background: {
+              default: "#121212",
+              paper: "#333",
+            },
+            text: {
+              primary: "#fff",
+              secondary: "#121212",
+            },
+          }),
     },
     typography: {
       fontFamily: '"Roboto", sans-serif',
@@ -36,16 +49,11 @@ export const navList = {
     xs: "column",
     md: "row",
   },
-  gap:"5px"
+  gap: "5px",
 };
 
 export const bannerContainer = {
-  padding: {md:"100px 40px",xs:"50px 20px"},
-  backgroundColor: "#dcdcdc",
-  borderRadius: "15px",
-  position: "relative",
-  height: "500px",
-  width: "100%",
+  
 };
 
 export const buttonStyle = {
@@ -55,7 +63,7 @@ export const buttonStyle = {
   color: "white",
   border: "none",
   marginTop: "20px",
-  fontSize: {md:"18px",xs:"12px"},
+  fontSize: { md: "18px", xs: "12px" },
   fontWeight: "700",
   cursor: "pointer",
   transition: "transform 0.5s ease",
@@ -110,7 +118,7 @@ export const socialButtonStyle = {
   borderRadius: "50%",
   backgroundColor: "#f3b628",
   border: "2px solid white",
-  color: "white"
+  color: "white",
 };
 
 export const contactDetailsStyle = {
@@ -123,40 +131,19 @@ export const iconStyle = {
 };
 
 export const newLetterStyles = {
-  container: {
-    paddingTop: "4rem",
-  },
-  content: {
-    padding: "40px",
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "2rem",
-    backgroundColor: "#f5f5f5",
-    width: "100%",
-  },
   heading: {
-    fontSize: { md: "30px", xs: "20px" },
+    fontSize: { md: "25px", xs: "15px" },
+    fontWeight: "700",
   },
   hr: {
-    width: { md: "40px", xs: "0px" },
-  },
-  input: {
-    height: "50px",
-    padding: "20px",
+    width: { md: "50px", xs: "0px" },
   },
   button: {
     backgroundColor: "#2b2b2b",
     color: "#fff",
     padding: "10px 30px",
     width: "auto",
-    borderRadius: "0px",
-    transition: "background-color color ease-in-out",
-    "&:hover": {
-      backgroundColor: "#fff",
-      color: "#2b2b2b",
-    },
+    borderRadius: "10px",
   },
 };
 
@@ -205,7 +192,6 @@ export const footerStyles = {
   },
   contactIcon: {
     color: "#f3b628",
-    paddingRight:"2rem"
+    paddingRight: "2rem",
   },
 };
-

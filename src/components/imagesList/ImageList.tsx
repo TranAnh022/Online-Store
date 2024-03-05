@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-import { FormattingURL } from "../../utils";
+import { formattingURL } from "../../utils";
 
 export const ImageList = ({images,onDelete,}: {images: string[];onDelete: (index: number) => void;}) => {
 
@@ -10,7 +10,7 @@ export const ImageList = ({images,onDelete,}: {images: string[];onDelete: (index
         <div key={index} style={{ marginBottom: "10px" }}>
           <Box sx={{ position: "relative" }}>
             <img
-              src={FormattingURL(image)}
+              src={formattingURL(image)}
               alt={`Img ${index + 1}`}
               style={{ maxWidth: "100px", marginRight: "10px" }}
             />

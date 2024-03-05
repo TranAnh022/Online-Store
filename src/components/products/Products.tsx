@@ -9,7 +9,6 @@ import { Box, Pagination, Typography } from "@mui/material";
 import { ProductType } from "../../types/type";
 import ProductCard from "./ProductCard";
 import { ProductContainer } from "../../customizedCSS";
-import LoadingComponent from "../loading/LoadingComponent";
 import FilterForm from "../filter/FilterForm";
 import { fetchFilterProduct } from "../../redux/actions/productActions";
 import NotFound from "../notFound/NotFound";
@@ -47,7 +46,7 @@ function Products() {
   return (
     <Box sx={{ mt: 2 }}>
       <Typography variant="h2" fontWeight={700} textAlign={"center"}>
-        {" "}
+        
         Products
       </Typography>
       <Typography textAlign={"center"} variant="subtitle2">

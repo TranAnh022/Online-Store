@@ -22,7 +22,7 @@ export default function FadeMenu(props: { user: UserType }) {
   };
 
   return (
-    <div>
+    <Box>
       <Box display={"flex"} flexDirection={{ xs: "row" }} gap="1rem">
         <Avatar alt="avatar" src={`${props.user.avatar}`} />
         <Button
@@ -54,6 +54,6 @@ export default function FadeMenu(props: { user: UserType }) {
         )}
         <MenuItem onClick={() => dispatch(signOut())}>Logout</MenuItem>
       </Menu>
-    </div>
+    </Box>
   );
 }

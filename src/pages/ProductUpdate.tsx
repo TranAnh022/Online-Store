@@ -7,9 +7,8 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { TitleStyle } from "../customizedCSS";
-import { ProductDto, ProductType } from "../types/type";
+import { ProductDto, UserType } from "../types/type";
 import {
-  createProduct,
   fetchProductAsync,
   updateProduct,
 } from "../redux/actions/productActions";
@@ -17,9 +16,11 @@ import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 import { validationProductSchema } from "../validation";
 import { ImageList } from "../components/imagesList/ImageList";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import LoadingComponent from "../components/loading/LoadingComponent";
-import { FormattingURL } from "../utils";
+import { formattingURL } from "../utils";
+import { toast } from "react-toastify";
+import { router } from "../router/Routes";
 
 function ProductUpdate() {
   const dispatch = useAppDispatch();
@@ -27,6 +28,11 @@ function ProductUpdate() {
   const productDetail = useAppSelector((state) => state.products.productDetail);
 
   useEffect(() => {
+    const user = localStorage.getItem("user") as unknown as UserType;
+    if (user?.role !== "admin") {
+      toast.error("Only admin can access update page !!!")
+      router.navigate("/")
+    }
     if (productDetail?.title) {
       const { title, category, price, description, images } = productDetail;
       formik.setValues({
@@ -43,7 +49,7 @@ function ProductUpdate() {
 
   const handleSubmit = async (values: ProductDto) => {
     const updatedImages: string[] = values.images.map((img) =>
-      FormattingURL(img)
+      formattingURL(img)
     );
     await dispatch(
       updateProduct({
@@ -139,7 +145,7 @@ function ProductUpdate() {
           label="Images (comma-separated)"
           multiline
           rows={4}
-          value={FormattingURL(formik.values.images)}
+          value={formattingURL(formik.values.images)}
           onChange={(event) => {
             const imageArray = event.target.value.split(",");
             formik.setFieldValue("images", imageArray);
