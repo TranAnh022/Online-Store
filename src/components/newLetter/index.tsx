@@ -3,7 +3,6 @@ import {
   Typography,
   TextField,
   Divider,
-  Grid,
   Button,
   useTheme,
 } from "@mui/material";
@@ -13,48 +12,39 @@ const NewLetter = () => {
   const theme = useTheme();
   return (
     <Box
+      className="newletter"
       sx={{
-        padding: "3rem",
+        width: "100%",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
-        background: theme.palette.background.paper,
+        marginBottom: "2rem",
       }}
-      className="newletter"
     >
       <Box
         sx={{
-          padding: "40px",
-          display: "flex",
-          justifyContent: "space-evenly",
-          alignItems: "center",
-          gap: "1rem",
-          backgroundColor: "#fff",
-          width: "80%",
-          margin: "40px",
-          textAlign: "center",
-          flexDirection: { md: "row", xs: "column" },
-          background: theme.palette.background.default,
-          borderRadius:"20px"
+          background: theme.palette.background.paper,
         }}
-        className="newletter__content"
+        display={"flex"}
+        justifyContent={"space-evenly"}
+        padding={"3rem"}
+        flexDirection={{ md: "row", xs: "column" }}
+        textAlign={"center"}
+        gap={"5rem"}
       >
         <Box>
-          <Typography variant="h3" >
+          <Typography variant="h4" fontWeight={"500"}>
             NEWSLETTER
           </Typography>
-          <Divider sx={newLetterStyles.hr} />
-          <Typography >
-            Don't miss out on our latest promotions
-          </Typography>
+          <Divider sx={{ md: "center", xs: "none" }} />
+          <Typography>Don't miss out on our latest promotions</Typography>
         </Box>
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            gap: "2rem",
             flexDirection: { md: "row", xs: "column" },
+            gap: "1rem",
           }}
         >
           <TextField placeholder="Your Email ..." variant="outlined" />

@@ -28,10 +28,11 @@ function ProductUpdate() {
   const productDetail = useAppSelector((state) => state.products.productDetail);
 
   useEffect(() => {
-    const user = localStorage.getItem("user") as unknown as UserType;
-    if (user?.role !== "admin") {
-      toast.error("Only admin can access update page !!!")
-      router.navigate("/")
+    const userString = localStorage.getItem("user");
+    const user = JSON.parse(userString!) as UserType;
+    if (user.role !== "admin") {
+      toast.error("Only admin can access update page !!!");
+      router.navigate("/");
     }
     if (productDetail?.title) {
       const { title, category, price, description, images } = productDetail;

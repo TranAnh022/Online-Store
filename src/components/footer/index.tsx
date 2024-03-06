@@ -26,7 +26,7 @@ const Footer = () => {
             ></Icon>
           </Box>
         </Box>
-        <Typography>
+        <Typography sx={{textAlign:"center",paddingX:"50px"}}>
           Thank you for shopping with us! Your satisfaction is our top priority.
           Feel free to contact us with any questions or feedback. Happy shopping
         </Typography>

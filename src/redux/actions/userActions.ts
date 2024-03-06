@@ -13,7 +13,7 @@ export const userLoginAsync = createAsyncThunk(
   "userLoginAsync",
   async (values: UserLogin, thunkAPI) => {
     try {
-      const response = await fetch(`${baseURL}/auth/login`, {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/auth/login`, {
         method: "Post",
         headers: {
           "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export const fetchCurrentUser = createAsyncThunk<UserType>(
   async (_, thunkAPI) => {
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await fetch(`${baseURL}/auth/profile`, {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/auth/profile`, {
         method: "Get",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ export const userRegisterAsync = createAsyncThunk<UserType, UserRegister>(
   "userRegisterAsync",
   async (values: UserRegister, thunkAPI) => {
     try {
-      const response = await fetch(`${baseURL}/users`, {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/users`, {
         method: "Post",
         headers: {
           "Content-Type": "application/json",

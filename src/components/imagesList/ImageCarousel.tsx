@@ -9,6 +9,7 @@ function ImageCarousel({ images }: Props) {
     <Carousel>
       {images.map((img) => (
         <img
+          key={img}
           src={formattingURL(img)}
           alt={img}
           style={{ width: "50%" }}

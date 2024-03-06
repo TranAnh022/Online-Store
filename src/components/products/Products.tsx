@@ -5,14 +5,13 @@ import {
   useAppSelector,
 } from "../../redux/configureStore";
 import { useEffect, useState } from "react";
-import { Box, Pagination, Typography } from "@mui/material";
+import { Box, Container, Pagination, Typography } from "@mui/material";
 import { ProductType } from "../../types/type";
 import ProductCard from "./ProductCard";
 import { ProductContainer } from "../../customizedCSS";
 import FilterForm from "../filter/FilterForm";
 import { fetchFilterProduct } from "../../redux/actions/productActions";
 import NotFound from "../notFound/NotFound";
-
 
 function Products() {
   const dispatch = useAppDispatch();
@@ -22,7 +21,7 @@ function Products() {
 
   useEffect(() => {
     dispatch(fetchFilterProduct(productParams));
-  }, [dispatch,productParams]);
+  }, [dispatch, productParams]);
 
   const productList = useSelector((state: AppState) => state.products.products);
   const totalPage = Math.ceil(productList.length / 6);
@@ -44,9 +43,8 @@ function Products() {
   if (!productsShow) return <NotFound />;
 
   return (
-    <Box sx={{ mt: 2 }}>
+    <Container  >
       <Typography variant="h2" fontWeight={700} textAlign={"center"}>
-        
         Products
       </Typography>
       <Typography textAlign={"center"} variant="subtitle2">
@@ -67,7 +65,7 @@ function Products() {
           sx={{ margin: "4rem 0 4rem" }}
         />
       )}
-    </Box>
+    </Container>
   );
 }
 

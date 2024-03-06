@@ -6,7 +6,7 @@ import Fade from "@mui/material/Fade";
 import { useAppDispatch } from "../../redux/configureStore";
 import { signOut } from "../../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { Avatar, Box } from "@mui/material";
+import { Avatar, Box, IconButton } from "@mui/material";
 import { UserType } from "../../types/type";
 
 export default function FadeMenu(props: { user: UserType }) {
@@ -25,16 +25,20 @@ export default function FadeMenu(props: { user: UserType }) {
     <Box>
       <Box display={"flex"} flexDirection={{ xs: "row" }} gap="1rem">
         <Avatar alt="avatar" src={`${props.user.avatar}`} />
-        <Button
+        <IconButton
           id="fade-button"
           aria-controls={open ? "fade-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
           onClick={handleClick}
-          sx={{ color: "white",display:{xs:"none",md:"block"}}}
+          sx={{
+            color: "white",
+            display: { xs: "none", md: "block" },
+            fontSize: "20px",
+          }}
         >
           {props.user.name}
-        </Button>
+        </IconButton>
       </Box>
       <Menu
         id="fade-menu"

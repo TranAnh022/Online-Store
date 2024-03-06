@@ -9,8 +9,6 @@ type Props = {
   product: ProductType;
 };
 
-const ProductCard1 = {};
-
 const ProductImg = styled("img")({
   height: "200px",
   width: "250px",
@@ -46,11 +44,7 @@ function ProductCard({ product }: Props) {
         }}
       >
         <ProductImg
-          src={
-            !formattingURL(product.images![0])
-              ? "https://source.unsplash.com/random/?clothing"
-              : formattingURL(product.images![0])
-          }
+          src={formattingURL(product.images![0])}
           alt="product-img"
         />
       </Box>

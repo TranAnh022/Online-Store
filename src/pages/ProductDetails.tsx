@@ -62,8 +62,8 @@ function ProductDetails() {
     <Container sx={{ marginTop: "5rem", marginBottom: "3rem" }}>
       <Grid container spacing={6}>
         <Grid item md={6}>
-          <ImageCarousel images={productDetail?.images}/>
-          
+          <ImageCarousel images={productDetail?.images} />
+
         </Grid>
         <Grid item md={6}>
           <Typography variant="h3">{productDetail?.title}</Typography>

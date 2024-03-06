@@ -1,16 +1,22 @@
-import { Box, Container } from "@mui/material";
-import HeroBanner from "../components/banner/HeroBanner";
+import { Box} from "@mui/material";
 import Products from "../components/products/Products";
 import NewLetter from "../components/newLetter";
 import Footer from "../components/footer";
+import Banner from "../components/about/Banner";
+import { useRef } from "react";
+import NewArrival from "../components/products/NewArrival";
+import About from "../components/banner/About";
 
 function HomePage() {
+  const productsRef = useRef(null);
   return (
     <Box>
-      <Container sx={{ marginTop: "5rem", marginBottom: "3rem" }}>
-        <HeroBanner />
+      <Banner />
+      <NewArrival />
+      <Box id="product" ref={productsRef}>
         <Products />
-      </Container>
+      </Box>
+      <About />
       <NewLetter />
       <Footer />
     </Box>

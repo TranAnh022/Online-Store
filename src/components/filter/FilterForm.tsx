@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {
+  Box,
   Grid,
   MenuItem,
   Select,
@@ -11,6 +12,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/configureStore";
 import { debounce } from "lodash";
 import { setProductParams } from "../../redux/slices/productSlice";
+import { Label } from "@mui/icons-material";
 
 const MAX = 1000;
 const MIN = 0;
@@ -40,20 +42,20 @@ function FilterForm() {
   }, 1000);
 
   return (
-    <Grid container>
-      <Grid item xs={12} sx={{ textAlign: "center" }} md={4}>
-        <TextField
-          placeholder="Search..."
-          onChange={(event) => {
-            setSearchTerm(event.target.value);
-            handleSearchChange(event);
-          }}
-          value={searchTerm || ""}
+    <Grid container paddingTop={"2rem"}>
+      <Grid item sx={{ textAlign: "center" }} flexDirection={"column"} >
+        <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"} gap={"1.5rem"}>
+          <Typography>Search:</Typography>
+          <TextField
+            placeholder="Search..."
+            onChange={(event) => {
+              setSearchTerm(event.target.value);
+              handleSearchChange(event);
+            }}
+            value={searchTerm || ""}
+          />
+        </Box>
 
-        />
-      </Grid>
-      <Grid item md={4}></Grid>
-      <Grid item md={4} xs={12} flexDirection={"column"}>
         <Stack spacing={6} direction="row" sx={{ mb: 1 }} alignItems="center">
           <Typography>Price:</Typography>
           <Slider

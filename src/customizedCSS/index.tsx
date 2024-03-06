@@ -23,9 +23,6 @@ export const customTheme = (paletteType: PaletteMode) => {
             },
           }),
     },
-    typography: {
-      fontFamily: '"Roboto", sans-serif',
-    },
   });
 };
 
@@ -50,10 +47,8 @@ export const navList = {
     md: "row",
   },
   gap: "5px",
-};
-
-export const bannerContainer = {
-  
+  justifyContent: "center",
+  alignItems: "center",
 };
 
 export const buttonStyle = {
@@ -79,7 +74,7 @@ export const ProductContainer = {
   alignItems: "center",
   padding: "3rem 1rem",
   width: " 100%",
-  gap: "100px",
+  gap: "3rem",
 };
 
 export const TitleStyle = {
@@ -135,9 +130,6 @@ export const newLetterStyles = {
     fontSize: { md: "25px", xs: "15px" },
     fontWeight: "700",
   },
-  hr: {
-    width: { md: "50px", xs: "0px" },
-  },
   button: {
     backgroundColor: "#2b2b2b",
     color: "#fff",
@@ -155,7 +147,7 @@ export const footerStyles = {
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    gap: "2rem",
+    gap: "1.5rem",
     alignItems: "center",
   },
   heading: {
@@ -193,5 +185,34 @@ export const footerStyles = {
   contactIcon: {
     color: "#f3b628",
     paddingRight: "2rem",
+  },
+};
+
+export const aboutTitle = {
+  overflow: "hidden",
+  display: "inline-block",
+  borderRight: "2px solid #091c28",
+  whiteSpace: "nowrap",
+  margin: 0,
+  width: "300px",
+  fontSize: { xs: "1rem", md: "3.5rem" }, // Adjust font size for different breakpoints
+  animation: "animationCycle 10s infinite",
+  "@keyframes animationCycle": {
+    "0%, 100%": {
+      width: 0,
+      borderColor: "transparent",
+    },
+    "10%": {
+      width: "100%",
+      borderColor: "transparent",
+    },
+    "80%": {
+      width: "100%",
+      borderColor: "transparent",
+    },
+    "90%, 100%": {
+      width: 0,
+      borderColor: "#091720",
+    },
   },
 };

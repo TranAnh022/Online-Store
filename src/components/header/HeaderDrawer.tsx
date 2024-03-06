@@ -36,33 +36,20 @@ const HeaderDrawer = () => {
             size="large"
             edge="start"
             color="inherit"
-            sx={{ mr: 2 }}
           >
             <Badge badgeContent={itemCount} color="secondary">
               <ShoppingCart />
             </Badge>
           </IconButton>
-          <ListItem disablePadding>
-            <HeaderDropDown user={user} />
-          </ListItem>
-          <List
-            sx={{
-              display: {
-                md: "none",
-              },
-            }}
-          >
-            <ListItem disablePadding>
-              <ListItemText primary={user.name} />
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton
-                sx={listItemStyle}
-                onClick={() => navigate("/profile")}
-              >
-                Profile
-              </ListItemButton>
-            </ListItem>
+          <HeaderDropDown user={user} />
+          <List sx={{ display: { md: "none" } }}>
+            <ListItemButton >{user.name}</ListItemButton>
+            <ListItemButton
+              sx={listItemStyle}
+              onClick={() => navigate("/profile")}
+            >
+              Profile
+            </ListItemButton>
             {user.role === "admin" && (
               <ListItem disablePadding>
                 <ListItemButton
@@ -73,29 +60,29 @@ const HeaderDrawer = () => {
                 </ListItemButton>
               </ListItem>
             )}
-            <ListItem disablePadding>
-              <ListItemButton
-                sx={listItemStyle}
-                onClick={() => dispatch(signOut())}
-              >
-                Logout
-              </ListItemButton>
-            </ListItem>
+            <ListItemButton
+              sx={listItemStyle}
+              onClick={() => dispatch(signOut())}
+            >
+              Logout
+            </ListItemButton>
           </List>
         </List>
       ) : (
         <List sx={navList}>
-          <IconButton
-            component={Link}
-            to="/cart"
-            size="large"
-            color="inherit"
-            sx={{ mr: 2 }}
-          >
-            <Badge badgeContent={itemCount} color="secondary">
-              <ShoppingCart />
-            </Badge>
-          </IconButton>
+          <ListItem>
+            <IconButton
+              component={Link}
+              to="/cart"
+              size="large"
+              color="inherit"
+              sx={{ mr: 2 }}
+            >
+              <Badge badgeContent={itemCount} color="secondary">
+                <ShoppingCart />
+              </Badge>
+            </IconButton>
+          </ListItem>
           {["Login", "Register"].map((text) => (
             <ListItem key={text} disablePadding>
               <ListItemButton

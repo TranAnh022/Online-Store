@@ -43,7 +43,7 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <GoogleOAuthProvider
-          clientId={`502815919430-o2epc1d7a2otsdvie0n6gt77hnrss8jp.apps.googleusercontent.com`}
+          clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
         >
           <ToastContainer
             position="bottom-right"

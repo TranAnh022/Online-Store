@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { FilterType, ProductDto, ProductType } from "../../types/type";
 
-let baseURL = "https://api.escuelajs.co/api/v1/products";
+
 
 export const fetchFilterProduct = createAsyncThunk<
   ProductType[],
@@ -10,7 +10,7 @@ export const fetchFilterProduct = createAsyncThunk<
   "fetchFilterProductsAsync",
   async (filterMethod: FilterType | undefined, thunkAPI) => {
     try {
-      let url = baseURL;
+      let url = `${process.env.REACT_APP_BASE_URL}/products`;
 
       if (filterMethod) {
         const queryParams: string[] = [];
@@ -46,7 +46,7 @@ export const fetchProductAsync = createAsyncThunk<ProductType, number>(
   "product/fetchProduct",
   async (productId: number, thunkAPI) => {
     try {
-      const response = await fetch(`${baseURL}/${productId}`);
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/products/${productId}`);
       if (!response.ok) {
         const errorResponse = await response.json();
         return thunkAPI.rejectWithValue(errorResponse);
@@ -64,7 +64,7 @@ export const createProduct = createAsyncThunk<ProductType, ProductDto>(
   "createProductAsync",
   async (product: ProductDto, thunkAPI) => {
     try {
-      const response = await fetch(baseURL, {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,7 +89,7 @@ export const updateProduct = createAsyncThunk<
   { id: number; value: ProductDto }
 >("updateProductAsync", async (value, thunkAPI) => {
   try {
-    const response = await fetch(`${baseURL}/${value.id}`, {
+    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/products/${value.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -112,7 +112,7 @@ export const deleteProduct = createAsyncThunk(
   "deleteProduct",
   async (id: number,  thunkAPI ) => {
     try {
-      const response = await fetch(`${baseURL}/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/products/${id}`, {
         method: "DELETE",
       });
       if (!response.ok) {

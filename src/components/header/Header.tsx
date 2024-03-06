@@ -35,7 +35,7 @@ export default function Header() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar>
+      <AppBar color="primary">
         <Toolbar>
           <Grid container>
             <Grid item md={5} sx={{ display: "flex", alignItems: "center" }}>
