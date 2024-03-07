@@ -1,50 +1,126 @@
-# Frontend project
+# Introduction
 
-This repository for the Frontend project to build an e-commerce website.
+This project is a frontend e-commerce website built using React and MUI (Material-UI) for the front end. It leverages the API endpoint https://fakeapi.platzi.com/ for the backend functionalities. The website offers a variety of features for users, including adding items to cart, switching between dark and light modes, and providing admin functionalities for creating, updating, and deleting products.
 
-## Requirements
+Check out the website [here](https://online-store-demo.netlify.app/)
 
-### Basic requirements
+### Prerequisites:
+- React
+- Redux
+- MUI
+- Typescript
+- Unit Testing
 
-The Front end project must use TypeScript and Redux toolkit.
+### Installation:
+   Clone the repo: 
 
-1. Use the API endpoint `https://fakeapi.platzi.com/`.
+   `git clone https://github.com/TranAnh022/fs17-Frontend-project`
+   
+   Then, install all the dependencies:
 
-2. Create at lease 4 pages (can be more if you want): Page for all products, product page, profile page (only available if user logins), and cart page (cart page could be a page or a modal)
+   `npm install`
 
-3. Create Redux store for following features:
+   Start the project with:
 
-   - product reducer: get all products, find a single products, filter products by categories, sort products by price. Create, update and delete a product (enable update & delete features only for admin of the webapp)
-   - user reducer: register and login
-   - cart reducer: add product to cart, remove products, update products's quantity in cart
+   `npm start`
 
-4. When adding routers to your application, set certain routes to be private. For example, route to user profile page should not be accessible if user has not logged in.
+   Run testing using command:
 
-5. Styling: must have responsive
+   `npm run test`
 
-6. Implement unit testing for the reducers
+### Project Structure
+   - [App.tsx](App.tsx)
+   - [README.md](README.md)
+   - __components__
+     - __about__
+       - [About.tsx](components/about/About.tsx)
+     - __banner__
+       - [About.tsx](components/banner/About.tsx)
+     - __cart__
+       - [CartSum.tsx](components/cart/CartSum.tsx)
+       - [CartTable.tsx](components/cart/CartTable.tsx)
+     - __contextAPI__
+       - [ThemeColorProvider.tsx.tsx](components/contextAPI/ThemeColorProvider.tsx.tsx)
+     - __filter__
+       - [FilterForm.tsx](components/filter/FilterForm.tsx)
+     - __footer__
+       - [index.tsx](components/footer/index.tsx)
+     - __googleLogin__
+       - [GoogleLogin.tsx](components/googleLogin/GoogleLogin.tsx)
+     - __header__
+       - [Header.tsx](components/header/Header.tsx)
+       - [HeaderDrawer.tsx](components/header/HeaderDrawer.tsx)
+       - [HeaderDropDown.tsx](components/header/HeaderDropDown.tsx)
+     - __imagesList__
+       - [ImageCarousel.tsx](components/imagesList/ImageCarousel.tsx)
+       - [ImageList.tsx](components/imagesList/ImageList.tsx)
+     - __loading__
+       - [LoadingComponent.tsx](components/loading/LoadingComponent.tsx)
+     - __newLetter__
+       - [index.tsx](components/newLetter/index.tsx)
+     - __notFound__
+       - [NotFound.tsx](components/notFound/NotFound.tsx)
+     - __products__
+       - [NewArrival.tsx](components/products/NewArrival.tsx)
+       - [ProductCard.tsx](components/products/ProductCard.tsx)
+       - [Products.tsx](components/products/Products.tsx)
+   - __customizedCSS__
+     - [index.tsx](customizedCSS/index.tsx)
+   - [index.css](index.css)
+   - [index.tsx](index.tsx)
+   - __pages__
+     - [CartPage.tsx](pages/CartPage.tsx)
+     - [HomePage.tsx](pages/HomePage.tsx)
+     - [LoginPage.tsx](pages/LoginPage.tsx)
+     - [ProductCreate.tsx](pages/ProductCreate.tsx)
+     - [ProductDetails.tsx](pages/ProductDetails.tsx)
+     - [ProductUpdate.tsx](pages/ProductUpdate.tsx)
+     - [Profile.tsx](pages/Profile.tsx)
+     - [RegisterPage.tsx](pages/RegisterPage.tsx)
+   - [react\-app\-env.d.ts](react-app-env.d.ts)
+   - __redux__
+     - __actions__
+       - [productActions.ts](redux/actions/productActions.ts)
+       - [userActions.ts](redux/actions/userActions.ts)
+     - [configureStore.ts](redux/configureStore.ts)
+     - __slices__
+       - [cartSlice.ts](redux/slices/cartSlice.ts)
+       - [productSlice.ts](redux/slices/productSlice.ts)
+       - [userSlice.ts](redux/slices/userSlice.ts)
+   - [reportWebVitals.ts](reportWebVitals.ts)
+   - __router__
+     - [RequireAuth.tsx](router/RequireAuth.tsx)
+     - [Routes.tsx](router/Routes.tsx)
+   - [setupTests.ts](setupTests.ts)
+   - __test__
+     - [Cart.test.ts](test/Cart.test.ts)
+     - [Products.test.ts](test/Products.test.ts)
+     - [Users.test.ts](test/Users.test.ts)
+     - __shared__
+       - [productServer.ts](test/shared/productServer.ts)
+       - [userServer.ts](test/shared/userServer.ts)
+   - __types__
+     - [type.tsx](types/type.tsx)
+   - [utils.ts](utils.ts)
+   - [validation.ts](validation.ts)
 
-7. **Deploy** the application and rewrite README file.
 
-### Additional features:
 
-- Use Context API to switch theme
-- Use pagination when fetching/displaying all the products
-- Implement performance optimization where applicable
+## Picture Demo
 
-## Grading (1-5)
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/800471a9-c094-463b-8bb4-9d52b13add3b)
 
-1: Late submission or not complete basic requirements
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/a95c2850-d4ce-4542-9186-bd806af44609)
 
-2: Basic requirement + Presentation
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/f3c0f793-7ca6-428f-bfba-312731ac15e9)
 
-3: Folder structure + follow convention(naming convention ,loading, error) + some additional features
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/bb520605-b569-458b-be14-d2e86223187a)
 
-4: All additional features + reusable logic + custom hook
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/5f261429-1cc8-4c81-8a3d-d48bf2578e16)
 
-5: UI-UX (for example: send alert when user add same product) + styling (animation or transition, scroll to top) + advanced feature (google log in)
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/8459640d-35a9-44b6-a0bf-e2435e28e4b7)
 
-## Deadline
 
-- Presentation: **7/3** and **8/3/ 2024**
-- Submitting Front-end project **10am 8/3/2024**
+
+
+
