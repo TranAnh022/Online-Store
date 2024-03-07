@@ -6,20 +6,20 @@ import {
   UserType,
 } from "../../types/type";
 
-
-let baseURL = "https://api.escuelajs.co/api/v1";
-
 export const userLoginAsync = createAsyncThunk(
   "userLoginAsync",
   async (values: UserLogin, thunkAPI) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/auth/login`, {
-        method: "Post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/auth/login`,
+        {
+          method: "Post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
       if (!response.ok) {
         const errorResponse = await response.json();
         return thunkAPI.rejectWithValue(errorResponse);
@@ -39,12 +39,15 @@ export const fetchCurrentUser = createAsyncThunk<UserType>(
   async (_, thunkAPI) => {
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/auth/profile`, {
-        method: "Get",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/auth/profile`,
+        {
+          method: "Get",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (!response.ok) {
         const errorResponse = await response.json();
         return thunkAPI.rejectWithValue(errorResponse);

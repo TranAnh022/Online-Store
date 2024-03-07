@@ -5,7 +5,7 @@ import {
   useAppSelector,
 } from "../../redux/configureStore";
 import { useEffect, useState } from "react";
-import { Box, Container, Grid, Pagination, Typography } from "@mui/material";
+import { Box, Grid, Pagination, Typography } from "@mui/material";
 import { ProductType } from "../../types/type";
 import ProductCard from "./ProductCard";
 import { ProductContainer } from "../../customizedCSS";
@@ -45,7 +45,7 @@ function Products() {
   return (
     <Box
       sx={{
-       
+
         paddingRight: "15px",
         paddingLeft: "15px",
         marginRight: "auto",

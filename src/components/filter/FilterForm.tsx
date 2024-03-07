@@ -1,13 +1,9 @@
 import { useState } from "react";
 import {
   Box,
-  Button,
   FormControlLabel,
-  Grid,
-  MenuItem,
   Radio,
   RadioGroup,
-  Select,
   Slider,
   Stack,
   TextField,
@@ -16,7 +12,6 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/configureStore";
 import { debounce } from "lodash";
 import { setProductParams } from "../../redux/slices/productSlice";
-import { Label } from "@mui/icons-material";
 
 const MAX = 1000;
 const MIN = 0;
