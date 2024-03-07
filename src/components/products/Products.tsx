@@ -5,7 +5,7 @@ import {
   useAppSelector,
 } from "../../redux/configureStore";
 import { useEffect, useState } from "react";
-import { Box, Container, Pagination, Typography } from "@mui/material";
+import { Box, Container, Grid, Pagination, Typography } from "@mui/material";
 import { ProductType } from "../../types/type";
 import ProductCard from "./ProductCard";
 import { ProductContainer } from "../../customizedCSS";
@@ -43,29 +43,44 @@ function Products() {
   if (!productsShow) return <NotFound />;
 
   return (
-    <Container  >
-      <Typography variant="h2" fontWeight={700} textAlign={"center"}>
-        Products
-      </Typography>
-      <Typography textAlign={"center"} variant="subtitle2">
-        {" "}
-        Fashion of many variations
-      </Typography>
-      <FilterForm />
-      <Box sx={ProductContainer}>
-        {productsShow.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
+    <Box
+      sx={{
+       
+        paddingRight: "15px",
+        paddingLeft: "15px",
+        marginRight: "auto",
+        marginLeft: "auto",
+      }}
+    >
+      <Box sx={{padding:"30px"}}>
+        <Typography variant="h2" fontWeight={700} textAlign={"center"}>
+          Products
+        </Typography>
+        <Typography textAlign={"center"} variant="subtitle2">
+          Fashion of many variations
+        </Typography>
       </Box>
-      {productParams && (
-        <Pagination
-          count={totalPage}
-          page={page}
-          onChange={handleChange}
-          sx={{ margin: "4rem 0 4rem" }}
-        />
-      )}
-    </Container>
+      <Grid container>
+        <Grid item xs={12} md={3}>
+          <FilterForm />
+        </Grid>
+        <Grid item xs={12} md={9}>
+          <Box sx={ProductContainer}>
+            {productsShow.map((product) => (
+              <ProductCard product={product} key={product.id} />
+            ))}
+          </Box>
+          {productParams && (
+            <Pagination
+              count={totalPage}
+              page={page}
+              onChange={handleChange}
+              sx={{ margin: "4rem 0 4rem" }}
+            />
+          )}
+        </Grid>
+      </Grid>
+    </Box>
   );
 }
 

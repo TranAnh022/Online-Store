@@ -1,8 +1,12 @@
 import { useState } from "react";
 import {
   Box,
+  Button,
+  FormControlLabel,
   Grid,
   MenuItem,
+  Radio,
+  RadioGroup,
   Select,
   Slider,
   Stack,
@@ -42,58 +46,65 @@ function FilterForm() {
   }, 1000);
 
   return (
-    <Grid container paddingTop={"2rem"}>
-      <Grid item sx={{ textAlign: "center" }} flexDirection={"column"} >
-        <Box display={"flex"} alignItems={"center"} justifyContent={"space-between"} gap={"1.5rem"}>
-          <Typography>Search:</Typography>
-          <TextField
-            placeholder="Search..."
-            onChange={(event) => {
-              setSearchTerm(event.target.value);
-              handleSearchChange(event);
-            }}
-            value={searchTerm || ""}
-          />
-        </Box>
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      gap={"1rem"}
+      paddingLeft={"3rem"}
+      width={"80%"}
+    >
+      <Typography variant="h4" fontWeight={"700"}>
+        Filter
+      </Typography>
+      <Stack spacing={4} sx={{ mb: 1 }}>
+        <TextField
+          placeholder="Search Product..."
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+            handleSearchChange(event);
+          }}
+          value={searchTerm || ""}
+          variant="standard"
+        />
+      </Stack>
 
-        <Stack spacing={6} direction="row" sx={{ mb: 1 }} alignItems="center">
-          <Typography>Price:</Typography>
-          <Slider
-            marks={marks}
-            step={1}
-            value={productParams.price}
-            valueLabelDisplay="auto"
-            min={MIN}
-            max={MAX}
-            onChange={(_, value) =>
-              dispatch(setProductParams({ price: value as number }))
-            }
-          />
-        </Stack>
-        <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
-          <Typography>Category:</Typography>
-          <Select
-            value={productParams.category || ""}
-            onChange={(event) =>
-              dispatch(
-                setProductParams({
-                  ...productParams,
-                  category: event.target.value,
-                })
-              )
-            }
-            label="Categories"
-            fullWidth
-          >
-            <MenuItem value="">None</MenuItem>
-            <MenuItem value="1">Clothes</MenuItem>
-            <MenuItem value="2">Electronics</MenuItem>
-            <MenuItem value="3">Furniture</MenuItem>
-            <MenuItem value="4">Shoes</MenuItem>
-          </Select>
-        </Stack>
-      </Grid>
-    </Grid>
+      <Stack spacing={2} sx={{ mb: 1 }}>
+        <Typography fontWeight={"700"}>Price:</Typography>
+        <Slider
+          marks={marks}
+          step={1}
+          value={productParams.price}
+          valueLabelDisplay="auto"
+          min={MIN}
+          max={MAX}
+          onChange={(_, value) =>
+            dispatch(setProductParams({ price: value as number }))
+          }
+        />
+      </Stack>
+      <Stack spacing={2} sx={{ mb: 1 }}>
+        <Typography fontWeight={"700"}>Category:</Typography>
+        <RadioGroup
+          aria-label="category"
+          name="category"
+          value={productParams.category || ""}
+          onChange={(event) =>
+            dispatch(
+              setProductParams({
+                ...productParams,
+                category: event.target.value,
+              })
+            )
+          }
+        >
+          <FormControlLabel value="1" control={<Radio />} label="Clothes" />
+          <FormControlLabel value="2" control={<Radio />} label="Electronics" />
+          <FormControlLabel value="3" control={<Radio />} label="Furniture" />
+          <FormControlLabel value="4" control={<Radio />} label="Shoes" />
+          <FormControlLabel   value="" control={<Radio />} label="Clear" />
+        </RadioGroup>
+      </Stack>
+    </Box>
   );
 }
 
