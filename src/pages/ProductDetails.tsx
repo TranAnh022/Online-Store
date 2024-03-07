@@ -1,7 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 import {
+  Box,
   Container,
   Divider,
   Grid,
@@ -129,16 +130,20 @@ function ProductDetails() {
                 </LoadingButton>
               </Grid>
               <Grid item xs={6}>
-                <LoadingButton
-                  sx={{ height: "55px" }}
-                  color="secondary"
-                  size="large"
-                  variant="contained"
-                  fullWidth
-                  href={`/products/${productDetail.id}/update`}
+                <Box
+                  component={Link}
+                  to={`/products/${productDetail.id}/update`}
                 >
-                  Update
-                </LoadingButton>
+                  <LoadingButton
+                    sx={{ height: "55px" }}
+                    color="secondary"
+                    size="large"
+                    variant="contained"
+                    fullWidth
+                  >
+                    Update
+                  </LoadingButton>
+                </Box>
               </Grid>
             </Grid>
           )}
