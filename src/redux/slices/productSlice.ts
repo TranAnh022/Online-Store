@@ -138,22 +138,22 @@ const productSlice = createSlice({
     });
 
     //--- UPDATE PRODUCT ----
-    builder.addCase(updateProduct.fulfilled, (state, action) => {
-      if (!(action.payload instanceof Error)) {
-        const itemIndex = state.products.findIndex(
-          (product) => product.id === action.payload.id
-        );
-        state.products.splice(itemIndex, 1);
-        toast.success("update the product successfully !!!");
-        router.navigate(`/products/${action.payload.id}`);
-        return {
-          ...state,
-          products: [...state.products, action.payload],
-          productDetail: action.payload,
-          loading: false,
-        };
-      }
-    });
+   builder.addCase(updateProduct.fulfilled, (state, action) => {
+     if (!(action.payload instanceof Error)) {
+       const updatedProduct = action.payload;
+       const itemIndex = state.products.findIndex(
+         (product) => product.id === updatedProduct.id
+       );
+       console.log(state.products)
+       console.log(itemIndex)
+       if (itemIndex !== -1) {
+         state.products.splice(itemIndex, 1, updatedProduct);
+         state.productDetail = updatedProduct;
+         toast.success("Product updated successfully !!!");
+         router.navigate(`/products/${updatedProduct.id}`);
+       }
+     }
+   });
 
     builder.addCase(updateProduct.pending, (state, action) => {
       return {

@@ -6,10 +6,9 @@ import { validationRegisterSchema } from "../validation";
 import { useAppDispatch } from "../redux/configureStore";
 import { userRegisterAsync } from "../redux/actions/userActions";
 
-
 function RegisterPage() {
   const dispatch = useAppDispatch();
-  
+
   const handleSubmit = async (values: any) => {
     await dispatch(userRegisterAsync(values));
     formik.resetForm();
@@ -36,7 +35,6 @@ function RegisterPage() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
-
           }}
         >
           <Typography sx={TitleStyle}>Online Store</Typography>

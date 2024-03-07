@@ -23,6 +23,7 @@ import {
 import { addToCart, updateToCart } from "../redux/slices/cartSlice";
 import NotFound from "../components/notFound/NotFound";
 import ImageCarousel from "../components/imagesList/ImageCarousel";
+import LoadingComponent from "../components/loading/LoadingComponent";
 
 function ProductDetails() {
   const { id } = useParams<{ id: string }>();
@@ -32,6 +33,7 @@ function ProductDetails() {
   const [quantity, setQuantity] = useState<number>(0);
   const product = cart?.products.find((p) => p.id === productDetail?.id);
   const user = useAppSelector((state) => state.user.user);
+  const { loading } = useAppSelector((state) => state.products);
 
   useEffect(() => {
     if (product && parseInt(id!) === productDetail?.id) {
@@ -58,6 +60,7 @@ function ProductDetails() {
   };
 
   if (!productDetail) return <NotFound />;
+  if (loading) return <LoadingComponent message="Loading Product...."></LoadingComponent>;
   return (
     <Container sx={{ marginTop: "5rem", marginBottom: "3rem" }}>
       <Grid container spacing={6}>

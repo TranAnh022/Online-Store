@@ -20,12 +20,18 @@ function ProductCreate() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const user = localStorage.getItem("user") as unknown as UserType;
-    if (user?.role !== "admin") {
+    const user = localStorage.getItem("user");
+    if (!user) {
+      toast.error("Only admin can access delete page !!!");
+      router.navigate("/login");
+      return;
+    }
+    const userJson = JSON.parse(user) as UserType;
+    if (userJson?.role !== "admin") {
       toast.error("Only admin can access delete page !!!");
       router.navigate("/");
     }
-  })
+  });
   const initialValues = {
     title: "",
     categoryId: 0,

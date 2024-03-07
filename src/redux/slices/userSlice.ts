@@ -79,9 +79,10 @@ const UserSlice = createSlice({
       toast.error("Session expired - please login again");
       router.navigate("/");
     });
+    
     builder.addCase(userRegisterAsync.fulfilled, (state, action) => {
       if (!(action.payload instanceof Error)) {
-        router.navigate("/login");
+        router.navigate("/");
         return {
           ...state,
           user: action.payload,
@@ -96,7 +97,7 @@ const UserSlice = createSlice({
     });
 
     builder.addCase(userRegisterAsync.rejected, (state, action: any) => {
-      toast.error(action.payload.response.data.message[0]);
+      toast.error(action.payload.message[0]);
     });
   },
 });
