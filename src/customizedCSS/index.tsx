@@ -72,7 +72,6 @@ export const ProductContainer = {
   flexWrap: "wrap",
   justifyContent: "center",
   alignItems: "center",
-  padding: "3rem 1rem",
   width: " 100%",
   gap: "3rem",
 };
@@ -142,12 +141,12 @@ export const newLetterStyles = {
 export const footerStyles = {
   container: {
     backgroundColor: "#2b2b2b",
-    height: "400px",
+    height: "350px",
     color: "#fff",
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    gap: "1.5rem",
+    gap: "1rem",
     alignItems: "center",
   },
   heading: {
@@ -195,7 +194,7 @@ export const aboutTitle = {
   whiteSpace: "nowrap",
   margin: 0,
   width: "300px",
-  fontSize: { xs: "1rem", md: "3.5rem" }, // Adjust font size for different breakpoints
+  fontSize: { xs: "1rem", md: "3.5rem" },
   animation: "animationCycle 10s infinite",
   "@keyframes animationCycle": {
     "0%, 100%": {

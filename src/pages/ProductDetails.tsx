@@ -23,7 +23,6 @@ import { addToCart, updateToCart } from "../redux/slices/cartSlice";
 import NotFound from "../components/notFound/NotFound";
 import ImageCarousel from "../components/imagesList/ImageCarousel";
 
-
 function ProductDetails() {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
@@ -31,7 +30,7 @@ function ProductDetails() {
   const { cart } = useAppSelector((state) => state.cart);
   const [quantity, setQuantity] = useState<number>(0);
   const product = cart?.products.find((p) => p.id === productDetail?.id);
-  const user= useAppSelector(state=>state.user.user)
+  const user = useAppSelector((state) => state.user.user);
 
   useEffect(() => {
     if (product && parseInt(id!) === productDetail?.id) {
@@ -43,7 +42,7 @@ function ProductDetails() {
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newQuantity = parseInt(event.currentTarget.value);
-    if (!isNaN(newQuantity)) {
+    if (!isNaN(newQuantity) && newQuantity >= 0) {
       setQuantity(newQuantity);
     }
   };
@@ -63,7 +62,6 @@ function ProductDetails() {
       <Grid container spacing={6}>
         <Grid item md={6}>
           <ImageCarousel images={productDetail?.images} />
-
         </Grid>
         <Grid item md={6}>
           <Typography variant="h3">{productDetail?.title}</Typography>

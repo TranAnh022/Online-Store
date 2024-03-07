@@ -3,7 +3,7 @@ body,
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Inria Sans', sans-serif;
+  font-family: "Inria Sans", sans-serif;
 }
 
 a {
@@ -11,4 +11,12 @@ a {
   text-decoration: none;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 

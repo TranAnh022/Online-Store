@@ -6,13 +6,13 @@ type Props = {
 };
 function ImageCarousel({ images }: Props) {
   return (
-    <Carousel>
+    <Carousel autoPlay={true} infiniteLoop={true}>
       {images.map((img) => (
         <img
           key={img}
           src={formattingURL(img)}
           alt={img}
-          style={{ width: "50%" }}
+          style={{ width: "100%" }}
         />
       ))}
     </Carousel>

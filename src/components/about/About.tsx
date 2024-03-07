@@ -1,5 +1,6 @@
 import { Box, Divider, Grid, Typography, useTheme } from "@mui/material";
 import { aboutTitle } from "../../customizedCSS";
+import { motion } from "framer-motion";
 
 const About = () => {
   const theme = useTheme();
@@ -53,21 +54,32 @@ const About = () => {
               padding={"20px"}
             >
               <Typography sx={aboutTitle}>Who Are We ?</Typography>
-              <Typography fontSize={{ xs: "0.8rem", md: "1.2rem" }}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, ab
-                fugiat accusantium porro amet animi aliquam facilis tempore.
-                Saepe pariatur non tempora dolorem porro earum dolorum totam
-                sunt impedit harum
-              </Typography>
-              <Typography
-                fontSize={{ xs: "0.8rem", md: "1.2rem" }}
-                display={{ xs: "none", md: "block" }}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.5 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                variants={{
+                  hidden: { opacity: 0, x: 50 },
+                  visible: { opacity: 1, x: 0 },
+                }}
               >
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus
-                optio expedita, veniam cumque corrupti qui similique adipisci ex
-                inventore facilis minima quas iure placeat fugiat. Quod laborum
-                sapiente animi placeat.
-              </Typography>
+                <Typography fontSize={{ xs: "0.8rem", md: "1.2rem" }}>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo,
+                  ab fugiat accusantium porro amet animi aliquam facilis
+                  tempore. Saepe pariatur non tempora dolorem porro earum
+                  dolorum totam sunt impedit harum
+                </Typography>
+                <Typography
+                  fontSize={{ xs: "0.8rem", md: "1.2rem" }}
+                  display={{ xs: "none", md: "block" }}
+                >
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Natus optio expedita, veniam cumque corrupti qui similique
+                  adipisci ex inventore facilis minima quas iure placeat fugiat.
+                  Quod laborum sapiente animi placeat.
+                </Typography>
+              </motion.div>
             </Grid>
             <Grid item xs={12} md={5}>
               <img

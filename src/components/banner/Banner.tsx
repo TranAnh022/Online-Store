@@ -7,8 +7,9 @@ import {
   useTheme,
 } from "@mui/material";
 import { buttonStyle } from "../../customizedCSS";
+import { motion } from "framer-motion";
 
-function Banner() {
+function About() {
   const handleScrollToProducts = () => {
     const productsSection = document.getElementById("product");
     if (productsSection) {
@@ -61,23 +62,36 @@ function Banner() {
             gap={"1rem"}
             padding={"20px"}
           >
-            <Typography
-              fontSize={{ xs: "1.2rem", md: "2.5rem" }}
-              fontWeight={"700"}
-              lineHeight={"1.5"}
-              fontFamily={"Overpass, sans-serif"}
+            <motion.div
+              initial="hidden"
+
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5 }}
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                visible: { opacity: 1, x: 0 },
+              }}
             >
-              DISCOVER AND SHOP YOUR UNIQUE STYLE WITH EASE.
-            </Typography>
-            <Typography fontSize={{ xs: "0.8rem", md: "1.2rem" }}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, ab
-              fugiat accusantium porro amet animi aliquam facilis tempore. Saepe
-              pariatur non tempora dolorem porro earum dolorum totam sunt
-              impedit harum. Lorem ipsum dolor, sit amet consectetur adipisicing
-              elit. Natus optio expedita, veniam cumque corrupti qui similique
-              adipisci ex inventore facilis minima quas iure placeat fugiat.
-              Quod laborum sapiente animi placeat.
-            </Typography>
+              <Typography
+                fontSize={{ xs: "1.2rem", md: "2.5rem" }}
+                fontWeight={"700"}
+                lineHeight={"1.5"}
+                fontFamily={"Overpass, sans-serif"}
+              >
+                DISCOVER AND SHOP YOUR UNIQUE STYLE WITH EASE.
+              </Typography>
+
+              <Typography fontSize={{ xs: "0.8rem", md: "1.2rem" }}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, ab
+                fugiat accusantium porro amet animi aliquam facilis tempore.
+                Saepe pariatur non tempora dolorem porro earum dolorum totam
+                sunt impedit harum. Lorem ipsum dolor, sit amet consectetur
+                adipisicing elit. Natus optio expedita, veniam cumque corrupti
+                qui similique adipisci ex inventore facilis minima quas iure
+                placeat fugiat. Quod laborum sapiente animi placeat.
+              </Typography>
+            </motion.div>
             <Typography>
               <Button
                 variant="contained"
@@ -102,4 +116,4 @@ function Banner() {
   );
 }
 
-export default Banner;
+export default About;

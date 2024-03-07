@@ -2,8 +2,8 @@ import React from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useAppDispatch } from "../../redux/configureStore";
 import { setUser } from "../../redux/slices/userSlice";
-
-
+import { Google } from "@mui/icons-material";
+import { Box, Typography } from "@mui/material";
 
 function GoogleLogin() {
   const dispatch = useAppDispatch();
@@ -25,10 +25,20 @@ function GoogleLogin() {
     },
   });
   return (
-    <div>
-      LogInWithGoogle
-      <button onClick={() => login()}>Login with google</button>
-    </div>
+    <Box
+      display={"flex"}
+      justifyContent={"center"}
+      gap={"0.5rem"}
+      alignItems={"center"}
+    >
+      <Typography fontSize={"15px"}>LogIn With Google</Typography>
+      <Google
+        fontSize={"small"}
+        color="error"
+        onClick={() => login()}
+        sx={{ cursor: "pointer" }}
+      />
+    </Box>
   );
 }
 

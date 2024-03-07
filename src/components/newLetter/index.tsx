@@ -18,6 +18,7 @@ const NewLetter = () => {
         display: "flex",
         justifyContent: "center",
         marginBottom: "2rem",
+        padding:"3rem"
       }}
     >
       <Box
