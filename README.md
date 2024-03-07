@@ -2,7 +2,7 @@
 
 This project is a frontend e-commerce website built using React and MUI (Material-UI) for the front end. It leverages the API endpoint https://fakeapi.platzi.com/ for the backend functionalities. The website offers a variety of features for users, including adding items to cart, switching between dark and light modes, and providing admin functionalities for creating, updating, and deleting products.
 
-Check out the website [here](https://online-store-demo.netlify.app/)
+Check out the website [here](https://fs17-frontend-project.onrender.com/)
 
 ### Prerequisites:
 - React
