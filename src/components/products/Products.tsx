@@ -5,13 +5,14 @@ import {
   useAppSelector,
 } from "../../redux/configureStore";
 import { useEffect, useState } from "react";
-import { Box, Grid, Pagination, Typography } from "@mui/material";
+import { Box,Grid, Pagination,Typography } from "@mui/material";
 import { ProductType } from "../../types/type";
 import ProductCard from "./ProductCard";
 import { ProductContainer } from "../../customizedCSS";
 import FilterForm from "../filter/FilterForm";
 import { fetchFilterProduct } from "../../redux/actions/productActions";
 import NotFound from "../notFound/NotFound";
+import NotFoundProduct from "../notFound/NotFoundProduct";
 
 function Products() {
   const dispatch = useAppDispatch();
@@ -45,14 +46,14 @@ function Products() {
   return (
     <Box
       sx={{
-
         paddingRight: "15px",
         paddingLeft: "15px",
         marginRight: "auto",
         marginLeft: "auto",
+
       }}
     >
-      <Box sx={{padding:"30px"}}>
+      <Box sx={{ padding: "30px" }}>
         <Typography variant="h2" fontWeight={700} textAlign={"center"}>
           Products
         </Typography>
@@ -66,9 +67,13 @@ function Products() {
         </Grid>
         <Grid item xs={12} md={9}>
           <Box sx={ProductContainer}>
-            {productsShow.map((product) => (
-              <ProductCard product={product} key={product.id} />
-            ))}
+            {productsShow.length > 0 ? (
+              productsShow.map((product) => (
+                <ProductCard product={product} key={product.id} />
+              ))
+            ) : (
+              <NotFoundProduct></NotFoundProduct>
+            )}
           </Box>
           {productParams && (
             <Pagination

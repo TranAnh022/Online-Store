@@ -9,6 +9,7 @@ import Register from "../pages/RegisterPage";
 import ProductCreate from "../pages/ProductCreate";
 import CartPage from "../pages/CartPage";
 import ProductUpdate from "../pages/ProductUpdate";
+import NotFound from "../components/notFound/NotFound";
 
 export const router = createBrowserRouter([
   {
@@ -17,9 +18,7 @@ export const router = createBrowserRouter([
     children: [
       {
         element: <RequireAuth />,
-        children: [
-          { path: "profile", element: <Profile /> },
-        ],
+        children: [{ path: "profile", element: <Profile /> }],
       },
       { path: "", element: <HomePage /> },
       { path: "products/:id", element: <ProductDetails /> },
@@ -31,6 +30,7 @@ export const router = createBrowserRouter([
         path: "products/:id/update",
         element: <ProductUpdate />,
       },
+      { path: "*", element: <NotFound /> },
     ],
   },
 ]);
