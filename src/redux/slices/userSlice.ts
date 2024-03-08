@@ -79,7 +79,6 @@ const UserSlice = createSlice({
       toast.error("Session expired - please login again");
       router.navigate("/");
     });
-    
     builder.addCase(userRegisterAsync.fulfilled, (state, action) => {
       if (!(action.payload instanceof Error)) {
         router.navigate("/");

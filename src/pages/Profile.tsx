@@ -1,4 +1,4 @@
-import React from "react";
+
 import {
   Container,
   Grid,
@@ -14,6 +14,7 @@ import {
 import { Facebook, Instagram, Twitter } from "@mui/icons-material";
 import { useAppSelector } from "../redux/configureStore";
 
+
 const StyledContainer = styled(Container)({
   height: "100vh",
   backgroundColor: "#eee",
@@ -21,7 +22,7 @@ const StyledContainer = styled(Container)({
 
 const StyledCard = styled(Card)({
   borderRadius: 15,
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Adding box shadow for elevation
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
 });
 
 const StyledCardMedia = {
@@ -36,7 +37,8 @@ const StyledTypography = styled(Typography)({
 });
 
 export default function ProfileStatistics() {
-  const user = useAppSelector(state=>state.user.user)
+  const user = useAppSelector(state => state.user.user)
+
   return (
     <StyledContainer>
       <Grid

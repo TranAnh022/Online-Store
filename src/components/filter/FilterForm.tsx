@@ -12,7 +12,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/configureStore";
 import { debounce } from "lodash";
 import { setProductParams } from "../../redux/slices/productSlice";
-import { pink } from "@mui/material/colors";
+import { grey} from "@mui/material/colors";
 
 const MAX = 1000;
 const MIN = 0;
@@ -31,7 +31,6 @@ function FilterForm() {
   const dispatch = useAppDispatch();
   const { productParams } = useAppSelector((state) => state.products);
   const [searchTerm, setSearchTerm] = useState(productParams.search);
-
 
   const handleSearchChange = debounce((event) => {
     dispatch(
@@ -99,19 +98,56 @@ function FilterForm() {
             control={
               <Radio
                 sx={{
-                  color: pink[800],
-                  "&.Mui-checked": {
-                    color: pink[600],
-                  },
+                  color: grey[800],
                 }}
               />
             }
             label="Clothes"
           />
-          <FormControlLabel value="2" control={<Radio />} label="Electronics" />
-          <FormControlLabel value="3" control={<Radio />} label="Furniture" />
-          <FormControlLabel value="4" control={<Radio />} label="Shoes" />
-          <FormControlLabel value="" control={<Radio />} label="Clear" />
+          <FormControlLabel
+            value="2"
+            control={
+              <Radio
+                sx={{
+                  color: grey[800],
+                }}
+              />
+            }
+            label="Electronics"
+          />
+          <FormControlLabel
+            value="3"
+            control={
+              <Radio
+                sx={{
+                  color: grey[800],
+                }}
+              />
+            }
+            label="Furniture"
+          />
+          <FormControlLabel
+            value="4"
+            control={
+              <Radio
+                sx={{
+                  color: grey[800],
+                }}
+              />
+            }
+            label="Shoes"
+          />
+          <FormControlLabel
+            value=""
+            control={
+              <Radio
+                sx={{
+                  color: grey[800],
+                }}
+              />
+            }
+            label="Clear"
+          />
         </RadioGroup>
       </Stack>
     </Box>
