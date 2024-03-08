@@ -1,13 +1,10 @@
-import {
-  Box,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, Container, Grid, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-
-const NotFound = () => {
+type Props = {
+  message?: string;
+};
+const NotFound = ({ message }: Props) => {
   return (
     <Box marginTop={"8rem"}>
       <Container maxWidth="md">
@@ -35,7 +32,9 @@ const NotFound = () => {
           >
             <Typography variant="h3">Sorry</Typography>
             <Typography variant="h6">
-              The page you’re looking for doesn’t exist.
+              {message?.length
+                ? message
+                : `The page you’re looking for doesn’t exist.`}
             </Typography>
             <Box
               sx={{

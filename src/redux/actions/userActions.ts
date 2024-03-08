@@ -53,7 +53,6 @@ export const fetchCurrentUser = createAsyncThunk<UserType>(
         return thunkAPI.rejectWithValue(errorResponse);
       }
       const data: UserType = await response.json();
-      localStorage.setItem("user", JSON.stringify(data));
       return data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue({ error: error.data });
@@ -64,7 +63,7 @@ export const fetchCurrentUser = createAsyncThunk<UserType>(
     condition: () => {
       if (!localStorage.getItem("accessToken")) {
         return false;
-      } 
+      }
     },
   }
 );

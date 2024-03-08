@@ -21,19 +21,15 @@ import LoadingComponent from "../components/loading/LoadingComponent";
 import { formattingURL } from "../utils";
 import { toast } from "react-toastify";
 import { router } from "../router/Routes";
+import NotFound from "../components/notFound/NotFound";
 
 function ProductUpdate() {
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const productDetail = useAppSelector((state) => state.products.productDetail);
+  const user = useAppSelector((state) => state.user.user);
 
   useEffect(() => {
-    const userString = localStorage.getItem("user");
-    const user = JSON.parse(userString!) as UserType;
-    if (user.role !== "admin") {
-      toast.error("Only admin can access update page !!!");
-      router.navigate("/");
-    }
     if (productDetail?.title) {
       const { title, category, price, description, images } = productDetail;
       formik.setValues({
@@ -77,7 +73,9 @@ function ProductUpdate() {
     validationSchema: validationProductSchema,
     onSubmit: handleSubmit,
   });
-
+ if (user?.role !== "admin") {
+   return <NotFound message="Only admin can access this page"></NotFound>;
+ }
   if (!productDetail) return <LoadingComponent message="Loading Form" />;
   return (
     <Container maxWidth="sm" style={{ marginTop: "5rem" }}>

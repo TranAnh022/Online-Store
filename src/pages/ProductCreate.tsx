@@ -7,31 +7,19 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { TitleStyle } from "../customizedCSS";
-import { ProductDto, UserType } from "../types/type";
+import { ProductDto,} from "../types/type";
 import { createProduct } from "../redux/actions/productActions";
-import { useAppDispatch } from "../redux/configureStore";
+import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 import { validationProductSchema } from "../validation";
 import { ImageList } from "../components/imagesList/ImageList";
-import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { router } from "../router/Routes";
+import NotFound from "../components/notFound/NotFound";
 
 function ProductCreate() {
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user.user);
 
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (!user) {
-      toast.error("Only admin can access delete page !!!");
-      router.navigate("/login");
-      return;
-    }
-    const userJson = JSON.parse(user) as UserType;
-    if (userJson?.role !== "admin") {
-      toast.error("Only admin can access delete page !!!");
-      router.navigate("/");
-    }
-  });
   const initialValues = {
     title: "",
     categoryId: 0,
@@ -57,6 +45,9 @@ function ProductCreate() {
     onSubmit: handleSubmit,
   });
 
+  if (user?.role !== "admin" || !user) {
+    return <NotFound message="Only admin can access this page"></NotFound>;
+  }
   return (
     <Container maxWidth="sm" style={{ marginTop: "5rem" }}>
       <Typography sx={TitleStyle}>Create New Product</Typography>
