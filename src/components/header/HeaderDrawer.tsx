@@ -15,6 +15,7 @@ import { listItemStyle, navList, navStyles } from "../../customizedCSS";
 import { signOut } from "../../redux/slices/userSlice";
 import { ShoppingCart } from "@mui/icons-material";
 import HeaderDropDown from "./HeaderDropDown";
+import { CartItem, ProductType } from "../../types/type";
 
 const HeaderDrawer = () => {
   const user = useAppSelector((state) => state.user.user);
@@ -23,6 +24,11 @@ const HeaderDrawer = () => {
   const navigate = useNavigate();
   const itemCount = cart?.products.reduce(
     (sum, product) => sum + product.quantity,
+    0
+  );
+  const cartPersist = localStorage.getItem("cart")
+  const itemCountPersist: number =cartPersist !== null && JSON.parse(cartPersist)?.products.reduce(
+    (sum:number, product:CartItem) => sum + product.quantity,
     0
   );
   return (
@@ -37,13 +43,16 @@ const HeaderDrawer = () => {
             edge="start"
             color="inherit"
           >
-            <Badge badgeContent={itemCount} color="secondary">
+            <Badge
+              badgeContent={itemCountPersist ? itemCountPersist : itemCount}
+              color="secondary"
+            >
               <ShoppingCart />
             </Badge>
           </IconButton>
           <HeaderDropDown user={user} />
           <List sx={{ display: { md: "none" } }}>
-            <ListItemButton >{user.name}</ListItemButton>
+            <ListItemButton>{user.name}</ListItemButton>
             <ListItemButton
               sx={listItemStyle}
               onClick={() => navigate("/profile")}
@@ -78,7 +87,10 @@ const HeaderDrawer = () => {
               color="inherit"
               sx={{ mr: 2 }}
             >
-              <Badge badgeContent={itemCount} color="secondary">
+              <Badge
+                badgeContent={itemCountPersist ? itemCountPersist : itemCount}
+                color="secondary"
+              >
                 <ShoppingCart />
               </Badge>
             </IconButton>

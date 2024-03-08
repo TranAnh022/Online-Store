@@ -24,12 +24,14 @@ const CartSlice = createSlice({
       } else {
         state.cart.products.push(action.payload);
       }
+      localStorage.setItem("cart",JSON.stringify(state.cart))
     },
     removeToCart: (state, action: PayloadAction<number>) => {
       const productId = action.payload;
       state.cart.products = state.cart?.products.filter(
         (product) => product.id !== productId
       );
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     updateToCart: (
       state,
@@ -48,6 +50,7 @@ const CartSlice = createSlice({
         if (state.cart.products[productIndex].quantity === 0) {
           state.cart.products.splice(productIndex, 1);
         }
+        localStorage.setItem("cart", JSON.stringify(state.cart));
       } else {
         throw new Error("Product not found");
       }
