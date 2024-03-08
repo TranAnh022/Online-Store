@@ -43,7 +43,6 @@ describe("cart reducer", () => {
     store.dispatch(addToCart(mockData));
     store.dispatch(removeToCart(64));
     const state = store.getState().cart.cart;
-    console.log(state);
     expect(state.products.length).toBe(0);
   });
   test("update to card", () => {

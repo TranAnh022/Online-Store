@@ -59,12 +59,12 @@ export const fetchCurrentUser = createAsyncThunk<UserType>(
       return thunkAPI.rejectWithValue({ error: error.data });
     }
   },
-  //this condition below will determine the async thunk should be executed or not
+
   {
     condition: () => {
       if (!localStorage.getItem("accessToken")) {
         return false;
-      } // if the condition returns false it will be skipped,otherwise, the async thunk will be executed
+      } 
     },
   }
 );

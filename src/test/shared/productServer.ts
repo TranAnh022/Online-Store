@@ -55,7 +55,7 @@ export const mockProducts = [
 ];
 
 export const handler = [
-  //Handler for fetching all products
+  
   http.get("https://api.escuelajs.co/api/v1/products", () => {
     return HttpResponse.json(mockProducts, { status: 200 });
   }),

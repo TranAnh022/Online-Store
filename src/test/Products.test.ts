@@ -22,14 +22,14 @@ beforeEach(() => {
 });
 
 describe("product reducer", () => {
-  //--Test Fetch All Product--
+
   test("should fetch all products from api", async () => {
     await store.dispatch(fetchFilterProduct());
     expect(store.getState().products.products.length).toBe(3);
     expect(store.getState().products.loading).toBeFalsy();
   });
 
-  //--Test create new product
+
   test("create a new product", async () => {
     const product: ProductDto = {
       title: "new test",
@@ -42,7 +42,7 @@ describe("product reducer", () => {
     expect(store.getState().products.products.length).toBe(1);
   });
 
-  //-- Test get product byId ---
+
   test("Get product by id", async () => {
     const productId: number = 64;
     await store.dispatch(fetchProductAsync(productId));
@@ -64,7 +64,7 @@ describe("product reducer", () => {
     });
     expect(store.getState().products.loading).toBeFalsy();
   });
-  // -- Test Update Product---
+
 
   test("update product by id", async () => {
     const updatedProduct = {
@@ -98,7 +98,7 @@ describe("product reducer", () => {
     expect(store.getState().products.loading).toBeFalsy();
   });
 
-  // --Test Delete Product--
+  
 
   test("delete product by id", async () => {
     await store.dispatch(deleteProduct(64));

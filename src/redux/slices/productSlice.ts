@@ -55,7 +55,7 @@ const productSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    //--- FETCH PRODUCTS----
+
     builder.addCase(fetchFilterProduct.fulfilled, (state, action) => {
       return {
         ...state,
@@ -78,7 +78,7 @@ const productSlice = createSlice({
       };
     });
 
-    //--- FETCH  SINGLE PRODUCT----
+
     builder.addCase(fetchProductAsync.fulfilled, (state, action) => {
       if (!(action.payload instanceof Error)) {
         return {
@@ -106,7 +106,7 @@ const productSlice = createSlice({
       }
     });
 
-    //--- CREATE PRODUCT----
+
     builder.addCase(createProduct.fulfilled, (state, action) => {
       if (!(action.payload instanceof Error)) {
         toast.success("create new product successfully !!!")
@@ -137,7 +137,7 @@ const productSlice = createSlice({
       }
     });
 
-    //--- UPDATE PRODUCT ----
+
    builder.addCase(updateProduct.fulfilled, (state, action) => {
      if (!(action.payload instanceof Error)) {
        const updatedProduct = action.payload;
@@ -170,7 +170,7 @@ const productSlice = createSlice({
       };
     });
 
-    // --- DELETE PRODUCT ----
+  
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
       toast.success("Delete product successfully");
       router.navigate("/");

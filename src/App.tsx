@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingComponent from "./components/loading/LoadingComponent";
 import Header from "./components/header/Header";
@@ -28,8 +28,8 @@ function App() {
   const initApp = useCallback(async () => {
     try {
       await dispatch(fetchCurrentUser());
-    } catch (error) {
-      console.log(error);
+    } catch (error:any) {
+      toast.error(error);
     }
   }, [dispatch]);
 

@@ -51,7 +51,6 @@ export const fetchProductAsync = createAsyncThunk<ProductType, number>(
         const errorResponse = await response.json();
         return thunkAPI.rejectWithValue(errorResponse);
       }
-      //If there's no HTTP error, parse and return the response body.
       const data: ProductType = await response.json();
       return data;
     } catch (error) {
@@ -75,7 +74,6 @@ export const createProduct = createAsyncThunk<ProductType, ProductDto>(
         const errorResponse = await response.json();
         return thunkAPI.rejectWithValue(errorResponse);
       }
-      //If there's no HTTP error, parse and return the response body.
       const data: ProductType = await response.json();
       return data;
     } catch (error) {
@@ -100,7 +98,6 @@ export const updateProduct = createAsyncThunk<
       const errorResponse = await response.json();
       return thunkAPI.rejectWithValue(errorResponse);
     }
-    //If there's no HTTP error, parse and return the response body.
     const data: ProductType = await response.json();
     return data;
   } catch (error) {

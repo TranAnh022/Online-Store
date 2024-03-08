@@ -8,11 +8,11 @@ export const customTheme = (paletteType: PaletteMode) => {
       mode: paletteType,
       ...(paletteType === "light"
         ? {
-            // palette values for light mode
+            
             background: { default: "#eaeaea" },
           }
         : {
-            // palette values for dark mode
+
             background: {
               default: "#121212",
               paper: "#333",
