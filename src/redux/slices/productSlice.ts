@@ -144,11 +144,10 @@ const productSlice = createSlice({
        const itemIndex = state.products.findIndex(
          (product) => product.id === updatedProduct.id
        );
-       console.log(state.products)
-       console.log(itemIndex)
        if (itemIndex !== -1) {
          state.products.splice(itemIndex, 1, updatedProduct);
          state.productDetail = updatedProduct;
+         state.loading = false;
          toast.success("Product updated successfully !!!");
          router.navigate(`/products/${updatedProduct.id}`);
        }

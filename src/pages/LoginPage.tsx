@@ -66,6 +66,7 @@ function LoginPage() {
                   error={formik.touched.email && Boolean(formik.errors.email)}
                   helperText={formik.touched.email && formik.errors.email}
                   disabled={formik.isSubmitting}
+                  InputLabelProps={{ style: { color: "white" } }}
                 />
                 <TextField
                   fullWidth
@@ -81,6 +82,7 @@ function LoginPage() {
                   }
                   helperText={formik.touched.password && formik.errors.password}
                   disabled={formik.isSubmitting}
+                  InputLabelProps={{ style: { color: "white" } }}
                 />
                 <Button
                   variant="contained"

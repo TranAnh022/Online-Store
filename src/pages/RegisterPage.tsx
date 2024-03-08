@@ -66,6 +66,7 @@ function RegisterPage() {
                   error={formik.touched.name && Boolean(formik.errors.name)}
                   helperText={formik.touched.name && formik.errors.name}
                   disabled={formik.isSubmitting}
+                  InputLabelProps={{ style: { color: "white" } }}
                 />
                 <TextField
                   fullWidth
@@ -79,6 +80,7 @@ function RegisterPage() {
                   error={formik.touched.email && Boolean(formik.errors.email)}
                   helperText={formik.touched.email && formik.errors.email}
                   disabled={formik.isSubmitting}
+                  InputLabelProps={{ style: { color: "white" } }}
                 />
                 <TextField
                   fullWidth
@@ -94,6 +96,7 @@ function RegisterPage() {
                   }
                   helperText={formik.touched.password && formik.errors.password}
                   disabled={formik.isSubmitting}
+                  InputLabelProps={{ style: { color: "white" } }}
                 />
                 <TextField
                   fullWidth
@@ -106,6 +109,7 @@ function RegisterPage() {
                   error={formik.touched.avatar && Boolean(formik.errors.avatar)}
                   helperText={formik.touched.avatar && formik.errors.avatar}
                   disabled={formik.isSubmitting}
+                  InputLabelProps={{ style: { color: "white" } }}
                 />
                 <Button
                   variant="contained"

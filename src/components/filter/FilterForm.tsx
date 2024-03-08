@@ -12,6 +12,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/configureStore";
 import { debounce } from "lodash";
 import { setProductParams } from "../../redux/slices/productSlice";
+import { pink } from "@mui/material/colors";
 
 const MAX = 1000;
 const MIN = 0;
@@ -30,6 +31,7 @@ function FilterForm() {
   const dispatch = useAppDispatch();
   const { productParams } = useAppSelector((state) => state.products);
   const [searchTerm, setSearchTerm] = useState(productParams.search);
+
 
   const handleSearchChange = debounce((event) => {
     dispatch(
@@ -92,11 +94,24 @@ function FilterForm() {
             )
           }
         >
-          <FormControlLabel value="1" control={<Radio />} label="Clothes" />
+          <FormControlLabel
+            value="1"
+            control={
+              <Radio
+                sx={{
+                  color: pink[800],
+                  "&.Mui-checked": {
+                    color: pink[600],
+                  },
+                }}
+              />
+            }
+            label="Clothes"
+          />
           <FormControlLabel value="2" control={<Radio />} label="Electronics" />
           <FormControlLabel value="3" control={<Radio />} label="Furniture" />
           <FormControlLabel value="4" control={<Radio />} label="Shoes" />
-          <FormControlLabel   value="" control={<Radio />} label="Clear" />
+          <FormControlLabel value="" control={<Radio />} label="Clear" />
         </RadioGroup>
       </Stack>
     </Box>
