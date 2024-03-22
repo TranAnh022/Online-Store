@@ -15,7 +15,6 @@ import { listItemStyle, navList, navStyles } from "../../customizedCSS";
 import { signOut } from "../../redux/slices/userSlice";
 import { ShoppingCart } from "@mui/icons-material";
 import HeaderDropDown from "./HeaderDropDown";
-import { CartItem, ProductType } from "../../types/type";
 
 const HeaderDrawer = () => {
   const user = useAppSelector((state) => state.user.user);
@@ -80,7 +79,6 @@ const HeaderDrawer = () => {
               to="/cart"
               size="large"
               color="inherit"
-              sx={{ mr: 2 }}
             >
               <Badge
                 badgeContent={itemCount}
