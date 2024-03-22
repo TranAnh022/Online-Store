@@ -26,11 +26,6 @@ const HeaderDrawer = () => {
     (sum, product) => sum + product.quantity,
     0
   );
-  const cartPersist = localStorage.getItem("cart")
-  const itemCountPersist: number =cartPersist !== null && JSON.parse(cartPersist)?.products.reduce(
-    (sum:number, product:CartItem) => sum + product.quantity,
-    0
-  );
   return (
     <Box sx={navStyles}>
       <Divider sx={{ md: "none" }} />
@@ -44,7 +39,7 @@ const HeaderDrawer = () => {
             color="inherit"
           >
             <Badge
-              badgeContent={itemCountPersist ? itemCountPersist : itemCount}
+              badgeContent={itemCount}
               color="secondary"
             >
               <ShoppingCart />
@@ -88,7 +83,7 @@ const HeaderDrawer = () => {
               sx={{ mr: 2 }}
             >
               <Badge
-                badgeContent={itemCountPersist ? itemCountPersist : itemCount}
+                badgeContent={itemCount}
                 color="secondary"
               >
                 <ShoppingCart />

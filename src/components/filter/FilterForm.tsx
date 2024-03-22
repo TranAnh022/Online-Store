@@ -19,13 +19,16 @@ const MIN = 0;
 const marks = [
   {
     value: MIN,
-    label: "",
+    label: "0",
   },
   {
     value: MAX,
-    label: "",
+    label: "$1000",
   },
 ];
+function valuetext(value: number) {
+  return `${value}°C`;
+}
 
 function FilterForm() {
   const dispatch = useAppDispatch();
@@ -71,6 +74,8 @@ function FilterForm() {
           step={1}
           value={productParams.price}
           valueLabelDisplay="auto"
+          getAriaValueText={valuetext}
+          aria-label="Custom marks"
           min={MIN}
           max={MAX}
           onChange={(_, value) =>

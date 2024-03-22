@@ -12,8 +12,6 @@ import { createProduct } from "../redux/actions/productActions";
 import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 import { validationProductSchema } from "../validation";
 import { ImageList } from "../components/imagesList/ImageList";
-import { toast } from "react-toastify";
-import { router } from "../router/Routes";
 import NotFound from "../components/notFound/NotFound";
 
 function ProductCreate() {

@@ -11,15 +11,6 @@ function CartPage() {
     cart?.products.reduce((sum, item) => sum + item.quantity * item.price, 0) ??
     0;
 
-  const cartPersist = localStorage.getItem("cart");
-  const sumPersist: number =
-    cartPersist !== null
-      ? JSON.parse(cartPersist).products.reduce(
-          (sum: number, product: CartItem) =>
-            sum + product.quantity * product.price,
-          0
-        )
-      : 0;
 
   return (
     <Container sx={{ marginY: "10px" }}>
@@ -30,7 +21,7 @@ function CartPage() {
           </Typography>
         </Grid>
         <Grid item md={8} xs={12}>
-          <CartTable cart={cartPersist ? JSON.parse(cartPersist) : cart} />
+          <CartTable cart={cart} />
         </Grid>
         <Grid
           item
@@ -40,7 +31,7 @@ function CartPage() {
           display={"flex"}
           justifyContent={"center"}
         >
-          <CartSum sum={sumPersist ? sumPersist : sum} />
+          <CartSum sum={sum} />
         </Grid>
       </Grid>
     </Container>

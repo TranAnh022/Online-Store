@@ -10,6 +10,7 @@ import { fetchCurrentUser } from "./redux/actions/userActions";
 import { customTheme } from "./customizedCSS";
 import { ColorModeContext } from "./components/contextAPI/ThemeColorProvider.tsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { setCart } from "./redux/slices/cartSlice";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -28,6 +29,11 @@ function App() {
   const initApp = useCallback(async () => {
     try {
       await dispatch(fetchCurrentUser());
+
+      const cartPersist = localStorage.getItem("cart") ;
+      if (cartPersist !== null) {
+        await dispatch(setCart(JSON.parse(cartPersist)));
+      }
     } catch (error:any) {
       toast.error(error);
     }
@@ -35,6 +41,8 @@ function App() {
 
   useEffect(() => {
     initApp().then(() => setLoading(false));
+
+
   }, [initApp]);
 
   if (loading) return <LoadingComponent message="Initializing app..." />;

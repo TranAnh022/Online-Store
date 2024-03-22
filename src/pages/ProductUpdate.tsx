@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { TitleStyle } from "../customizedCSS";
-import { ProductDto, UserType } from "../types/type";
+import { ProductDto } from "../types/type";
 import {
   fetchProductAsync,
   updateProduct,
@@ -19,8 +19,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import LoadingComponent from "../components/loading/LoadingComponent";
 import { formattingURL } from "../utils";
-import { toast } from "react-toastify";
-import { router } from "../router/Routes";
+
 import NotFound from "../components/notFound/NotFound";
 
 function ProductUpdate() {
