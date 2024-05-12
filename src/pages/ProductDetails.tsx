@@ -24,6 +24,7 @@ import { addToCart, updateToCart } from "../redux/slices/cartSlice";
 import NotFound from "../components/notFound/NotFound";
 import ImageCarousel from "../components/imagesList/ImageCarousel";
 import LoadingComponent from "../components/loading/LoadingComponent";
+import  Marquee  from "../components/marquee/Marquee";
 
 function ProductDetails() {
   const { id } = useParams<{ id: string }>();
@@ -62,7 +63,7 @@ function ProductDetails() {
   if (!productDetail) return <NotFound />;
   if (loading) return <LoadingComponent message="Loading Product...."></LoadingComponent>;
   return (
-    <Container sx={{ marginTop: "5rem", marginBottom: "3rem" }}>
+    <Container sx={{ marginTop: "10rem", marginBottom: "3rem" }}>
       <Grid container spacing={6}>
         <Grid item md={6}>
           <ImageCarousel images={productDetail?.images} />
@@ -152,6 +153,7 @@ function ProductDetails() {
           )}
         </Grid>
       </Grid>
+      <Marquee ></Marquee>
     </Container>
   );
 }

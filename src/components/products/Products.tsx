@@ -50,7 +50,7 @@ function Products() {
         paddingLeft: "15px",
         marginRight: "auto",
         marginLeft: "auto",
-
+        
       }}
     >
       <Box sx={{ padding: "30px" }}>

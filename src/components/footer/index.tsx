@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
@@ -10,73 +10,89 @@ import MailIcon from "@mui/icons-material/Mail";
 const Container = styled.div`
   display: flex;
   background-color: #2b2b2b;
-  color:#ffffff;
-  font-Size:1rem;
-  padding :2rem;
+  color: #ffffff;
+  font-size: 1rem;
+  padding: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
+
 const Left = styled.div`
-    flex:1;
-    display:flex;
-    flex-direction:column;
-    padding:20px;
-`;
-const Logo = styled.h1``;
-const Desc = styled.p`
-    margin:20px 0px;
-`;
-const SocialContainer = styled.div`
-    display:flex;
-    gap:1.5rem;
-`;
-const SocialIcon = styled.div`
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    color:white;
-    background-color: #${props => props.color};
-    display:flex;
-    justify-content:center;
-    align-items:center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
 
 `;
-const Center = styled.div`
-    flex:1;
-    padding:20px;
+
+const Logo = styled.h1``;
+
+const Desc = styled.p`
+  margin: 20px 0px;
 `;
+
+const SocialContainer = styled.div`
+  display: flex;
+  gap: 1.5rem;
+`;
+
+const SocialIcon = styled.div`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  background-color: #${(props) => props.color};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Center = styled.div`
+  flex: 1;
+  padding: 20px;
+   @media (max-width: 768px) {
+    display: none;
+`;
+
 const Title = styled.h3`
-    margin-bottom:30px;
+  margin-bottom: 30px;
 `;
 
 const List = styled.ul`
-    margin:0;
-    padding:0;
-    list-style:none;
-    display:flex;
-    flex-wrap:wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
 `;
+
 const ListItem = styled.li`
-    width:50%;
-    margin-bottom:10px;
-`
+  width: 50%;
+  margin-bottom: 10px;
+`;
 
 const Right = styled.div`
-    flex:1;
-    padding:20px;
+  flex: 1;
+  padding: 20px;
 `;
+
 const ContactItem = styled.div`
-    margin-bottom:20px;
-    display:flex;
-    align-items:center;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 `;
+
 const Payment = styled.img`
-    width: 50%;
+  width: 50%;
 `;
 
 const Footer = () => {
   return (
     <Container aria-label="Contact Section">
       <Left>
-        <Logo>DUC PHU.</Logo>
+        <Logo>Online-Store.</Logo>
         <Desc>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur sit
           omnis sequi illum incidunt consectetur consequuntur ut ex in minima
@@ -122,12 +138,12 @@ const Footer = () => {
         </ContactItem>
         <ContactItem>
           <MailIcon style={{ marginRight: "10px" }} />
-          ducphu@gmail.com
+          online-store@gmail.com
         </ContactItem>
         <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
       </Right>
     </Container>
   );
-}
+};
 
-export default Footer
+export default Footer;

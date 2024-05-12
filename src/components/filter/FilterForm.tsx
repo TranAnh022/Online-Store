@@ -83,8 +83,10 @@ function FilterForm() {
           }
         />
       </Stack>
-      <Stack spacing={2} sx={{ mb: 1 }}>
-        <Typography fontWeight={"700"}>Category:</Typography>
+      <Stack spacing={1} sx={{ mb: 1 }}>
+        <Typography fontSize={"1.5rem"} fontWeight={"700"}>
+          Categories
+        </Typography>
         <RadioGroup
           aria-label="category"
           name="category"
@@ -98,6 +100,17 @@ function FilterForm() {
             )
           }
         >
+          <FormControlLabel
+            value=""
+            control={
+              <Radio
+                sx={{
+                  color: grey[800],
+                }}
+              />
+            }
+            label="All"
+          />
           <FormControlLabel
             value="1"
             control={
@@ -141,17 +154,6 @@ function FilterForm() {
               />
             }
             label="Shoes"
-          />
-          <FormControlLabel
-            value=""
-            control={
-              <Radio
-                sx={{
-                  color: grey[800],
-                }}
-              />
-            }
-            label="Clear"
           />
         </RadioGroup>
       </Stack>

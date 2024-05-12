@@ -13,7 +13,7 @@ function CartPage() {
 
 
   return (
-    <Container sx={{ marginY: "10px" }}>
+    <Container sx={{ marginY: "5rem" }}>
       <Grid container gap={"1rem"}>
         <Grid item xs={12}>
           <Typography textAlign={"center"} sx={TitleStyle}>
