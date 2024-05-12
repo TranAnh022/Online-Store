@@ -8,11 +8,9 @@ export const customTheme = (paletteType: PaletteMode) => {
       mode: paletteType,
       ...(paletteType === "light"
         ? {
-            
-            background: { default: "#eaeaea" },
+            background: { default: "#ffff", paper: "#eaeaea" },
           }
         : {
-
             background: {
               default: "#121212",
               paper: "#333",
@@ -38,6 +36,7 @@ export const navStyles = {
 export const listItemStyle = {
   borderRadius: "15px",
   "&.active": { color: "text.secondary" },
+
 };
 
 export const navList = {
@@ -138,54 +137,7 @@ export const newLetterStyles = {
   },
 };
 
-export const footerStyles = {
-  container: {
-    backgroundColor: "#2b2b2b",
-    height: "350px",
-    color: "#fff",
-    display: "flex",
-    justifyContent: "center",
-    flexDirection: "column",
-    gap: "1rem",
-    alignItems: "center",
-  },
-  heading: {
-    fontSize: { md: "40px", xs: "30px" },
-  },
-  socialIconContainer: {
-    display: "flex",
-    gap: { md: "2rem", xs: "1rem" },
-  },
-  socialButton: {
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "center",
-    borderRadius: "50%",
-    backgroundColor: "#f3b628",
-    border: "2px solid #fff",
-    width: { md: "50px", xs: "30px" },
-    height: { md: "50px", xs: "30px" },
-  },
-  socialIcon: {
-    fontSize: { md: "20px", xs: "15px" },
-    color: "#fff",
-  },
-  contactInfo: {
-    display: "grid",
-    justifyContent: "center",
-    alignItems: "center",
-    fontSize: { md: "20px", xs: "15px" },
-    gridTemplateRows: "1fr 1fr 1fr",
-    gap: "1rem",
-  },
-  contactDetails: {
-    textAlign: "center",
-  },
-  contactIcon: {
-    color: "#f3b628",
-    paddingRight: "2rem",
-  },
-};
+
 
 export const aboutTitle = {
   overflow: "hidden",

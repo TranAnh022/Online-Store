@@ -7,13 +7,15 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { Grid, Switch } from "@mui/material";
+import { Grid } from "@mui/material";
 import { drawerWidth } from "../../customizedCSS";
 import { Link } from "react-router-dom";
 import HeaderDrawer from "./HeaderDrawer";
 import { ColorModeContext } from "../contextAPI/ThemeColorProvider.tsx";
+import CustomizedSwitches from "./CustomizedSwitches";
+import { orange } from "@mui/material/colors";
 
-export default function Header() {
+export default function Header({mode}:{mode:string}) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
   const colorMode = React.useContext(ColorModeContext);
@@ -32,10 +34,14 @@ export default function Header() {
     }
   };
 
+  console.log(mode);
+
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar color="primary">
+      <AppBar
+        sx={{ backgroundColor: mode === "light" ? `#ff7043` : "#000000" }}
+      >
         <Toolbar>
           <Grid container>
             <Grid item md={5} sx={{ display: "flex", alignItems: "center" }}>
@@ -48,10 +54,10 @@ export default function Header() {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" noWrap component={Link} to="/">
+              <Typography variant="h4" noWrap component={Link} to="/">
                 Online Store
               </Typography>
-              <Switch onClick={colorMode.toggleColorMode} />
+              <CustomizedSwitches Mode={colorMode.toggleColorMode} />
             </Grid>
             <Grid item md={7} display={{ xs: "none", md: "block" }}>
               <HeaderDrawer />

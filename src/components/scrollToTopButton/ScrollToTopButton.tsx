@@ -10,13 +10,13 @@ const ScrollToTopButton = () => {
   return (
     <Button
       variant="contained"
-      color="primary"
       onClick={handleScrollToTop}
       style={{
         position: "fixed",
         bottom: "20px",
         right: "20px",
         zIndex: "1000",
+        backgroundColor:`#EB6114`
       }}
     >
       <KeyboardArrowUpIcon />

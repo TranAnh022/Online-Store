@@ -47,6 +47,8 @@ function App() {
 
   if (loading) return <LoadingComponent message="Initializing app..." />;
 
+
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -59,7 +61,7 @@ function App() {
             theme="colored"
           />
           <CssBaseline />
-          <Header />
+          <Header mode={mode} />
           <Outlet />
         </GoogleOAuthProvider>
       </ThemeProvider>

@@ -39,7 +39,8 @@ const HeaderDrawer = () => {
           >
             <Badge
               badgeContent={itemCount}
-              color="secondary"
+              color="warning"
+              sx={{ color: "black" }}
             >
               <ShoppingCart />
             </Badge>
@@ -80,20 +81,17 @@ const HeaderDrawer = () => {
               size="large"
               color="inherit"
             >
-              <Badge
-                badgeContent={itemCount}
-                color="secondary"
-              >
+              <Badge badgeContent={itemCount} color="warning">
                 <ShoppingCart />
               </Badge>
             </IconButton>
           </ListItem>
           {["Login", "Register"].map((text) => (
-            <ListItem key={text} disablePadding>
+            <ListItem key={text} disablePadding >
               <ListItemButton
                 sx={listItemStyle}
                 component={Link}
-                to={`${text.toLowerCase()}`}
+                to={`${text}`}
               >
                 <ListItemText primary={text} />
               </ListItemButton>
