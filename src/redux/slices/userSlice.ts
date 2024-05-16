@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { TokenState, UserLogin, UserType } from "../../types/type";
 import {
   fetchCurrentUser,
@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 type InitialState = {
   user: UserType | null;
   userLogin: UserLogin | null;
-  token: TokenState | null;
+  token: string | null;
 };
 
 const initialState: InitialState = {
@@ -29,7 +29,6 @@ const UserSlice = createSlice({
       state.token = null;
       localStorage.removeItem("user");
       localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
       toast.success("Logout successfully");
       router.navigate("/");
     },
@@ -39,7 +38,7 @@ const UserSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    builder.addCase(userLoginAsync.fulfilled, (state, action) => {
+    builder.addCase(userLoginAsync.fulfilled, (state, action:any) => {
       router.navigate("/");
       if (!(action.payload instanceof Error)) {
         return {

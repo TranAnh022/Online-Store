@@ -51,6 +51,7 @@ function App() {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
+      
       <ThemeProvider theme={theme}>
         <GoogleOAuthProvider
           clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}

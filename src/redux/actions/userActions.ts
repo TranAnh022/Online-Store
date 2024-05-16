@@ -5,28 +5,24 @@ import {
   UserRegister,
   UserType,
 } from "../../types/type";
+import axios from "axios";
 
 export const userLoginAsync = createAsyncThunk(
   "userLoginAsync",
   async (values: UserLogin, thunkAPI) => {
     try {
-      const response = await fetch(
+      const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/auth/login`,
-        {
-          method: "Post",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
+        values
       );
-      if (!response.ok) {
-        const errorResponse = await response.json();
+
+      if (response.status !== 200) {
+        const errorResponse = response.data;
         return thunkAPI.rejectWithValue(errorResponse);
       }
-      const data: TokenState = await response.json();
-      localStorage.setItem("accessToken", data.access_token);
-      localStorage.setItem("refreshToken", data.refresh_token);
+
+      const data: string = response.data;
+      localStorage.setItem("accessToken", data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -39,26 +35,25 @@ export const fetchCurrentUser = createAsyncThunk<UserType>(
   async (_, thunkAPI) => {
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/auth/profile`,
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/users/profile`,
         {
-          method: "Get",
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      if (!response.ok) {
-        const errorResponse = await response.json();
+
+      if (response.status !== 200) {
+        const errorResponse = response.data;
         return thunkAPI.rejectWithValue(errorResponse);
       }
-      const data: UserType = await response.json();
-      return data;
+
+      return response.data;
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.data });
+      return thunkAPI.rejectWithValue({ error: error.message });
     }
   },
-
   {
     condition: () => {
       if (!localStorage.getItem("accessToken")) {
@@ -71,7 +66,7 @@ export const fetchCurrentUser = createAsyncThunk<UserType>(
 export const userRegisterAsync = createAsyncThunk<UserType, UserRegister>(
   "userRegisterAsync",
   async (values: UserRegister, thunkAPI) => {
-    console.log(values)
+    console.log(values);
     try {
       const response = await fetch(`${process.env.REACT_APP_BASE_URL}/users`, {
         method: "Post",
