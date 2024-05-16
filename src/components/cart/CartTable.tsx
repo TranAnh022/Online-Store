@@ -50,7 +50,7 @@ function CartTable({ cart }: Props) {
                 >
                   {item.images && (
                     <img
-                      src={formattingURL(item.images[0])}
+                      src={item.images[0].url}
                       alt={item.title}
                       style={{ height: 50, marginRight: 20 }}
                     />

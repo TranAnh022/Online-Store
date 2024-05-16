@@ -28,57 +28,62 @@ function ProductUpdate() {
   const productDetail = useAppSelector((state) => state.products.productDetail);
   const user = useAppSelector((state) => state.user.user);
 
-  useEffect(() => {
-    if (productDetail?.title) {
-      const { title, category, price, description, images } = productDetail;
-      formik.setValues({
-        title: title || "",
-        categoryId: category?.id || 0,
-        price: price || 0,
-        description: description || "",
-        images: images || [],
-      });
-    } else if (id) {
-      dispatch(fetchProductAsync(parseInt(id)));
-    }
-  }, [id, dispatch, productDetail]);
+  // useEffect(() => {
+  //   if (productDetail?.title) {
+  //     const { title, category, price, description, images,inventory } = productDetail;
+  //     formik.setValues({
+  //       title: title || "",
+  //       categoryId: category?.id || 0,
+  //       price: price || 0,
+  //       description: description || "",
+  //       images: images ? images.map((image) => image.url) : [] || null,
+  //       inventory: inventory,
+  //     });
+  //   } else if (id) {
+  //     dispatch(fetchProductAsync(parseInt(id)));
+  //   }
+  // }, [id, dispatch, productDetail]);
 
-  const handleSubmit = async (values: ProductDto) => {
-    const updatedImages: string[] = values.images.map((img) =>
-      formattingURL(img)
-    );
-    await dispatch(
-      updateProduct({
-        id: parseInt(id!),
-        value: { ...values, images: updatedImages },
-      })
-    );
-  };
+  // const handleSubmit = async (values: ProductDto) => {
+  //   const updatedImages: string[] = values.images.map((img) =>
+  //     img
+  //   );
+  //   await dispatch(
+  //     updateProduct({
+  //       id: parseInt(id!),
+  //       value: { ...values, images: updatedImages },
+  //     })
+  //   );
+  // };
 
-  const handleImageDelete = (index: number) => {
-    const newImages = [...formik.values.images];
-    newImages.splice(index, 1);
-    formik.setFieldValue("images", newImages);
-  };
+  // const handleImageDelete = (index: number) => {
+  //   const newImages = [...formik.values.images];
+  //   newImages.splice(index, 1);
+  //   formik.setFieldValue("images", newImages);
+  // };
 
-  const formik = useFormik({
-    initialValues: {
-      title: productDetail?.title || "",
-      categoryId: productDetail?.category?.id || 0,
-      price: productDetail?.price || 0,
-      description: productDetail?.description || "",
-      images: productDetail?.images || [],
-    },
-    validationSchema: validationProductSchema,
-    onSubmit: handleSubmit,
-  });
- if (user?.role !== "admin") {
-   return <NotFound message="Only admin can access this page"></NotFound>;
- }
+  // const formik = useFormik({
+  //   initialValues: {
+  //     title: productDetail?.title || "",
+  //     categoryId: productDetail?.category?.id || 0,
+  //     price: productDetail?.price || 0,
+  //     description: productDetail?.description || "",
+  //     images: productDetail?.images
+  //       ? productDetail.images.map((img) => img.url)
+  //       : [],
+  //     inventory: productDetail?.inventory
+  //   },
+  //   validationSchema: validationProductSchema,
+  //   onSubmit: handleSubmit,
+  // });
+
+  if (user?.role !== "admin") {
+    return <NotFound message="Only admin can access this page"></NotFound>;
+  }
   if (!productDetail) return <LoadingComponent message="Loading Form" />;
   return (
     <Container maxWidth="sm" style={{ marginTop: "5rem" }}>
-      <Typography sx={TitleStyle}>Update the Product</Typography>
+      {/* <Typography sx={TitleStyle}>Update the Product</Typography>
       <form onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth
@@ -166,7 +171,7 @@ function ProductUpdate() {
         >
           Update
         </Button>
-      </form>
+      </form> */}
     </Container>
   );
 }

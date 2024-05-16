@@ -112,7 +112,7 @@ function FilterForm() {
             label="All"
           />
           <FormControlLabel
-            value="1"
+            value="50e3ad7f-f268-4c03-a632-05b0c2a03245"
             control={
               <Radio
                 sx={{
@@ -120,10 +120,21 @@ function FilterForm() {
                 }}
               />
             }
-            label="Clothes"
+            label="Home Goods"
           />
           <FormControlLabel
-            value="2"
+            value="91c88378-e3fd-4d73-8b19-9580cebbaab7"
+            control={
+              <Radio
+                sx={{
+                  color: grey[800],
+                }}
+              />
+            }
+            label="Toys"
+          />
+          <FormControlLabel
+            value="c517d50f-b81f-4bc6-90a0-25dc149338a0"
             control={
               <Radio
                 sx={{
@@ -134,18 +145,7 @@ function FilterForm() {
             label="Electronics"
           />
           <FormControlLabel
-            value="3"
-            control={
-              <Radio
-                sx={{
-                  color: grey[800],
-                }}
-              />
-            }
-            label="Furniture"
-          />
-          <FormControlLabel
-            value="4"
+            value="f2cf5c47-e213-49a7-9a71-52a3bbb7c9eb"
             control={
               <Radio
                 sx={{

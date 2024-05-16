@@ -19,8 +19,11 @@ const ProductCaption = styled("figcaption")({
   textAlign: "center",
 });
 
+
+
 function ProductCard({ product }: Props) {
   const theme = useTheme();
+  console.log(product);
   if (!product) return <LoadingComponent message="Product not found..." />;
   return (
     <Box component={Link} to={`/products/${product.id}`}>
@@ -44,7 +47,11 @@ function ProductCard({ product }: Props) {
         }}
       >
         <ProductImg
-          src={formattingURL(product.images![0])}
+          src={
+            product.images && product.images[0]
+              ? product.images[0].url
+              : `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png`
+          }
           alt="product-img"
         />
       </Box>

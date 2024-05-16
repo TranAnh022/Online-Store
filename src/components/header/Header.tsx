@@ -34,8 +34,6 @@ export default function Header({mode}:{mode:string}) {
     }
   };
 
-  console.log(mode);
-
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />

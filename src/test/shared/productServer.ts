@@ -55,25 +55,21 @@ export const mockProducts = [
 ];
 
 export const handler = [
-  
+
   http.get("https://api.escuelajs.co/api/v1/products", () => {
     return HttpResponse.json(mockProducts, { status: 200 });
   }),
 
   http.post("https://api.escuelajs.co/api/v1/products", async ({ request }) => {
     const product = (await request.json()) as ProductDto;
-    const createdProduct: ProductType = {
+    const createdProduct: any = {
       ...product,
       id: 4,
       category: {
         id: 2,
         name: "Electronics",
         image: "https://i.imgur.com/ZANVnHE.jpeg",
-        creationAt: "2024-02-29T03:37:26.000Z",
-        updatedAt: "2024-02-29T03:37:26.000Z",
       },
-      creationAt: "2024-02-29T16:49:29.000Z",
-      updatedAt: "2024-02-29T16:49:29.000Z",
     };
     const updateMockTest = [...mockProducts, createdProduct];
     return HttpResponse.json(updateMockTest, { status: 201 });

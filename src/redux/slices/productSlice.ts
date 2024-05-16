@@ -27,9 +27,8 @@ const initialState: InitialState = {
     price: 0,
     description: "",
     images: [],
-    creationAt: "",
-    updatedAt: "",
     category: null,
+    inventory:0
   },
   productParams: {
     price: 0,
@@ -170,7 +169,7 @@ const productSlice = createSlice({
       };
     });
 
-  
+
     builder.addCase(deleteProduct.fulfilled, (state, action) => {
       toast.success("Delete product successfully");
       router.navigate("/");

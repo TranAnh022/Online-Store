@@ -3,18 +3,21 @@ export interface ProductType {
   title: string;
   price: number;
   description: string;
-  images: string[];
-  creationAt: string;
-  updatedAt: string;
+  images: ProductImageType[] | null ;
+  inventory: number;
   category: CategoryType | null;
+}
+
+export interface ProductImageType{
+  id: number;
+  productId: number;
+  url:string
 }
 
 export interface CategoryType {
   id: number;
   name: string;
   image: string;
-  creationAt: string;
-  updatedAt: string;
 }
 
 export interface FilterType {
@@ -29,6 +32,7 @@ export interface ProductDto {
   description: string;
   images: string[];
   categoryId: number;
+  inventory:number
 }
 
 export interface UserType {
@@ -57,10 +61,11 @@ export interface TokenState {
   refresh_token: string;
 };
 
-export interface CartItem extends ProductType{
-  quantity: number
+export interface CartItem extends Omit<ProductType, "inventory"> {
+  quantity: number;
 }
 
 export interface CartType {
   products: CartItem[];
 }
+

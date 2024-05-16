@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { TitleStyle } from "../customizedCSS";
-import { ProductDto,} from "../types/type";
+import { ProductDto } from "../types/type";
 import { createProduct } from "../redux/actions/productActions";
 import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 import { validationProductSchema } from "../validation";
@@ -24,6 +24,7 @@ function ProductCreate() {
     price: 0,
     description: "",
     images: [],
+    inventory: 0,
   };
 
   const handleSubmit = (values: ProductDto) => {
@@ -74,10 +75,16 @@ function ProductCreate() {
           margin="normal"
         >
           <MenuItem value="0"></MenuItem>
-          <MenuItem value="1">Cloth</MenuItem>
-          <MenuItem value="2">Electric</MenuItem>
-          <MenuItem value="3">Furniture</MenuItem>
-          <MenuItem value="4">Shoes</MenuItem>
+          <MenuItem value="50e3ad7f-f268-4c03-a632-05b0c2a03245">
+            Home Goods
+          </MenuItem>
+          <MenuItem value="91c88378-e3fd-4d73-8b19-9580cebbaab7">Toys</MenuItem>
+          <MenuItem value="c517d50f-b81f-4bc6-90a0-25dc149338a0">
+            Electronics
+          </MenuItem>
+          <MenuItem value="f2cf5c47-e213-49a7-9a71-52a3bbb7c9eb">
+            Shoes
+          </MenuItem>
         </TextField>
         <TextField
           fullWidth

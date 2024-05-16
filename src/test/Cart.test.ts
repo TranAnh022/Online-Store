@@ -4,7 +4,7 @@ import {
   removeToCart,
   updateToCart,
 } from "../redux/slices/cartSlice";
-import { CartItem} from "../types/type";
+import { CartItem } from "../types/type";
 
 let store = createNewStore();
 
@@ -12,25 +12,25 @@ beforeEach(() => {
   store = createNewStore();
 });
 
-
 const mockData: CartItem = {
   id: 64,
   title: "Shoes",
   price: 45,
   description: "comfortable shoes",
-  images: ['["https://placeimg.com/640/480/any"]'],
-  creationAt: "2024-02-29T06:39:33.000Z",
-  updatedAt: "2024-02-29T09:47:15.000Z",
+  images: [
+    {
+      id: 1232131414,
+      productId: 1231245345,
+      url: "https://placeimg.com/640/480/any",
+    },
+  ],
   quantity: 1,
   category: {
     id: 1,
     name: "Clothes",
     image: "https://i.imgur.com/QkIa5tT.jpeg",
-    creationAt: "2024-02-29T03:37:26.000Z",
-    updatedAt: "2024-02-29T03:37:26.000Z",
   },
 };
-
 
 describe("cart reducer", () => {
   test("add to cart", () => {

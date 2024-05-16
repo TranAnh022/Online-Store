@@ -16,17 +16,17 @@ export const fetchFilterProduct = createAsyncThunk<
         const queryParams: string[] = [];
 
         if (filterMethod.category?.length) {
-          queryParams.push(`categoryId=${filterMethod.category}`);
+          queryParams.push(`SortBy=${filterMethod.category}`);
         }
 
         if (filterMethod.price! > 0) {
           queryParams.push(
-            `price_min=${filterMethod.price!.toString()}&price_max=1000`
+            `MinPrice=${filterMethod.price!.toString()}&MaxPrice=1000`
           );
         }
 
         if (filterMethod.search?.length) {
-          queryParams.push(`title=${filterMethod.search}`);
+          queryParams.push(`Search=${filterMethod.search}`);
         }
 
         if (queryParams.length > 0) {

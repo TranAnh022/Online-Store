@@ -1,17 +1,18 @@
 import { Carousel } from "react-responsive-carousel";
 import { formattingURL } from "../../utils";
+import { ProductImageType } from "../../types/type";
 
 type Props = {
-  images: string[];
+  images: ProductImageType[] | null;
 };
 function ImageCarousel({ images }: Props) {
   return (
     <Carousel autoPlay={true} infiniteLoop={true}>
-      {images.map((img) => (
+      {images?.map((img) => (
         <img
-          key={img}
-          src={formattingURL(img)}
-          alt={img}
+          key={img.id}
+          src={img.url}
+          alt={img.url}
           style={{ width: "100%" }}
         />
       ))}

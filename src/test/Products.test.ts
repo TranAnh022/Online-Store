@@ -37,6 +37,7 @@ describe("product reducer", () => {
       description: "new test",
       images: ["test.png"],
       categoryId: 1,
+      inventory:2
     };
     await store.dispatch(createProduct(product));
     expect(store.getState().products.products.length).toBe(1);
@@ -75,6 +76,7 @@ describe("product reducer", () => {
         description: "comfortable shoes",
         images: ['["https://placeimg.com/640/480/any"]'],
         categoryId: 1,
+        inventory:3
       },
     };
     await store.dispatch(updateProduct(updatedProduct));
@@ -98,7 +100,7 @@ describe("product reducer", () => {
     expect(store.getState().products.loading).toBeFalsy();
   });
 
-  
+
 
   test("delete product by id", async () => {
     await store.dispatch(deleteProduct(64));
