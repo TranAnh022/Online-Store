@@ -1,8 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { FilterType, ProductDto, ProductType } from "../../types/type";
 
-
-
 export const fetchFilterProduct = createAsyncThunk<
   ProductType[],
   FilterType | undefined
@@ -42,11 +40,13 @@ export const fetchFilterProduct = createAsyncThunk<
   }
 );
 
-export const fetchProductAsync = createAsyncThunk<ProductType, number>(
+export const fetchProductAsync = createAsyncThunk<ProductType, string>(
   "product/fetchProduct",
-  async (productId: number, thunkAPI) => {
+  async (productId: string, thunkAPI) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/products/${productId}`);
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/products/${productId}`
+      );
       if (!response.ok) {
         const errorResponse = await response.json();
         return thunkAPI.rejectWithValue(errorResponse);
@@ -59,17 +59,22 @@ export const fetchProductAsync = createAsyncThunk<ProductType, number>(
   }
 );
 
-export const createProduct = createAsyncThunk<ProductType, ProductDto>(
+export const createProduct = createAsyncThunk<ProductType, FormData>(
   "createProductAsync",
-  async (product: ProductDto, thunkAPI) => {
+  async (formData: FormData, thunkAPI) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/products`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(product),
-      });
+      const token = localStorage.getItem("accessToken");
+
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/products`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: formData,
+        }
+      );
       if (!response.ok) {
         const errorResponse = await response.json();
         return thunkAPI.rejectWithValue(errorResponse);
@@ -84,16 +89,21 @@ export const createProduct = createAsyncThunk<ProductType, ProductDto>(
 
 export const updateProduct = createAsyncThunk<
   any,
-  { id: number; value: ProductDto }
+  { id: string; value: FormData }
 >("updateProductAsync", async (value, thunkAPI) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_BASE_URL}/products/${value.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(value.value),
-    });
+    const token = localStorage.getItem("accessToken");
+    console.log(value.value);
+    const response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}/products/${value.id}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: value.value,
+      }
+    );
     if (!response.ok) {
       const errorResponse = await response.json();
       return thunkAPI.rejectWithValue(errorResponse);
@@ -107,11 +117,19 @@ export const updateProduct = createAsyncThunk<
 
 export const deleteProduct = createAsyncThunk(
   "deleteProduct",
-  async (id: number,  thunkAPI ) => {
+  async (id: number, thunkAPI) => {
     try {
-      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/products/${id}`, {
-        method: "DELETE",
-      });
+      const token = localStorage.getItem("accessToken");
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/products/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       if (!response.ok) {
         const errorResponse = await response.json();
         return thunkAPI.rejectWithValue(errorResponse);

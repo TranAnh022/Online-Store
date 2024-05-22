@@ -21,7 +21,7 @@ const HeaderDrawer = () => {
   const cart = useAppSelector((state) => state.cart.cart);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const itemCount = cart?.products.reduce(
+  const itemCount = cart?.items.reduce(
     (sum, product) => sum + product.quantity,
     0
   );
@@ -40,7 +40,7 @@ const HeaderDrawer = () => {
             <Badge
               badgeContent={itemCount}
               color="warning"
-              sx={{ color: "black" }}
+              sx={{ color: "white" }}
             >
               <ShoppingCart />
             </Badge>
@@ -54,7 +54,7 @@ const HeaderDrawer = () => {
             >
               Profile
             </ListItemButton>
-            {user.role === "admin" && (
+            {user.role === "Admin" && (
               <ListItem disablePadding>
                 <ListItemButton
                   sx={listItemStyle}
@@ -87,7 +87,7 @@ const HeaderDrawer = () => {
             </IconButton>
           </ListItem>
           {["Login", "Register"].map((text) => (
-            <ListItem key={text} disablePadding >
+            <ListItem key={text} disablePadding>
               <ListItemButton
                 sx={listItemStyle}
                 component={Link}

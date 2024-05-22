@@ -98,9 +98,7 @@ function LoginPage() {
                 New to the Online Store?{" "}
                 <Link href="/register">Create an account</Link>
               </Typography>
-              <Typography variant="body2" sx={{ color: "white", mt: 2 }}>
-                <GoogleLogin />
-              </Typography>
+              <GoogleLogin />
             </Box>
           </Box>
         </Box>

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 type Props = {
   message?: string;
 };
+
 const NotFound = ({ message }: Props) => {
   return (
     <Box marginTop={"8rem"}>
@@ -12,6 +13,7 @@ const NotFound = ({ message }: Props) => {
           <Grid
             item
             xs={12}
+            container // Add this line
             alignItems={"center"}
             display={"flex"}
             justifyContent={"center"}
@@ -25,6 +27,7 @@ const NotFound = ({ message }: Props) => {
           <Grid
             item
             xs={12}
+            container // Add this line
             display={"flex"}
             justifyContent={"center"}
             direction={"column"}

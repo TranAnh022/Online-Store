@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import LoadingComponent from "../loading/LoadingComponent";
 import { Box, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
-import { formattingURL } from "../../utils";
+
 
 type Props = {
   product: ProductType;
@@ -23,7 +23,6 @@ const ProductCaption = styled("figcaption")({
 
 function ProductCard({ product }: Props) {
   const theme = useTheme();
-  console.log(product);
   if (!product) return <LoadingComponent message="Product not found..." />;
   return (
     <Box component={Link} to={`/products/${product.id}`}>

@@ -3,14 +3,18 @@ import CartTable from "../components/cart/CartTable";
 import { TitleStyle } from "../customizedCSS";
 import CartSum from "../components/cart/CartSum";
 import { useAppSelector } from "../redux/configureStore";
-import { CartItem } from "../types/type";
+import { useEffect } from "react";
+
 
 function CartPage() {
-  const { cart } = useAppSelector((state) => state.cart);
-  const sum =
-    cart?.products.reduce((sum, item) => sum + item.quantity * item.price, 0) ??
-    0;
+ const { cart } = useAppSelector((state) => state.cart);
+  useEffect(() => {
+  }, [cart])
 
+
+  const sum =
+    cart?.items.reduce((sum, item) => sum + item.quantity * item.product.price, 0) ??
+    0;
 
   return (
     <Container sx={{ marginY: "5rem" }}>

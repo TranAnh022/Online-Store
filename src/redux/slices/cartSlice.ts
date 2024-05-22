@@ -1,14 +1,20 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { CartItem, CartType } from "../../types/type";
+import {
+  addCartItemAsync,
+  fetchCartAsync,
+  removeCartItemAsync,
+} from "../actions/cartAction";
+import { toast } from "react-toastify";
 
 type InitialState = {
-  cart: CartType;
+  cart: CartType | null;
+  status: string;
 };
 
 const initialState: InitialState = {
-  cart: {
-    products: [],
-  },
+  cart: null,
+  status: "idle",
 };
 
 const CartSlice = createSlice({
@@ -18,51 +24,58 @@ const CartSlice = createSlice({
     setCart: (state, action: PayloadAction<CartType>) => {
       state.cart = action.payload;
     },
-    addToCart: (state, action: PayloadAction<CartItem>) => {
-      const productIndex = state.cart?.products.findIndex(
-        (product) => product.id === action.payload.id
-      );
-      if (productIndex >= 0) {
-        state.cart.products[productIndex].quantity += 1;
-      } else {
-        state.cart.products.push(action.payload);
+    clearCart: (state) => {
+      state.cart = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(
+      removeCartItemAsync.fulfilled,
+      (state,action: PayloadAction<CartType>) => {
+        state.cart = action.payload;
+        state.status = "idle";
       }
-      localStorage.setItem("cart",JSON.stringify(state.cart))
-    },
-    removeToCart: (state, action: PayloadAction<number>) => {
-      const productId = action.payload;
-      state.cart.products = state.cart?.products.filter(
-        (product) => product.id !== productId
-      );
-      localStorage.setItem("cart", JSON.stringify(state.cart));
-    },
-    updateToCart: (
-      state,
-      action: PayloadAction<{ id: number; quantity: number; name?: string }>
-    ) => {
-      const { id, quantity,name } = action.payload;
-      const productIndex = state.cart?.products.findIndex(
-        (product) => product.id === id
-      );
-      if (productIndex >= 0) {
-        if (name === "rem") {
-          state.cart.products[productIndex].quantity -= 1;
-        } else {
-          state.cart.products[productIndex].quantity = quantity;
-        }
-        if (state.cart.products[productIndex].quantity === 0) {
-          state.cart.products.splice(productIndex, 1);
-        }
-        localStorage.setItem("cart", JSON.stringify(state.cart));
-      } else {
-        throw new Error("Product not found");
-      }
-    },
+    );
+
+    builder.addCase(removeCartItemAsync.pending, (state, action) => {
+      state.status =
+        "pendingRemoveItem" + action.meta.arg.productId + action.meta.arg.name;
+    });
+
+    builder.addCase(removeCartItemAsync.rejected, (state, action:any) => {
+      state.status = "idle";
+      console.log("work ???")
+      toast.error(action.payload);
+    });
+
+    builder.addCase(addCartItemAsync.fulfilled, (state, action) => {
+      state.cart = action.payload;
+      state.status = "idle";
+    });
+
+    builder.addCase(addCartItemAsync.pending, (state, action) => {
+      state.status = "pendingAddItem" + action.meta.arg.productId;
+    });
+
+    builder.addCase(addCartItemAsync.rejected, (state, action: any) => {
+      state.status = "idle";
+      toast.error(action.payload);
+    });
+
+    builder.addCase(fetchCartAsync.fulfilled, (state, action) => {
+      state.cart = action.payload;
+      state.status = "idle";
+    });
+
+    builder.addCase(fetchCartAsync.rejected, (state, action: any) => {
+      state.status = "idle";
+      toast.error(action.payload.message);
+    });
   },
 });
 
 const cartReducer = CartSlice.reducer;
 
-export const { addToCart, removeToCart, updateToCart,setCart } = CartSlice.actions;
+export const { clearCart, setCart } = CartSlice.actions;
 
 export default cartReducer;

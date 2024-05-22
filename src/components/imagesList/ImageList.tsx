@@ -1,32 +1,31 @@
-import { Box } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import ClearIcon from "@mui/icons-material/Clear";
-import { formattingURL } from "../../utils";
+
 
 export const ImageList = ({images,onDelete,}: {images: string[];onDelete: (index: number) => void;}) => {
-
   return (
-    <Box flexWrap={"wrap"} display={"flex"}>
+    <Grid container spacing={2} style={{ marginTop: "1rem" }}>
       {images.map((image, index) => (
-        <div key={index} style={{ marginBottom: "10px" }}>
-          <Box sx={{ position: "relative" }}>
+        <Grid item key={index} xs={6} sm={4} md={3}>
+          {typeof image === "string" ? (
+            <img src={image} alt={`image-${index}`} style={{ width: "100%" }} />
+          ) : (
             <img
-              src={formattingURL(image)}
-              alt={`Img ${index + 1}`}
-              style={{ maxWidth: "100px", marginRight: "10px" }}
+              src={URL.createObjectURL(image)}
+              alt={`image-${index}`}
+              style={{ width: "100%" }}
             />
-            <ClearIcon
-              onClick={() => onDelete(index)}
-              sx={{
-                position: "absolute",
-                border: "none",
-                color: "inherit",
-                cursor: "pointer",
-                left: "80px",
-              }}
-            />
-          </Box>
-        </div>
+          )}
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={() => onDelete(index)}
+            style={{ marginTop: "0.5rem" }}
+          >
+            Delete
+          </Button>
+        </Grid>
       ))}
-    </Box>
+    </Grid>
   );
-};
+}

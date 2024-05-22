@@ -7,6 +7,10 @@ export const validationProductSchema = yup.object().shape({
     .number()
     .required("Price is required")
     .positive("Price must be positive"),
+  inventory: yup
+    .number()
+    .required("Inventory is required")
+    .positive("Inventory must be positive"),
   description: yup.string().required("Description is required"),
   images: yup.array().of(yup.string()).optional(),
 });

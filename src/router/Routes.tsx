@@ -8,7 +8,7 @@ import Login from "../pages/LoginPage";
 import Register from "../pages/RegisterPage";
 import ProductCreate from "../pages/ProductCreate";
 import CartPage from "../pages/CartPage";
-//import ProductUpdate from "../pages/ProductUpdate";
+import ProductUpdate from "../pages/ProductUpdate";
 import NotFound from "../components/notFound/NotFound";
 
 export const router = createBrowserRouter([
@@ -26,10 +26,10 @@ export const router = createBrowserRouter([
       { path: "create", element: <ProductCreate /> },
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
-      // {
-      //   path: "products/:id/update",
-      //   element: <ProductUpdate />,
-      // },
+      {
+        path: "products/:id/update",
+        element: <ProductUpdate />,
+      },
       { path: "*", element: <NotFound /> },
     ],
   },

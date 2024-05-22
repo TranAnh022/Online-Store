@@ -12,19 +12,17 @@ import { Link } from "react-router-dom";
 import { LoadingButton } from "@mui/lab";
 import { Add, Delete, Remove } from "@mui/icons-material";
 import { CartItem, CartType } from "../../types/type";
-import {
-  addToCart,
-  removeToCart,
-  updateToCart,
-} from "../../redux/slices/cartSlice";
 import { useAppDispatch } from "../../redux/configureStore";
-import { formattingURL } from "../../utils";
+import {
+  addCartItemAsync,
+  removeCartItemAsync,
+} from "../../redux/actions/cartAction";
 
-type Props = { cart: CartType };
+type Props = { cart: CartType | null };
 
 function CartTable({ cart }: Props) {
   const dispatch = useAppDispatch();
-
+  console.log(cart);
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -33,39 +31,39 @@ function CartTable({ cart }: Props) {
             <TableCell>Product</TableCell>
             <TableCell align="right">Price</TableCell>
             <TableCell align="center">Quantity</TableCell>
-            <TableCell align="right">SubTotal</TableCell>
+            <TableCell align="right">Total</TableCell>
             <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {cart.products.map((item: CartItem) => (
-            <TableRow key={item.title}>
+          {cart?.items.map((item: CartItem) => (
+            <TableRow key={item.product.title}>
               <TableCell component="th" scope="row">
                 <Box
                   display="flex"
                   alignItems="center"
                   component={Link}
-                  to={`/products/${item.id}`}
+                  to={`/products/${item.product.id}`}
                   style={{ textDecoration: "none", cursor: "pointer" }}
                 >
-                  {item.images && (
+                  {item.product.images && (
                     <img
-                      src={item.images[0].url}
-                      alt={item.title}
+                      src={item.product?.images[0]?.url}
+                      alt={item.product.title}
                       style={{ height: 50, marginRight: 20 }}
                     />
                   )}
-                  <span>{item.title}</span>
+                  <span>{item.product.title}</span>
                 </Box>
               </TableCell>
-              <TableCell align="right">${item.price}</TableCell>
+              <TableCell align="right">${item.product.price}</TableCell>
               <TableCell align="center">
                 <Box display="flex" alignItems="center" justifyContent="center">
                   <LoadingButton
                     onClick={() =>
                       dispatch(
-                        updateToCart({
-                          id: item.id,
+                        removeCartItemAsync({
+                          productId: item.product.id,
                           quantity: 1,
                           name: "rem",
                         })
@@ -77,17 +75,34 @@ function CartTable({ cart }: Props) {
                   </LoadingButton>
                   <span>{item.quantity}</span>
                   <LoadingButton
-                    onClick={() => dispatch(addToCart(item))}
+                    onClick={() =>
+                      dispatch(
+                        addCartItemAsync({
+                          productId: item.product.id,
+                          quantity: 1,
+                        })
+                      )
+                    }
                     color="error"
                   >
                     <Add />
                   </LoadingButton>
                 </Box>
               </TableCell>
-              <TableCell align="right">{item.price * item.quantity}</TableCell>
+              <TableCell align="right">
+                {(item.product.price * item.quantity).toFixed(2)}
+              </TableCell>
               <TableCell align="right">
                 <LoadingButton
-                  onClick={() => dispatch(removeToCart(item.id))}
+                  onClick={() =>
+                    dispatch(
+                      removeCartItemAsync({
+                        productId: item.product.id,
+                        quantity: item.quantity,
+                        name: "del",
+                      })
+                    )
+                  }
                   color="error"
                 >
                   <Delete />

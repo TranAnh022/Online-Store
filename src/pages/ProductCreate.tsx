@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useFormik } from "formik";
+import { useState } from "react";
 import { TitleStyle } from "../customizedCSS";
 import { ProductDto } from "../types/type";
 import { createProduct } from "../redux/actions/productActions";
@@ -17,25 +18,52 @@ import NotFound from "../components/notFound/NotFound";
 function ProductCreate() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user);
+  const [imageUrl, setImageUrl] = useState("");
 
-  const initialValues = {
+  const initialValues: ProductDto = {
     title: "",
     categoryId: 0,
     price: 0,
     description: "",
-    images: [],
+    imageUrls: [], // Default value as empty array
+    imageFiles: [], // Default value as empty array
     inventory: 0,
   };
 
   const handleSubmit = (values: ProductDto) => {
-    dispatch(createProduct(values));
+    const formData = new FormData();
+    formData.append("title", values.title);
+    formData.append("categoryId", values.categoryId.toString());
+    formData.append("price", values.price.toString());
+    formData.append("description", values.description);
+    formData.append("inventory", values.inventory.toString());
+
+    (values.imageUrls || []).forEach((url, index) => {
+      formData.append(`imageUrls[${index}]`, url);
+    });
+
+    (values.imageFiles || []).forEach((file, index) => {
+      formData.append(`imageFiles[${index}]`, file);
+    });
+
+    dispatch(createProduct(formData));
     formik.resetForm();
   };
 
   const handleImageDelete = (index: number) => {
-    const newImages = [...formik.values.images];
-    newImages.splice(index, 1);
-    formik.setFieldValue("images", newImages);
+    const newImageUrls = [...formik.values.imageUrls!];
+    newImageUrls.splice(index, 1);
+    formik.setFieldValue("imageUrls", newImageUrls);
+  };
+
+  const handleImageUrlAdd = () => {
+    if (imageUrl) {
+      formik.setFieldValue("imageUrls", [
+        ...formik.values.imageUrls!,
+        imageUrl,
+      ]);
+      setImageUrl("");
+    }
   };
 
   const formik = useFormik({
@@ -44,9 +72,10 @@ function ProductCreate() {
     onSubmit: handleSubmit,
   });
 
-  if (user?.role !== "admin" || !user) {
+  if (user?.role !== "Admin" || !user) {
     return <NotFound message="Only admin can access this page"></NotFound>;
   }
+
   return (
     <Container maxWidth="sm" style={{ marginTop: "5rem" }}>
       <Typography sx={TitleStyle}>Create New Product</Typography>
@@ -115,23 +144,39 @@ function ProductCreate() {
         />
         <TextField
           fullWidth
-          id="images"
-          name="images"
-          label="Images (comma-separated)"
-          multiline
-          rows={4}
-          value={formik.values.images.join(",")}
-          onChange={(event) => {
-            const imageArray = event.target.value.split(",");
-            formik.setFieldValue("images", imageArray);
-          }}
-          error={formik.touched.images && Boolean(formik.errors.images)}
-          helperText={formik.touched.images && formik.errors.images}
+          id="imageUrl"
+          name="imageUrl"
+          label="Image URL"
+          value={imageUrl}
+          onChange={(event) => setImageUrl(event.target.value)}
           margin="normal"
         />
-        {formik.values.images.length > 0 && (
+        <Button
+          onClick={handleImageUrlAdd}
+          variant="outlined"
+          style={{ marginBottom: "1rem" }}
+        >
+          Add Image URL
+        </Button>
+        <input
+          id="imageFiles"
+          name="imageFiles"
+          type="file"
+          multiple
+          onChange={(event) => {
+            if (event.target.files) {
+              const files = Array.from(event.target.files);
+              formik.setFieldValue("imageFiles", [
+                ...formik.values.imageFiles!,
+                ...files,
+              ]);
+            }
+          }}
+          style={{ width: "100%" }}
+        />
+        {formik.values.imageUrls && formik.values.imageUrls.length > 0 && (
           <ImageList
-            images={formik.values.images}
+            images={formik.values.imageUrls}
             onDelete={handleImageDelete}
           />
         )}

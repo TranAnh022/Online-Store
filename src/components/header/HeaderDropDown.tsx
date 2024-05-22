@@ -7,6 +7,7 @@ import { signOut } from "../../redux/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { Avatar, Box, IconButton } from "@mui/material";
 import { UserType } from "../../types/type";
+import { clearCart } from "../../redux/slices/cartSlice";
 
 export default function FadeMenu(props: { user: UserType }) {
   const dispatch = useAppDispatch();
@@ -20,6 +21,11 @@ export default function FadeMenu(props: { user: UserType }) {
     setAnchorEl(null);
   };
 
+ const handleLogout = () => {
+    dispatch(signOut());
+    dispatch(clearCart());
+    navigate("/login");
+  };
   return (
     <Box>
       <Box display={"flex"} flexDirection={{ xs: "row" }} gap="1rem">
@@ -50,12 +56,19 @@ export default function FadeMenu(props: { user: UserType }) {
         TransitionComponent={Fade}
       >
         <MenuItem onClick={() => navigate("/profile")}>Profile</MenuItem>
-        {props.user.role === "admin" && (
+        {props.user.role === "Admin" && (
           <MenuItem onClick={() => navigate("/create")}>
             Create new Product
           </MenuItem>
         )}
-        <MenuItem onClick={() => dispatch(signOut())}>Logout</MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleLogout();
+            handleClose();
+          }}
+        >
+          Logout
+        </MenuItem>
       </Menu>
     </Box>
   );

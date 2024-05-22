@@ -3,15 +3,15 @@ export interface ProductType {
   title: string;
   price: number;
   description: string;
-  images: ProductImageType[] | null ;
+  images: ProductImageType[] | null;
   inventory: number;
   category: CategoryType | null;
 }
 
-export interface ProductImageType{
+export interface ProductImageType {
   id: number;
   productId: number;
-  url:string
+  url: string;
 }
 
 export interface CategoryType {
@@ -30,17 +30,17 @@ export interface ProductDto {
   title: string;
   price: number;
   description: string;
-  images: string[];
+  imageUrls?: string[];
+  imageFiles?: File[];
   categoryId: number;
-  inventory:number
+  inventory: number;
 }
 
 export interface UserType {
   id: number;
   email: string;
-  password?: string;
   name: string;
-  role: "admin" | "customer";
+  role: "Admin" | "User";
   avatar: string;
 }
 
@@ -59,13 +59,34 @@ export interface UserRegister {
 export interface TokenState {
   access_token: string;
   refresh_token: string;
-};
+}
 
-export interface CartItem extends Omit<ProductType, "inventory"> {
+export interface CartItem {
+  id: number;
+  product: ProductType;
+  cartId: number;
   quantity: number;
 }
 
 export interface CartType {
-  products: CartItem[];
+  id: number;
+  userId: string;
+  items: CartItem[];
 }
 
+export interface Review {
+  id: number;
+  user: UserType;
+  productId: number;
+  rating: number;
+  context: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ReviewDto
+{
+  productId: number;
+  rating: number;
+  context: string;
+}

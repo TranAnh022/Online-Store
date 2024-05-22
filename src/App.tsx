@@ -10,7 +10,8 @@ import { fetchCurrentUser } from "./redux/actions/userActions";
 import { customTheme } from "./customizedCSS";
 import { ColorModeContext } from "./components/contextAPI/ThemeColorProvider.tsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { setCart } from "./redux/slices/cartSlice";
+import { fetchCartAsync } from "./redux/actions/cartAction";
+import { fetchReviewAsync } from "./redux/actions/reviewAction";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -29,11 +30,9 @@ function App() {
   const initApp = useCallback(async () => {
     try {
       await dispatch(fetchCurrentUser());
+      await dispatch(fetchCartAsync());
+      await dispatch(fetchReviewAsync());
 
-      const cartPersist = localStorage.getItem("cart") ;
-      if (cartPersist !== null) {
-        await dispatch(setCart(JSON.parse(cartPersist)));
-      }
     } catch (error:any) {
       toast.error(error);
     }
@@ -41,17 +40,12 @@ function App() {
 
   useEffect(() => {
     initApp().then(() => setLoading(false));
-
-
   }, [initApp]);
 
   if (loading) return <LoadingComponent message="Initializing app..." />;
 
-
-
   return (
     <ColorModeContext.Provider value={colorMode}>
-      
       <ThemeProvider theme={theme}>
         <GoogleOAuthProvider
           clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
@@ -69,5 +63,4 @@ function App() {
     </ColorModeContext.Provider>
   );
 }
-
 export default App;

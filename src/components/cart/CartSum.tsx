@@ -19,7 +19,7 @@ function CartSum({sum}:Props) {
       }}
     >
       <Typography variant="h6"> subtotal:</Typography>
-                  <Typography fontSize={{ md: "30px", xs: "20px" }} marginTop={"3px"}>$ {sum}</Typography>
+                  <Typography fontSize={{ md: "30px", xs: "20px" }} marginTop={"3px"}>$ {sum.toFixed(2)}</Typography>
       <Button variant="contained" color="error" sx={buttonStyle}>
         Checkout
       </Button>

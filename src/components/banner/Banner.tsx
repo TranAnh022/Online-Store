@@ -45,6 +45,7 @@ function About() {
             item
             display={{ md: "block", xs: "none" }}
             padding={"10px"}
+            container
             md={1}
           >
             <Typography fontSize={"20px"} color={"#f75843"} fontWeight={"500"}>
@@ -61,10 +62,10 @@ function About() {
             direction={"column"}
             gap={"1rem"}
             padding={"20px"}
+            container // Add this line
           >
             <motion.div
               initial="hidden"
-
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.5 }}

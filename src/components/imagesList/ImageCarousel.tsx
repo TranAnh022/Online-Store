@@ -1,5 +1,5 @@
 import { Carousel } from "react-responsive-carousel";
-import { formattingURL } from "../../utils";
+
 import { ProductImageType } from "../../types/type";
 
 type Props = {

@@ -66,7 +66,7 @@ export const fetchCurrentUser = createAsyncThunk<UserType>(
 export const userRegisterAsync = createAsyncThunk<UserType, UserRegister>(
   "userRegisterAsync",
   async (values: UserRegister, thunkAPI) => {
-    console.log(values);
+    
     try {
       const response = await fetch(`${process.env.REACT_APP_BASE_URL}/users`, {
         method: "Post",

@@ -21,15 +21,7 @@ type InitialState = {
 const initialState: InitialState = {
   products: [],
   loading: false,
-  productDetail: {
-    id: 0,
-    title: "",
-    price: 0,
-    description: "",
-    images: [],
-    category: null,
-    inventory:0
-  },
+  productDetail: null,
   productParams: {
     price: 0,
   },
@@ -140,9 +132,12 @@ const productSlice = createSlice({
    builder.addCase(updateProduct.fulfilled, (state, action) => {
      if (!(action.payload instanceof Error)) {
        const updatedProduct = action.payload;
+       console.log(action.payload)
+       console.log(updatedProduct)
        const itemIndex = state.products.findIndex(
          (product) => product.id === updatedProduct.id
        );
+       console.log(state.products);
        if (itemIndex !== -1) {
          state.products.splice(itemIndex, 1, updatedProduct);
          state.productDetail = updatedProduct;

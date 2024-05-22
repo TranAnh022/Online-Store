@@ -38,7 +38,7 @@ const StyledTypography = styled(Typography)({
 
 export default function ProfileStatistics() {
   const user = useAppSelector(state => state.user.user)
-
+  
   return (
     <StyledContainer>
       <Grid
