@@ -10,6 +10,7 @@ import ProductCreate from "../pages/ProductCreate";
 import CartPage from "../pages/CartPage";
 import ProductUpdate from "../pages/ProductUpdate";
 import NotFound from "../components/notFound/NotFound";
+import CheckoutPage from "../pages/CheckoutPage";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
       {
         path: "products/:id/update",
         element: <ProductUpdate />,
+      },
+      {
+        path: "checkout/:id",
+        element: <CheckoutPage />,
       },
       { path: "*", element: <NotFound /> },
     ],

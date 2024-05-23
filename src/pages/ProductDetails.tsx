@@ -28,7 +28,7 @@ import {
   removeCartItemAsync,
 } from "../redux/actions/cartAction";
 import Reviews from "../components/review/Reviews";
-import { CartItem } from "../types/type";
+
 
 function ProductDetails() {
   const { id } = useParams<{ id: string }>();

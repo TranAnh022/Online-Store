@@ -4,13 +4,15 @@ import productReducer from "./slices/productSlice";
 import userReducer from "./slices/userSlice";
 import cartReducer from "./slices/cartSlice";
 import reviewReducer from "./slices/reviewSlice";
+import orderReducer from "./slices/orderSlice";
 
 export const store = configureStore({
   reducer: {
     products: productReducer,
     user: userReducer,
     cart: cartReducer,
-    reviews:reviewReducer
+    reviews: reviewReducer,
+    order:orderReducer
   },
 });
 

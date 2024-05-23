@@ -90,3 +90,32 @@ export interface ReviewDto
   rating: number;
   context: string;
 }
+
+export interface OrderItem{
+  id: number
+  orderId: number;
+  quantity: number;
+  price: number;
+  productSnapshot:
+  {
+    productId: number;
+    title: string;
+    descripton: string;
+    price: number;
+  }
+}
+
+export interface Order{
+  id: number;
+  userId: number;
+  orderItems: OrderItem[];
+  status: OrderStatus
+  totalPrice: number;
+}
+
+export enum OrderStatus
+{
+  Pending,
+  Shipped,
+  Cancelled
+}

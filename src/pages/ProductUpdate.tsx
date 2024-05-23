@@ -15,10 +15,10 @@ import {
 import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 import { validationProductSchema } from "../validation";
 import { ImageList } from "../components/imagesList/ImageList";
-import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LoadingComponent from "../components/loading/LoadingComponent";
 import NotFound from "../components/notFound/NotFound";
+import { useParams } from "react-router-dom";
 
 function ProductUpdate() {
   const dispatch = useAppDispatch();
@@ -26,7 +26,7 @@ function ProductUpdate() {
   const productDetail = useAppSelector((state) => state.products.productDetail);
   const user = useAppSelector((state) => state.user.user);
   const [imageUrl, setImageUrl] = useState("");
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (productDetail?.title) {
