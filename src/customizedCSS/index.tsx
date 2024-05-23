@@ -1,4 +1,12 @@
-import { PaletteMode, createTheme } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Card,
+  Container,
+  PaletteMode,
+  createTheme,
+  styled,
+} from "@mui/material";
 
 export const drawerWidth = 240;
 
@@ -36,7 +44,6 @@ export const navStyles = {
 export const listItemStyle = {
   borderRadius: "15px",
   "&.active": { color: "text.secondary" },
-
 };
 
 export const navList = {
@@ -137,8 +144,6 @@ export const newLetterStyles = {
   },
 };
 
-
-
 export const aboutTitle = {
   overflow: "hidden",
   display: "inline-block",
@@ -167,3 +172,50 @@ export const aboutTitle = {
     },
   },
 };
+export const StyledContainer = styled(Container)({
+  padding: "5rem",
+  backgroundColor: "#f5f5f5",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+});
+
+export const StyledCard = styled(Card)({
+  borderRadius: 15,
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  maxWidth: 400,
+  textAlign: "center",
+  background: "linear-gradient(135deg, #f96332, #ff8008)",
+  color: "#fff",
+  padding: "1rem",
+});
+
+export const ProfileInfo = styled(Box)({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+});
+
+export const StyledAvatar = styled(Avatar)({
+  width: 60,
+  height: 60,
+  margin: "1rem auto",
+  backgroundColor: "#fff",
+});
+
+export const InfoBox = styled(Box)({
+  display: "flex",
+  justifyContent: "space-around",
+  flexDirection: "column",
+  alignItems: "center",
+  padding: "1rem 0",
+  borderBottom: "1px solid #e0e0e0",
+});
+
+export const OrdersContainer = styled(Box)({
+  backgroundColor: "#fff",
+  borderRadius: "15px",
+  padding: "1rem",
+  marginTop: "1rem",
+  color: "#333",
+});

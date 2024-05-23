@@ -111,6 +111,8 @@ export interface Order{
   orderItems: OrderItem[];
   status: OrderStatus
   totalPrice: number;
+  createdAt: string
+  updatedAt:string
 }
 
 export enum OrderStatus

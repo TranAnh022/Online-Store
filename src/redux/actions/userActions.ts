@@ -66,7 +66,6 @@ export const fetchCurrentUser = createAsyncThunk<UserType>(
 export const userRegisterAsync = createAsyncThunk<UserType, UserRegister>(
   "userRegisterAsync",
   async (values: UserRegister, thunkAPI) => {
-    
     try {
       const response = await fetch(`${process.env.REACT_APP_BASE_URL}/users`, {
         method: "Post",
@@ -83,6 +82,114 @@ export const userRegisterAsync = createAsyncThunk<UserType, UserRegister>(
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const updateUserAsync = createAsyncThunk(
+  "user/updateUserAsync",
+  async (
+    {
+      values,
+      id,
+    }: {
+      values: {
+        name?: string;
+        email?: string;
+        password?: string;
+        avatar?: string;
+      };
+      id: string;
+    },
+    thunkAPI
+  ) => {
+    try {
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.put(
+        `${process.env.REACT_APP_BASE_URL}/users/${id}`,
+        values,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status !== 200) {
+        return thunkAPI.rejectWithValue(response.data);
+      }
+      return response.data;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  }
+);
+
+export const fetchAllUser = createAsyncThunk(
+  "user/fetchAllUserAsync",
+  async (_, thunkAPI) => {
+    try {
+
+      const token = localStorage.getItem("accessToken");
+     const response = await axios.get(
+       `${process.env.REACT_APP_BASE_URL}/users`,
+       {
+         headers: {
+           Authorization: `Bearer ${token}`,
+         },
+       }
+     );
+      if (response.status !== 200) {
+        return thunkAPI.rejectWithValue(response.data);
+      }
+      return response.data;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  }
+);
+
+export const deleteUser = createAsyncThunk(
+  "user/fetchAllUserAsync",
+  async (id:string, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/users/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status !== 200) {
+        return thunkAPI.rejectWithValue(response.data);
+      }
+      return response.data;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  }
+);
+
+export const fetchUserId = createAsyncThunk(
+  "user/fetchUserIdAsync",
+  async (id: string, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/users/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status !== 200) {
+        return thunkAPI.rejectWithValue(response.data);
+      }
+      return response.data;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({ error: error.message });
     }
   }
 );

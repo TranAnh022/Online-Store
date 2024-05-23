@@ -1,7 +1,10 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { TokenState, UserLogin, UserType } from "../../types/type";
+import { createSlice } from "@reduxjs/toolkit";
+import { UserLogin, UserType } from "../../types/type";
 import {
+  fetchAllUser,
   fetchCurrentUser,
+  fetchUserId,
+  updateUserAsync,
   userLoginAsync,
   userRegisterAsync,
 } from "../actions/userActions";
@@ -12,12 +15,16 @@ type InitialState = {
   user: UserType | null;
   userLogin: UserLogin | null;
   token: string | null;
+  users: UserType[];
+  userUpdate: UserType | null;
 };
 
 const initialState: InitialState = {
   user: null,
   userLogin: null,
   token: null,
+  users: [],
+  userUpdate: null
 };
 
 const UserSlice = createSlice({
@@ -34,11 +41,11 @@ const UserSlice = createSlice({
     },
     setUser: (state, action) => {
       state.user = action.payload;
-      router.navigate('/')
+      router.navigate("/");
     },
   },
   extraReducers(builder) {
-    builder.addCase(userLoginAsync.fulfilled, (state, action:any) => {
+    builder.addCase(userLoginAsync.fulfilled, (state, action: any) => {
       router.navigate("/");
       if (!(action.payload instanceof Error)) {
         return {
@@ -95,6 +102,60 @@ const UserSlice = createSlice({
     });
 
     builder.addCase(userRegisterAsync.rejected, (state, action: any) => {
+      toast.error(action.payload.message[0]);
+    });
+
+    builder.addCase(updateUserAsync.fulfilled, (state, action) => {
+      if (!(action.payload instanceof Error)) {
+        router.navigate("/profile");
+        toast.success("update user successfully");
+        return {
+          ...state,
+          user: action.payload,
+        };
+      }
+    });
+
+    builder.addCase(updateUserAsync.pending, (state) => {
+      return {
+        ...state,
+      };
+    });
+
+    builder.addCase(updateUserAsync.rejected, (state, action: any) => {
+      toast.error(action.payload.message[0]);
+    });
+    builder.addCase(fetchAllUser.fulfilled, (state, action) => {
+      if (!(action.payload instanceof Error)) {
+        return {
+          ...state,
+          users: action.payload,
+        };
+      }
+    });
+    builder.addCase(fetchAllUser.pending, (state) => {
+      return {
+        ...state,
+      };
+    });
+    builder.addCase(fetchAllUser.rejected, (state, action: any) => {
+      toast.error(action.payload.message[0]);
+    });
+
+    builder.addCase(fetchUserId.fulfilled, (state, action) => {
+      if (!(action.payload instanceof Error)) {
+        return {
+          ...state,
+          userUpdate: action.payload,
+        };
+      }
+    });
+    builder.addCase(fetchUserId.pending, (state) => {
+      return {
+        ...state,
+      };
+    });
+    builder.addCase(fetchUserId.rejected, (state, action: any) => {
       toast.error(action.payload.message[0]);
     });
   },

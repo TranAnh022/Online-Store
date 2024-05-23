@@ -49,23 +49,19 @@ export const fetchCurrentOrder = createAsyncThunk(
       return thunkAPI.rejectWithValue({ error: error.message });
     }
   },
-  {
-    condition: () => {
-      if (!localStorage.getItem("accessToken")) {
-        return false;
-      }
-    },
-  }
 );
-
 
 export const fetchOrdersByUser = createAsyncThunk(
   "fetchOrderByUser",
-  async (_, thunkAPI) => {
+  async (value: string | undefined, thunkAPI) => {
     try {
       const token = localStorage.getItem("accessToken");
+      let url = `${process.env.REACT_APP_BASE_URL}/orders/user`;
+      if (value) {
+        url += `?status=${value}`;
+      }
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/orders/user`,
+       url,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -82,11 +78,80 @@ export const fetchOrdersByUser = createAsyncThunk(
       return thunkAPI.rejectWithValue({ error: error.message });
     }
   },
-  {
-    condition: () => {
-      if (!localStorage.getItem("accessToken")) {
-        return false;
+);
+
+export const cancelOrders = createAsyncThunk(
+  "cancelOrderByUser",
+  async (id: string, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.patch(
+        `${process.env.REACT_APP_BASE_URL}/orders/cancel-order/${id}`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status !== 200) {
+        const errorResponse = response.data;
+        return thunkAPI.rejectWithValue(errorResponse);
       }
-    },
-  }
+      return { value: response.data, id: id };
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  },
+);
+
+export const fetchAllOrder = createAsyncThunk(
+  "fetchAllOrder",
+  async (_, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/orders`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status !== 200) {
+        const errorResponse = response.data;
+        return thunkAPI.rejectWithValue(errorResponse);
+      }
+      return response.data
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  },
+);
+
+export const deleteOrder = createAsyncThunk(
+  "deleteOrder",
+  async (id:string, thunkAPI) => {
+    try {
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.delete(
+        `${process.env.REACT_APP_BASE_URL}/orders/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.status !== 200) {
+        const errorResponse = response.data;
+        return thunkAPI.rejectWithValue(errorResponse);
+      }
+      return { value: response.data, id: id };
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  },
 );

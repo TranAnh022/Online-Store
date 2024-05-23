@@ -22,7 +22,7 @@ type Props = { cart: CartType | null };
 
 function CartTable({ cart }: Props) {
   const dispatch = useAppDispatch();
-  console.log(cart);
+  
   return (
     <TableContainer component={Paper}>
       <Table>

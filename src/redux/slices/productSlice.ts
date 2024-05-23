@@ -132,12 +132,9 @@ const productSlice = createSlice({
    builder.addCase(updateProduct.fulfilled, (state, action) => {
      if (!(action.payload instanceof Error)) {
        const updatedProduct = action.payload;
-       console.log(action.payload)
-       console.log(updatedProduct)
        const itemIndex = state.products.findIndex(
          (product) => product.id === updatedProduct.id
        );
-       console.log(state.products);
        if (itemIndex !== -1) {
          state.products.splice(itemIndex, 1, updatedProduct);
          state.productDetail = updatedProduct;

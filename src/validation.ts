@@ -26,3 +26,12 @@ export const validationRegisterSchema = yup.object().shape({
   password: yup.string().required("Password is required"),
   avatar: yup.string().required("Password is required"),
 });
+
+export const validationUserUpdateSchema = yup.object({
+  name: yup.string().required("Name is required"),
+  email: yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  password: yup.string().required("Password is required"),
+  avatar: yup.string().url("Invalid URL").required("Avatar URL is required"),
+});

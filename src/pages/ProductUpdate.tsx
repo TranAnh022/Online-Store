@@ -22,13 +22,12 @@ import { useParams } from "react-router-dom";
 
 function ProductUpdate() {
   const dispatch = useAppDispatch();
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const productDetail = useAppSelector((state) => state.products.productDetail);
   const user = useAppSelector((state) => state.user.user);
   const [imageUrl, setImageUrl] = useState("");
-
-
   useEffect(() => {
+    if (!id) return;
     if (productDetail?.title) {
       const { title, category, price, description, images, inventory } =
         productDetail;
@@ -41,7 +40,8 @@ function ProductUpdate() {
         imageFiles: [], // Assuming no files are available initially
         inventory: inventory || 0,
       });
-    } else if (id) {
+    }
+    if (id !== productDetail?.id.toString()) {
       dispatch(fetchProductAsync(id));
     }
   }, [id, dispatch, productDetail]);

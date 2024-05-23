@@ -1,13 +1,8 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
-  Container,
   Grid,
-  Card,
-  CardContent,
   Typography,
   Box,
-  Avatar,
-  styled,
   IconButton,
   Tooltip,
   Badge,
@@ -17,60 +12,23 @@ import { fetchOrdersByUser } from "../redux/actions/orderAction";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import CancelIcon from "@mui/icons-material/Cancel";
-import PendingIcon from "@mui/icons-material/Pending";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import EditIcon from "@mui/icons-material/Edit";
-import { Link } from "react-router-dom";
-import { OrderStatus } from "../types/type";
-const StyledContainer = styled(Container)({
-  height: "100vh",
-  backgroundColor: "#f5f5f5",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-});
-
-const StyledCard = styled(Card)({
-  borderRadius: 15,
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-  maxWidth: 400,
-  textAlign: "center",
-  background: "linear-gradient(135deg, #f96332, #ff8008)",
-  color: "#fff",
-  padding: "1rem",
-});
-
-const ProfileInfo = styled(Box)({
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
-});
-
-const StyledAvatar = styled(Avatar)({
-  width: 60,
-  height: 60,
-  margin: "1rem auto",
-  backgroundColor: "#fff",
-});
-
-const InfoBox = styled(Box)({
-  display: "flex",
-  justifyContent: "space-around",
-  flexDirection: "column",
-  alignItems: "center",
-  padding: "1rem 0",
-  borderBottom: "1px solid #e0e0e0",
-});
-
-const OrdersContainer = styled(Box)({
-  backgroundColor: "#fff",
-  borderRadius: "15px",
-  padding: "1rem",
-  marginTop: "1rem",
-  color: "#333",
-});
-
+import { Link, useNavigate } from "react-router-dom";
+import ManageAccountsOutlinedIcon from "@mui/icons-material/ManageAccountsOutlined";
+import {
+  InfoBox,
+  OrdersContainer,
+  ProfileInfo,
+  StyledAvatar,
+  StyledCard,
+  StyledContainer,
+} from "../customizedCSS";
+import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
+import { fetchAllUser } from "../redux/actions/userActions";
 export default function ProfileStatistics() {
   const dispatch = useAppDispatch();
 
@@ -89,7 +47,7 @@ export default function ProfileStatistics() {
   const shippedOrders = orders?.filter(
     (order) => order.status.toString() === "Shipped"
   );
-  console.log(cancelOrders?.length);
+  const navigate = useNavigate();
   return (
     <StyledContainer>
       <StyledCard>
@@ -98,7 +56,7 @@ export default function ProfileStatistics() {
             {user?.name}
           </Typography>
           <Tooltip title="Edit profile">
-            <IconButton>
+            <IconButton onClick={() => navigate(`/user/${user?.id}`)}>
               <EditIcon style={{ color: "#fff" }} />
             </IconButton>
           </Tooltip>
@@ -130,16 +88,17 @@ export default function ProfileStatistics() {
             <Grid item xs={4}>
               <IconButton
                 component={Link}
-                to="/cart"
+                to={`/order/history`}
                 size="small"
                 color="inherit"
+                onClick={() => dispatch(fetchOrdersByUser("cancelled"))}
               >
                 <Badge
                   badgeContent={cancelOrders?.length}
                   color="warning"
                   sx={{ color: "white" }}
                 >
-                  <CancelIcon color="warning" fontSize="large" />
+                  <CancelOutlinedIcon color="warning" fontSize="large" />
                 </Badge>
               </IconButton>
 
@@ -148,40 +107,92 @@ export default function ProfileStatistics() {
             <Grid item xs={4}>
               <IconButton
                 component={Link}
-                to="/cart"
+                to="/order/history"
                 size="small"
                 color="inherit"
+                onClick={() => dispatch(fetchOrdersByUser("pending"))}
               >
                 <Badge
                   badgeContent={pendingOrders?.length}
                   color="warning"
                   sx={{ color: "white" }}
                 >
-                  <PendingIcon color="warning" fontSize="large" />
+                  <PendingOutlinedIcon color="warning" fontSize="large" />
                 </Badge>
               </IconButton>
 
-              <Typography variant="body1">Pedning</Typography>
+              <Typography variant="body1">Pending</Typography>
             </Grid>
             <Grid item xs={4}>
               <IconButton
                 component={Link}
-                to="/cart"
+                to="order/history"
                 size="small"
                 color="inherit"
+                onClick={() => dispatch(fetchOrdersByUser("shipped"))}
               >
                 <Badge
                   badgeContent={shippedOrders?.length}
                   color="warning"
                   sx={{ color: "white" }}
                 >
-                  <LocalShippingIcon color="warning" fontSize="large" />
+                  <LocalShippingOutlinedIcon color="warning" fontSize="large" />
                 </Badge>
               </IconButton>
               <Typography variant="body1">Shipped</Typography>
             </Grid>
           </Grid>
         </OrdersContainer>
+        {/* --- admin feature ---*/}
+        {user?.role === "Admin" && (
+          <OrdersContainer>
+            <Typography variant="h6" gutterBottom>
+              Admin Features
+            </Typography>
+            <Grid container spacing={8} justifyContent="center" padding={1}>
+              <Grid item xs={4}>
+                <IconButton
+                  component={Link}
+                  to="/admin/users"
+                  size="small"
+                  color="inherit"
+                  onClick={() => dispatch(fetchAllUser())}
+                >
+                  <ManageAccountsOutlinedIcon
+                    color="warning"
+                    fontSize="large"
+                  />
+                </IconButton>
+
+                <Typography variant="body1">Manage Users</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <IconButton
+                  component={Link}
+                  to="/admin/products"
+                  size="small"
+                  color="inherit"
+                  onClick={() => dispatch(fetchOrdersByUser("pending"))}
+                >
+                  <Inventory2OutlinedIcon color="warning" fontSize="large" />
+                </IconButton>
+                <Typography variant="body1">Manage Products</Typography>
+              </Grid>
+              <Grid item xs={4}>
+                <IconButton
+                  component={Link}
+                  to="/admin/orders"
+                  size="small"
+                  color="inherit"
+                  onClick={() => dispatch(fetchOrdersByUser("shipped"))}
+                >
+                  <ListAltOutlinedIcon color="warning" fontSize="large" />
+                </IconButton>
+                <Typography variant="body1">Manage Orders</Typography>
+              </Grid>
+            </Grid>
+          </OrdersContainer>
+        )}
       </StyledCard>
     </StyledContainer>
   );

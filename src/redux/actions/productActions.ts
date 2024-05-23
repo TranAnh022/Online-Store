@@ -93,7 +93,7 @@ export const updateProduct = createAsyncThunk<
 >("updateProductAsync", async (value, thunkAPI) => {
   try {
     const token = localStorage.getItem("accessToken");
-    console.log(value.value);
+    
     const response = await fetch(
       `${process.env.REACT_APP_BASE_URL}/products/${value.id}`,
       {

@@ -1,6 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Order } from "../../types/type";
-import { createOrder, fetchCurrentOrder, fetchOrdersByUser } from "../actions/orderAction";
+import {
+  cancelOrders,
+  createOrder,
+  deleteOrder,
+  fetchAllOrder,
+  fetchCurrentOrder,
+  fetchOrdersByUser,
+} from "../actions/orderAction";
 import { toast } from "react-toastify";
 import { Navigate, useNavigate } from "react-router-dom";
 import { router } from "../../router/Routes";
@@ -12,7 +19,7 @@ type InitialState = {
 
 const initialState: InitialState = {
   order: null,
-  orders: null,
+  orders: [],
 };
 
 const OrderSlice = createSlice({
@@ -40,6 +47,36 @@ const OrderSlice = createSlice({
     });
 
     builder.addCase(fetchOrdersByUser.rejected, (state, action: any) => {
+      toast.error(action.payload);
+    });
+    builder.addCase(cancelOrders.fulfilled, (state, action) => {
+      if (action.payload.value === true && state.orders) {
+        state.orders = state.orders?.filter(
+          (order) => order.id.toString() !== action.payload.id
+        );
+      }
+    });
+
+    builder.addCase(cancelOrders.rejected, (state, action: any) => {
+      toast.error(action.payload);
+    });
+
+    builder.addCase(fetchAllOrder.fulfilled, (state, action: any) => {
+      state.orders = action.payload;
+    });
+
+    builder.addCase(fetchAllOrder.rejected, (state, action: any) => {
+      toast.error(action.payload);
+    });
+    builder.addCase(deleteOrder.fulfilled, (state, action: any) => {
+      if (action.payload.value === true && state.orders) {
+        state.orders = state.orders?.filter(
+          (order) => order.id.toString() !== action.payload.id
+        );
+      }
+    });
+
+    builder.addCase(deleteOrder.rejected, (state, action: any) => {
       toast.error(action.payload);
     });
   },

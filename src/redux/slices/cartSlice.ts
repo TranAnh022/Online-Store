@@ -44,7 +44,7 @@ const CartSlice = createSlice({
 
     builder.addCase(removeCartItemAsync.rejected, (state, action:any) => {
       state.status = "idle";
-      console.log("work ???")
+  
       toast.error(action.payload);
     });
 
