@@ -12,6 +12,7 @@ import { ColorModeContext } from "./components/contextAPI/ThemeColorProvider.tsx
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { fetchCartAsync } from "./redux/actions/cartAction";
 import { fetchReviewAsync } from "./redux/actions/reviewAction";
+import { fetchCategory, fetchFilterProduct } from "./redux/actions/productActions";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -29,11 +30,12 @@ function App() {
 
   const initApp = useCallback(async () => {
     try {
+      await dispatch(fetchFilterProduct());
       await dispatch(fetchCurrentUser());
       await dispatch(fetchCartAsync());
       await dispatch(fetchReviewAsync());
-
-    } catch (error:any) {
+      await dispatch(fetchCategory());
+    } catch (error: any) {
       toast.error(error);
     }
   }, [dispatch]);

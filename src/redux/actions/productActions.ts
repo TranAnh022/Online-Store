@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { FilterType, ProductDto, ProductType } from "../../types/type";
+import { responsiveFontSizes } from "@mui/material";
+import axios from "axios";
 
 export const fetchFilterProduct = createAsyncThunk<
   ProductType[],
@@ -31,8 +33,9 @@ export const fetchFilterProduct = createAsyncThunk<
           url += `?${queryParams.join("&")}`;
         }
       }
-      const response = await fetch(url);
-      const data = await response.json();
+      const response = await axios.get(url);
+      console.log(response);
+      const data = await response.data;
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -93,7 +96,7 @@ export const updateProduct = createAsyncThunk<
 >("updateProductAsync", async (value, thunkAPI) => {
   try {
     const token = localStorage.getItem("accessToken");
-    
+
     const response = await fetch(
       `${process.env.REACT_APP_BASE_URL}/products/${value.id}`,
       {
@@ -139,6 +142,26 @@ export const deleteProduct = createAsyncThunk(
     } catch (e) {
       const error = e as Error;
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchCategory = createAsyncThunk(
+  "category/fetchCategory",
+  async (_, thunkAPI) => {
+    try {
+      const response = await fetch(
+        `${process.env.REACT_APP_BASE_URL}/categories`
+      );
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        return thunkAPI.rejectWithValue(errorResponse);
+      }
+      const data = await response.json();
+      return data;
+    } catch (e) {
+      const error = e as Error;
+      return thunkAPI.rejectWithValue({ message: error.message });
     }
   }
 );

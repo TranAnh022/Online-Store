@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   FormControlLabel,
@@ -12,7 +12,8 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/configureStore";
 import { debounce } from "lodash";
 import { setProductParams } from "../../redux/slices/productSlice";
-import { grey} from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
+import { fetchCategory } from "../../redux/actions/productActions";
 
 const MAX = 1000;
 const MIN = 0;
@@ -34,6 +35,7 @@ function FilterForm() {
   const dispatch = useAppDispatch();
   const { productParams } = useAppSelector((state) => state.products);
   const [searchTerm, setSearchTerm] = useState(productParams.search);
+  const { categories } = useAppSelector((state) => state.products);
 
   const handleSearchChange = debounce((event) => {
     dispatch(
@@ -111,50 +113,19 @@ function FilterForm() {
             }
             label="All"
           />
-          <FormControlLabel
-            value="50e3ad7f-f268-4c03-a632-05b0c2a03245"
-            control={
-              <Radio
-                sx={{
-                  color: grey[800],
-                }}
-              />
-            }
-            label="Home Goods"
-          />
-          <FormControlLabel
-            value="91c88378-e3fd-4d73-8b19-9580cebbaab7"
-            control={
-              <Radio
-                sx={{
-                  color: grey[800],
-                }}
-              />
-            }
-            label="Toys"
-          />
-          <FormControlLabel
-            value="c517d50f-b81f-4bc6-90a0-25dc149338a0"
-            control={
-              <Radio
-                sx={{
-                  color: grey[800],
-                }}
-              />
-            }
-            label="Electronics"
-          />
-          <FormControlLabel
-            value="f2cf5c47-e213-49a7-9a71-52a3bbb7c9eb"
-            control={
-              <Radio
-                sx={{
-                  color: grey[800],
-                }}
-              />
-            }
-            label="Shoes"
-          />
+          {categories?.map((category) => (
+            <FormControlLabel
+              value={category.id}
+              control={
+                <Radio
+                  sx={{
+                    color: grey[800],
+                  }}
+                />
+              }
+              label={category.name}
+            />
+          ))}
         </RadioGroup>
       </Stack>
     </Box>

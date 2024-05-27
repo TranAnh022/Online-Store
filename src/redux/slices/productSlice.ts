@@ -1,8 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { FilterType, ProductType } from "../../types/type";
+import { CategoryType, FilterType, ProductType } from "../../types/type";
 import {
   createProduct,
   deleteProduct,
+  fetchCategory,
   fetchFilterProduct,
   fetchProductAsync,
   updateProduct,
@@ -16,6 +17,7 @@ type InitialState = {
   loading: boolean;
   error?: string;
   productParams: FilterType;
+  categories: CategoryType[] | null;
 };
 
 const initialState: InitialState = {
@@ -25,6 +27,7 @@ const initialState: InitialState = {
   productParams: {
     price: 0,
   },
+  categories:null
 };
 
 const productSlice = createSlice({
@@ -187,6 +190,27 @@ const productSlice = createSlice({
         toast.error(action.payload.message);
       }
     });
+
+     builder.addCase(fetchCategory.fulfilled, (state, action) => {
+       return {
+         ...state,
+         categories: action.payload,
+         loading: false,
+       };
+     });
+
+     builder.addCase(fetchCategory.pending, (state, action) => {
+       return {
+         ...state,
+         loading: true,
+       };
+     });
+
+     builder.addCase(fetchCategory.rejected, (state, action) => {
+       if (action.payload instanceof Error) {
+         toast.error(action.payload.message);
+       }
+     });
   },
 });
 

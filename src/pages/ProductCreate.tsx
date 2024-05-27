@@ -19,7 +19,7 @@ function ProductCreate() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user);
   const [imageUrl, setImageUrl] = useState("");
-
+  const categories = useAppSelector((state) => state.products.categories);
   const initialValues: ProductDto = {
     title: "",
     categoryId: 0,
@@ -104,16 +104,9 @@ function ProductCreate() {
           margin="normal"
         >
           <MenuItem value="0"></MenuItem>
-          <MenuItem value="50e3ad7f-f268-4c03-a632-05b0c2a03245">
-            Home Goods
-          </MenuItem>
-          <MenuItem value="91c88378-e3fd-4d73-8b19-9580cebbaab7">Toys</MenuItem>
-          <MenuItem value="c517d50f-b81f-4bc6-90a0-25dc149338a0">
-            Electronics
-          </MenuItem>
-          <MenuItem value="f2cf5c47-e213-49a7-9a71-52a3bbb7c9eb">
-            Shoes
-          </MenuItem>
+          {categories?.map((category) => (
+            <MenuItem value={category.id}>{category.name}</MenuItem>
+          ))}
         </TextField>
         <TextField
           fullWidth
