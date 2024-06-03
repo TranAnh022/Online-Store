@@ -91,10 +91,10 @@ export default function ProfileStatistics() {
             <Grid item xs={4}>
               <IconButton
                 component={Link}
-                to="/order/history/cancelled"
+                to={`/order/history`}
                 size="small"
                 color="inherit"
-                onClick={() => dispatch(fetchOrdersByUser())}
+                onClick={() => dispatch(fetchOrdersByUser("cancelled"))}
               >
                 <Badge
                   badgeContent={cancelOrders?.length}
@@ -104,15 +104,16 @@ export default function ProfileStatistics() {
                   <CancelOutlinedIcon color="warning" fontSize="large" />
                 </Badge>
               </IconButton>
+
               <Typography variant="body1">Cancelled</Typography>
             </Grid>
             <Grid item xs={4}>
               <IconButton
                 component={Link}
-                to="/order/history/pending"
+                to="/order/history"
                 size="small"
                 color="inherit"
-                onClick={() => dispatch(fetchOrdersByUser())}
+                onClick={() => dispatch(fetchOrdersByUser("pending"))}
               >
                 <Badge
                   badgeContent={pendingOrders?.length}
@@ -122,15 +123,16 @@ export default function ProfileStatistics() {
                   <PendingOutlinedIcon color="warning" fontSize="large" />
                 </Badge>
               </IconButton>
+
               <Typography variant="body1">Pending</Typography>
             </Grid>
             <Grid item xs={4}>
               <IconButton
                 component={Link}
-                to="/order/history/shipped"
+                to="order/history"
                 size="small"
                 color="inherit"
-                onClick={() => dispatch(fetchOrdersByUser())}
+                onClick={() => dispatch(fetchOrdersByUser("shipped"))}
               >
                 <Badge
                   badgeContent={shippedOrders?.length}

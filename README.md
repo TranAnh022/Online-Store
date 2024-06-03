@@ -1,8 +1,14 @@
 # Introduction
 
-This project is a frontend e-commerce website built using React and MUI (Material-UI) for the front end. It leverages the API endpoint https://fakeapi.platzi.com/ for the backend functionalities. The website offers a variety of features for users, including adding items to cart, switching between dark and light modes, and providing admin functionalities for creating, updating, and deleting products.
+This project is a final assignment for the front-end module at Integrify, showcasing the development of a basic e-commerce application. Built using React and Material-UI (MUI), the application interacts with a backend API for data management, enabling users to create, read, update, and delete data.
+
+The application features a robust authentication system with role-based access control. Basic users can explore and interact with products by filtering, searching, sorting, and adding or removing items from their cart. Additionally, they can write reviews, place orders, and make payments via Stripe.
+
+Administrators have access to a dedicated dashboard where they can perform CRUD (Create, Read, Update, Delete) operations on products, manage user data, and oversee orders. This ensures that both users and admins can efficiently interact with and manage the system.
 
 Check out the website [here](https://fs17-frontend-project.onrender.com/)
+
+NOTE: This repository only contains the frontend of the application. The backend can be found [here](https://github.com/TranAnh022/fs17_CSharp_FullStack)
 
 ### Prerequisites:
 - React

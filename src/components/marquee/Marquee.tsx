@@ -10,44 +10,6 @@ const marquee = keyframes`
   to { transform: translateX(-50%); }
 `;
 
-const Track = styled(Box)`
-  display: flex;
-  position: absolute;
-  will-change: transform;
-  animation: ${marquee} 15s linear infinite;
-  width: 180%;
-  &:hover {
-    animation-play-state: paused;
-  }
-`;
-
-const MarqueeContainer = styled(Box)`
-  position: relative;
-  height: 400px;
-  width: 100%;
-  overflow-x: hidden;
-`;
-
-const MarqueeWrapper = styled(Box)`
-  margin-top: 120px;
-`;
-
-const ProductCard = styled(Card)`
-  width: 200px;
-  margin: 1rem;
-  transition: transform 0.5s ease;
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
-const ProductImage = styled(CardMedia)`
-  border-radius: 15px;
-  background-color: #ebebeb;
-  transition: transform 0.5s ease;
-  height: 140px;
-`;
 
 const Marquee = () => {
   const { products } = useAppSelector((state) => state.products);
@@ -57,8 +19,8 @@ const Marquee = () => {
       <h2>You may also like</h2>
       <div className="marquee">
         <div className="maylike-products-container track">
-          {products.map((item) => (
-            <div>
+          {products.map((item,index) => (
+            <div key={index}>
               <Link to={`/products/${item.id}`}>
                 <div className="product-card">
                   <img

@@ -22,7 +22,7 @@ type Props = { cart: CartType | null };
 
 function CartTable({ cart }: Props) {
   const dispatch = useAppDispatch();
-  
+
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -36,8 +36,8 @@ function CartTable({ cart }: Props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {cart?.items.map((item: CartItem) => (
-            <TableRow key={item.product.title}>
+          {cart?.items.map((item: CartItem, index) => (
+            <TableRow key={index}>
               <TableCell component="th" scope="row">
                 <Box
                   display="flex"

@@ -94,7 +94,7 @@ function Reviews({ reviews }: Props) {
                     error={touched.comment && Boolean(errors.comment)}
                     helperText={touched.comment && errors.comment}
                   />
-                  <Button type="submit" variant="contained" color="primary">
+                  <Button type="submit" variant="contained" color="warning">
                     Send
                   </Button>
                 </Box>

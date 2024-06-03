@@ -24,7 +24,8 @@ const ReviewCard = ({ review }: Props) => {
     event.preventDefault();
     dispatch(deleteReviewAsync(review.id));
   }
-
+  console.log(user);
+  console.log(review);
   return (
     <Card sx={{ mt: 2, boxShadow: 3 }}>
       <CardContent>
@@ -40,12 +41,11 @@ const ReviewCard = ({ review }: Props) => {
               {review.user.name}
             </Typography>
           </Box>
-          {review.user.id === user?.id ||
-            (user?.role === "Admin" && (
-              <Button variant="contained" color="error" onClick={handleDelete}>
-                Delete
-              </Button>
-            ))}
+          {(review.user.id === user?.id || user?.role === "Admin") && (
+            <Button variant="contained" color="error" onClick={handleDelete}>
+              Delete
+            </Button>
+          )}
         </Box>
         <Rating value={review?.rating} count={5} />
         <Typography variant="body1" component="p" sx={{ p: 1 }}>
