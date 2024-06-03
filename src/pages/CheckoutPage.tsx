@@ -11,7 +11,8 @@ import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 import ProductOrder from "../components/products/ProductOrder";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchCurrentOrder } from "../redux/actions/orderAction";
+import { fetchCurrentOrder, paymentOrder } from "../redux/actions/orderAction";
+import LoadingComponent from "../components/loading/LoadingComponent";
 
 const OrderReview = () => {
   const dispatch = useAppDispatch();
@@ -33,8 +34,8 @@ const OrderReview = () => {
       (sum, item) => sum + item.quantity * item.productSnapshot.price,
       0
     ) ?? 0;
-  const deliveryFee = subtotal > 1000 ? 0 : 500;
-
+  const deliveryFee = subtotal > 500 ? 0 : 20;
+  if (!order) return <LoadingComponent></LoadingComponent>;
   return (
     <Box sx={{ padding: "100px" }}>
       <Grid container spacing={2}>
@@ -87,7 +88,7 @@ const OrderReview = () => {
                 </Typography>
               </Box>
               <Typography variant="body2" color="textSecondary">
-                Free ship for orders over $1000
+                Free ship for orders over $500
               </Typography>
               <Divider sx={{ marginY: "10px" }} />
               <Box
@@ -107,6 +108,7 @@ const OrderReview = () => {
                 color="error"
                 fullWidth
                 sx={{ marginTop: "10px" }}
+                onClick={() => dispatch(paymentOrder(order.id.toString()))}
               >
                 Pay with Stripe
               </Button>
@@ -120,7 +122,7 @@ const OrderReview = () => {
               </Typography>
               <Typography variant="body2" color="textSecondary">
                 Order confirmation and updates will be emailed to
-                Online-Store@gmail.com
+                onlinestore.fs17@gmail.com
               </Typography>
             </CardContent>
           </Card>

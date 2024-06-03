@@ -4,14 +4,31 @@ import { ThemeProvider } from "@mui/material/styles";
 import { LoginContainerStyle, TitleStyle, customTheme } from "../customizedCSS";
 import { validationRegisterSchema } from "../validation";
 import { useAppDispatch } from "../redux/configureStore";
-import { userRegisterAsync } from "../redux/actions/userActions";
+import {
+  userLoginAsync,
+  userRegisterAsync,
+} from "../redux/actions/userActions";
+import { toast } from "react-toastify";
 
 function RegisterPage() {
   const dispatch = useAppDispatch();
 
   const handleSubmit = async (values: any) => {
-    await dispatch(userRegisterAsync(values));
-    formik.resetForm();
+    try {
+      // Register the user
+      const registerResult = await dispatch(userRegisterAsync(values)).unwrap();
+
+      // Login the user
+      const loginValues = { email: values.email, password: values.password };
+      const loginResult = await dispatch(userLoginAsync(loginValues)).unwrap();
+
+      console.log("User registered and logged in:", {
+        user: registerResult,
+        token: loginResult,
+      });
+    } catch (error: any) {
+      toast.error("Registration or login failed:", error);
+    }
   };
 
   const formik = useFormik({

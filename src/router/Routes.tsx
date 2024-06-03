@@ -17,6 +17,8 @@ import EditProfile from "../components/profile/EditProfile";
 import AdminUserPage from "../pages/AdminUserPage";
 import AdminProductPage from "../pages/AdminProductPage";
 import AdminOrderPage from "../pages/AdminOrderPage";
+import SuccessPage from "../pages/SuccessPage";
+import CancelledPage from "../pages/CancelledPage";
 
 export const router = createBrowserRouter([
   {
@@ -35,11 +37,13 @@ export const router = createBrowserRouter([
       { path: "register", element: <Register /> },
       { path: "products/:id/update", element: <ProductUpdate /> },
       { path: "checkout/:id", element: <CheckoutPage /> },
-      { path: "order/history", element: <OrderHistory /> },
+      { path: "order/history/:status", element: <OrderHistory /> },
       { path: "user/:id", element: <EditProfile /> },
       { path: "admin/users", element: <AdminUserPage /> },
       { path: "admin/products", element: <AdminProductPage /> },
       { path: "admin/orders", element: <AdminOrderPage /> },
+      { path: "cancelled", element: <CancelledPage /> },
+      { path: "success", element: <SuccessPage /> },
       { path: "*", element: <NotFound /> },
     ],
   },

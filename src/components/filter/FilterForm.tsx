@@ -113,8 +113,9 @@ function FilterForm() {
             }
             label="All"
           />
-          {categories?.map((category) => (
+          {categories?.map((category,index) => (
             <FormControlLabel
+              key={index}
               value={category.id}
               control={
                 <Radio

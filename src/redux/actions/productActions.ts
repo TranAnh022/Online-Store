@@ -34,7 +34,6 @@ export const fetchFilterProduct = createAsyncThunk<
         }
       }
       const response = await axios.get(url);
-      console.log(response);
       const data = await response.data;
       return data;
     } catch (error) {

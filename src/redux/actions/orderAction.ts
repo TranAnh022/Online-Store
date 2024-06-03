@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Order } from "../../types/type";
 import axios from "axios";
+import { TrySharp } from "@mui/icons-material";
+import getStripe from "../../utils/getStripe";
 
 export const createOrder = createAsyncThunk(
   "createOrderAsync",
@@ -48,7 +50,7 @@ export const fetchCurrentOrder = createAsyncThunk(
     } catch (error: any) {
       return thunkAPI.rejectWithValue({ error: error.message });
     }
-  },
+  }
 );
 
 export const fetchOrdersByUser = createAsyncThunk(
@@ -60,14 +62,11 @@ export const fetchOrdersByUser = createAsyncThunk(
       if (value) {
         url += `?status=${value}`;
       }
-      const response = await axios.get(
-       url,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.status !== 200) {
         const errorResponse = response.data;
@@ -77,7 +76,7 @@ export const fetchOrdersByUser = createAsyncThunk(
     } catch (error: any) {
       return thunkAPI.rejectWithValue({ error: error.message });
     }
-  },
+  }
 );
 
 export const cancelOrders = createAsyncThunk(
@@ -103,7 +102,7 @@ export const cancelOrders = createAsyncThunk(
     } catch (error: any) {
       return thunkAPI.rejectWithValue({ error: error.message });
     }
-  },
+  }
 );
 
 export const fetchAllOrder = createAsyncThunk(
@@ -124,16 +123,16 @@ export const fetchAllOrder = createAsyncThunk(
         const errorResponse = response.data;
         return thunkAPI.rejectWithValue(errorResponse);
       }
-      return response.data
+      return response.data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue({ error: error.message });
     }
-  },
+  }
 );
 
 export const deleteOrder = createAsyncThunk(
   "deleteOrder",
-  async (id:string, thunkAPI) => {
+  async (id: string, thunkAPI) => {
     try {
       const token = localStorage.getItem("accessToken");
       const response = await axios.delete(
@@ -153,5 +152,34 @@ export const deleteOrder = createAsyncThunk(
     } catch (error: any) {
       return thunkAPI.rejectWithValue({ error: error.message });
     }
-  },
+  }
+);
+
+export const paymentOrder = createAsyncThunk(
+  "paymentOrder",
+  async (orderId: string, thunkAPI) => {
+    try {
+      console.log(orderId);
+      const token = localStorage.getItem("accessToken");
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/orders/create-checkout-session`,
+        orderId,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const session = response.data;
+      console.log(session);
+      const stripe = await getStripe();
+      await stripe.redirectToCheckout({ sessionId: session });
+
+      return session;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue({ error: error.message });
+    }
+  }
 );

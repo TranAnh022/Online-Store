@@ -49,7 +49,7 @@ const About = () => {
               md={6}
               sx={{ wordSpacing: "0.5em" }}
               display={"flex"}
-              direction={"column"}
+              flexDirection={"column"} // Change direction to flexDirection and use it with display="flex"
               gap={"1rem"}
               padding={"20px"}
             >

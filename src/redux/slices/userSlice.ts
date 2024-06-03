@@ -87,7 +87,6 @@ const UserSlice = createSlice({
     });
     builder.addCase(userRegisterAsync.fulfilled, (state, action) => {
       if (!(action.payload instanceof Error)) {
-        router.navigate("/");
         return {
           ...state,
           user: action.payload,

@@ -79,8 +79,8 @@ function ProductDetails() {
       );
     }
   };
-  if (!productDetail) return <NotFound />;
-  if (!productDetail && loading)
+  
+  if (!productDetail || loading)
     return <LoadingComponent message="Loading Product...."></LoadingComponent>;
   return (
     <Container sx={{ marginTop: "10rem", marginBottom: "3rem" }}>

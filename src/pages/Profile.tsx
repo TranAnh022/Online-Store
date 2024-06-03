@@ -29,6 +29,7 @@ import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import { fetchAllUser } from "../redux/actions/userActions";
+import LoadingComponent from "../components/loading/LoadingComponent";
 export default function ProfileStatistics() {
   const dispatch = useAppDispatch();
 
@@ -48,6 +49,8 @@ export default function ProfileStatistics() {
     (order) => order.status.toString() === "Shipped"
   );
   const navigate = useNavigate();
+
+  if (!user || !orders) return <LoadingComponent></LoadingComponent>;
   return (
     <StyledContainer>
       <StyledCard>
@@ -88,10 +91,10 @@ export default function ProfileStatistics() {
             <Grid item xs={4}>
               <IconButton
                 component={Link}
-                to={`/order/history`}
+                to="/order/history/cancelled"
                 size="small"
                 color="inherit"
-                onClick={() => dispatch(fetchOrdersByUser("cancelled"))}
+                onClick={() => dispatch(fetchOrdersByUser())}
               >
                 <Badge
                   badgeContent={cancelOrders?.length}
@@ -101,16 +104,15 @@ export default function ProfileStatistics() {
                   <CancelOutlinedIcon color="warning" fontSize="large" />
                 </Badge>
               </IconButton>
-
               <Typography variant="body1">Cancelled</Typography>
             </Grid>
             <Grid item xs={4}>
               <IconButton
                 component={Link}
-                to="/order/history"
+                to="/order/history/pending"
                 size="small"
                 color="inherit"
-                onClick={() => dispatch(fetchOrdersByUser("pending"))}
+                onClick={() => dispatch(fetchOrdersByUser())}
               >
                 <Badge
                   badgeContent={pendingOrders?.length}
@@ -120,16 +122,15 @@ export default function ProfileStatistics() {
                   <PendingOutlinedIcon color="warning" fontSize="large" />
                 </Badge>
               </IconButton>
-
               <Typography variant="body1">Pending</Typography>
             </Grid>
             <Grid item xs={4}>
               <IconButton
                 component={Link}
-                to="order/history"
+                to="/order/history/shipped"
                 size="small"
                 color="inherit"
-                onClick={() => dispatch(fetchOrdersByUser("shipped"))}
+                onClick={() => dispatch(fetchOrdersByUser())}
               >
                 <Badge
                   badgeContent={shippedOrders?.length}
