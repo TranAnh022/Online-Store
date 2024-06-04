@@ -19,21 +19,21 @@ NOTE: This repository only contains the frontend of the application. The backend
 
 ### Installation:
    Clone the repo:
-
-   `git clone https://github.com/TranAnh022/fs17-Frontend-project`
-
+```
+   git clone https://github.com/TranAnh022/fs17-Frontend-project
+```
    Then, install all the dependencies:
-
-   `npm install`
-
+```
+   npm install
+```
    Start the project with:
-
-   `npm start`
-
+```
+   npm start
+```
    Run testing using command:
-
-   `npm run test`
-
+```
+   npm run test
+```
 ### Project Structure
    - [App.tsx](App.tsx)
    - [README.md](README.md)
@@ -114,17 +114,24 @@ NOTE: This repository only contains the frontend of the application. The backend
 
 ## Picture Demo
 
-![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/800471a9-c094-463b-8bb4-9d52b13add3b)
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/02d25385-63e2-4c44-b178-170c78f60af4)
 
-![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/a95c2850-d4ce-4542-9186-bd806af44609)
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/014015c5-6513-4c2e-839e-3c608b1e2e38)
 
-![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/f3c0f793-7ca6-428f-bfba-312731ac15e9)
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/973973f7-9d56-4380-a278-11ad3aed7965)
 
-![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/bb520605-b569-458b-be14-d2e86223187a)
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/aac16fdf-f0b1-4b62-b0c4-c80bfbdab22c)
 
-![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/5f261429-1cc8-4c81-8a3d-d48bf2578e16)
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/e60ef68e-96f8-44b3-9288-084d40651ca5)
 
-![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/8459640d-35a9-44b6-a0bf-e2435e28e4b7)
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/6bebf6fb-78b8-4e21-8d6d-c0f665929f08)
+
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/5dc28e0d-369e-4394-a6a7-a412fb83f41b)
+
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/1d7e00e3-c3d8-4c63-9a56-72e425a31f10)
+
+![image](https://github.com/TranAnh022/fs17-Frontend-project/assets/63698770/4de044f8-36e6-487c-b647-b19aeede0346)
+
 
 
 
