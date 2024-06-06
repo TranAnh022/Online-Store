@@ -5,7 +5,6 @@ let stripePromise;
 const getStripe = () => {
   if (!stripePromise) {
     const stripeKey = `${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`;
-    console.log(`${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`);
     if (!stripeKey) {
       throw new Error("Stripe publishable key is missing");
     }

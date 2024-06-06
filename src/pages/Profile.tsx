@@ -91,7 +91,7 @@ export default function ProfileStatistics() {
             <Grid item xs={4}>
               <IconButton
                 component={Link}
-                to={`/order/history`}
+                to={`/order/history/cancelled`}
                 size="small"
                 color="inherit"
                 onClick={() => dispatch(fetchOrdersByUser("cancelled"))}
@@ -110,7 +110,7 @@ export default function ProfileStatistics() {
             <Grid item xs={4}>
               <IconButton
                 component={Link}
-                to="/order/history"
+                to="/order/history/pending"
                 size="small"
                 color="inherit"
                 onClick={() => dispatch(fetchOrdersByUser("pending"))}
@@ -129,10 +129,10 @@ export default function ProfileStatistics() {
             <Grid item xs={4}>
               <IconButton
                 component={Link}
-                to="order/history"
+                to="order/history/shipped"
                 size="small"
                 color="inherit"
-                onClick={() => dispatch(fetchOrdersByUser("shipped"))}
+                onClick={() => dispatch(fetchOrdersByUser())}
               >
                 <Badge
                   badgeContent={shippedOrders?.length}
@@ -175,7 +175,6 @@ export default function ProfileStatistics() {
                   to="/admin/products"
                   size="small"
                   color="inherit"
-                  onClick={() => dispatch(fetchOrdersByUser("pending"))}
                 >
                   <Inventory2OutlinedIcon color="warning" fontSize="large" />
                 </IconButton>

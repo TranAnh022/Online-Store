@@ -13,9 +13,9 @@ type Props = {
 const CartSum = ({ sum }: Props) => {
   const dispatch = useAppDispatch();
 
-  const handleCheckout = () => {
-    dispatch(createOrder());
-    dispatch(clearCart());
+  const handleCheckout = async () => {
+    await dispatch(createOrder());
+    await dispatch(clearCart());
   };
 
   return (
