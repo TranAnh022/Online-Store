@@ -11,7 +11,6 @@ import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 import {
   cancelOrders,
   fetchOrdersByUser,
-  paymentOrder,
 } from "../redux/actions/orderAction";
 import ProductOrder from "../components/products/ProductOrder";
 import NotFound from "../components/notFound/NotFound";

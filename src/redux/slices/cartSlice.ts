@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { CartItem, CartType } from "../../types/type";
+import {  CartType } from "../../types/type";
 import {
   addCartItemAsync,
   fetchCartAsync,
@@ -44,7 +44,7 @@ const CartSlice = createSlice({
 
     builder.addCase(removeCartItemAsync.rejected, (state, action:any) => {
       state.status = "idle";
-  
+
       toast.error(action.payload);
     });
 

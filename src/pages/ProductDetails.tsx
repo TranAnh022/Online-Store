@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import  { ChangeEvent, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/configureStore";
 import {
@@ -19,7 +19,6 @@ import {
   deleteProduct,
   fetchProductAsync,
 } from "../redux/actions/productActions";
-import NotFound from "../components/notFound/NotFound";
 import ImageCarousel from "../components/imagesList/ImageCarousel";
 import LoadingComponent from "../components/loading/LoadingComponent";
 import Marquee from "../components/marquee/Marquee";
@@ -79,7 +78,7 @@ function ProductDetails() {
       );
     }
   };
-  
+
   if (!productDetail || loading)
     return <LoadingComponent message="Loading Product...."></LoadingComponent>;
   return (

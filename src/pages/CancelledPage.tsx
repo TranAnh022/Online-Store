@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -8,9 +7,9 @@ import {
 } from "@mui/material";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { Link } from "react-router-dom";
-type Props = {};
 
-function CancelledPage({}: Props) {
+
+function CancelledPage() {
   const theme = useTheme();
   return (
     <Box

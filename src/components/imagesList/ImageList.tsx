@@ -1,5 +1,5 @@
-import { Box, Button, Grid } from "@mui/material";
-import ClearIcon from "@mui/icons-material/Clear";
+import { Button, Grid } from "@mui/material";
+
 
 
 export const ImageList = ({images,onDelete,}: {images: string[];onDelete: (index: number) => void;}) => {
@@ -8,11 +8,11 @@ export const ImageList = ({images,onDelete,}: {images: string[];onDelete: (index
       {images.map((image, index) => (
         <Grid item key={index} xs={6} sm={4} md={3}>
           {typeof image === "string" ? (
-            <img src={image} alt={`image-${index}`} style={{ width: "100%" }} />
+            <img src={image} alt={`${index}`} style={{ width: "100%" }} />
           ) : (
             <img
               src={URL.createObjectURL(image)}
-              alt={`image-${index}`}
+              alt={`${index}`}
               style={{ width: "100%" }}
             />
           )}

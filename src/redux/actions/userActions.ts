@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
-  TokenState,
   UserLogin,
   UserRegister,
   UserType,

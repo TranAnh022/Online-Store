@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { FilterType, ProductDto, ProductType } from "../../types/type";
-import { responsiveFontSizes } from "@mui/material";
+import { FilterType, ProductType } from "../../types/type";
+
 import axios from "axios";
 
 export const fetchFilterProduct = createAsyncThunk<

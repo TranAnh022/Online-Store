@@ -2,7 +2,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { CartType } from "../../types/type";
 import axios from "axios";
-import { toast } from "react-toastify";
 
 export const fetchCartAsync = createAsyncThunk(
   "cart/fetchCart",

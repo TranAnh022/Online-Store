@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   Box,
   FormControlLabel,
@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/configureStore";
 import { debounce } from "lodash";
 import { setProductParams } from "../../redux/slices/productSlice";
 import { grey } from "@mui/material/colors";
-import { fetchCategory } from "../../redux/actions/productActions";
+//import { fetchCategory } from "../../redux/actions/productActions";
 
 const MAX = 1000;
 const MIN = 0;

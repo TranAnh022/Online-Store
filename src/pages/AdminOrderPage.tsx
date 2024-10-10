@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import {
   Box,
   Card,
   CardContent,
-  Avatar,
   Typography,
   Button,
   Grid,
@@ -11,12 +10,7 @@ import {
   Collapse,
 } from "@mui/material";
 import { styled } from "@mui/system";
-import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/configureStore";
-import {
-  deleteProduct,
-  fetchFilterProduct,
-} from "../redux/actions/productActions";
 import NotFound from "../components/notFound/NotFound";
 import { deleteOrder, fetchAllOrder } from "../redux/actions/orderAction";
 
@@ -42,7 +36,7 @@ const AdminOrderPage = () => {
 
   useEffect(() => {
     if (!orders?.length) dispatch(fetchAllOrder());
-  }, [orders]);
+  }, [orders,dispatch]);
 
   const handleExpandClick = (OrderId: string) => {
     setExpandedOrderId((prevId) => (prevId === OrderId ? null : OrderId));

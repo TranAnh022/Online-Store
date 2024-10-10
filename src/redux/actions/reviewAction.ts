@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Review, ReviewDto } from "../../types/type";
-import axios from "axios";
+
 
 export const fetchReviewAsync = createAsyncThunk(
   "review/fetchReview",

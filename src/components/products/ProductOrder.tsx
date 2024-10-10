@@ -1,6 +1,6 @@
-import { Box, Grid, Link, Typography } from "@mui/material";
+import {  Grid, Link, Typography } from "@mui/material";
 
-import { CartItem, OrderItem } from "../../types/type";
+import { OrderItem } from "../../types/type";
 import { useAppSelector } from "../../redux/configureStore";
 
 const ProductOrder = ({ item }: { item: OrderItem }) => {

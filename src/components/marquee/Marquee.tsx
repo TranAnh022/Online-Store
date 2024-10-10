@@ -1,7 +1,5 @@
-import React from "react";
-import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { keyframes } from "@emotion/react";
-import styled from "@emotion/styled";
 import { useAppSelector } from "../../redux/configureStore";
 import { Link } from "react-router-dom";
 
@@ -29,7 +27,7 @@ const Marquee = () => {
                         ? item.images[0].url
                         : `https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1200px-No-Image-Placeholder.svg.png`
                     }
-                    alt="product-image"
+                    alt="product"
                     width={250}
                     height={250}
                     className="product-image"

@@ -1,7 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Order } from "../../types/type";
 import axios from "axios";
-import { TrySharp } from "@mui/icons-material";
 import getStripe from "../../utils/getStripe";
 
 export const createOrder = createAsyncThunk(

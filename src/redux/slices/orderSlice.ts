@@ -9,7 +9,6 @@ import {
   fetchOrdersByUser,
 } from "../actions/orderAction";
 import { toast } from "react-toastify";
-import { Navigate, useNavigate } from "react-router-dom";
 import { router } from "../../router/Routes";
 
 type InitialState = {
