@@ -47,7 +47,7 @@ const AdminOrderPage = () => {
   const handleExpandClick = (OrderId: string) => {
     setExpandedOrderId((prevId) => (prevId === OrderId ? null : OrderId));
   };
-  if (user?.role === "User")
+  if (user?.role !== "Admin")
     return <NotFound message={"Only Admin Can Access This Page"} />;
   return (
     <Container sx={{ padding: "10rem" }}>

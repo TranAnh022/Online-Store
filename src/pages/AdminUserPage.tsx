@@ -50,8 +50,10 @@ const AdminUserPage = () => {
   };
 
   const userList = users ? users.filter((u) => u.id !== user?.id) : [];
-  if (user?.role === "User") return <NotFound message={"Only Admin Can Access This Page"}/>
-    return (
+  if (user?.role !== "Admin")
+    return <NotFound message={"Only Admin Can Access This Page"} />;
+
+  return (
       <Container sx={{ padding: "10rem" }}>
         <Typography variant="h4" gutterBottom>
           User Management

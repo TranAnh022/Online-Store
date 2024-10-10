@@ -8,7 +8,9 @@ export default function RequireAuth() {
 
   if (!user) {
     toast.error("You have to login first !!!");
+     console.log(user);
     return <Navigate to="/login" state={{ from: location }} />;
+
   }
 
   return <Outlet />;
