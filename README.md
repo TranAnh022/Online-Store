@@ -6,7 +6,7 @@ The application features a robust authentication system with role-based access c
 
 Administrators have access to a dedicated dashboard where they can perform CRUD (Create, Read, Update, Delete) operations on products, manage user data, and oversee orders. This ensures that both users and admins can efficiently interact with and manage the system.
 
-Check out the website [here](https://fs17-frontend-project.onrender.com/)
+Check out the website [here](https://online-store-demo.netlify.app/)
 
 NOTE: This repository only contains the frontend of the application. The backend can be found [here](https://github.com/TranAnh022/fs17_CSharp_FullStack)
 
